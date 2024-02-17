@@ -62,3 +62,22 @@ def splinter_browser_chrome_screen_size(context, data):
     yield context.browser
     # -- CLEANUP-FIXTURE PART:
     context.browser.quit()
+
+@fixture
+def splinter_browser_chrome_headless(context):
+    # -- SETUP-FIXTURE PART:
+    options = webdriver.ChromeOptions()
+    options.add_argument('--headless=new')
+    options.add_argument('--ignore-ssl-errors=yes')
+    options.add_argument('--ignore-certificate-errors')
+    options.add_argument("--window-size=1280,700")
+    my_config = Config(headless=True)
+    service = Service(driver)
+    browser = Browser('chrome', options=options, config=my_config, service=service)
+     # configure Stere browser for Page objects
+    Stere.browser = browser
+    Stere.url_navigator = 'visit'
+    context.browser = browser
+    yield context.browser
+    # -- CLEANUP-FIXTURE PART:
+    context.browser.quit()

@@ -15,6 +15,9 @@ def core_before_scenario(context, scenario):
     if "fixture.splinter.browser.chrome.fullscreen" in scenario.tags:
         use_fixture(splinter_browser_chrome_fullscreen, context)
 
+    if "fixture.splinter.browser.chrome.headless" in scenario.tags:
+        use_fixture(splinter_browser_chrome_headless, context)
+
     if match := re.findall(r"(\bfixture.splinter.browser.chrome.screen.size.\b)+(\b[\d{0,}*\w{0,}*-{0,}?+]+\b)+", '|'.join(scenario.tags)):
         for data in match:
             use_fixture(splinter_browser_chrome_screen_size, context, data[1])
