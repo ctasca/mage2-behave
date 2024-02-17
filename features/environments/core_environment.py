@@ -7,6 +7,8 @@ def core_before_all(context):
     context.baseurl = config.DEVELOPMENT_ENV_BASEURL
     context.secure_baseurl = config.DEVELOPMENT_ENV_SECURE_BASEURL
     context.backend = config.DEVELOPMENT_BACKEND_URL
+    context.admin_username = config.DEVELOPMENT_ADMIN_USERNAME
+    context.admin_password = config.DEVELOPMENT_ADMIN_PASSWORD
 
 def core_before_feature(context, feature):
     if "fixture.splinter.browser.chrome" in feature.tags:

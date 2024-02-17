@@ -86,10 +86,10 @@ def splinter_browser_chrome_headless(context):
 @fixture
 def integration_admin_token(context):
     payload = {
-        "username": config.DEVELOPMENT_ADMIN_USERNAME,
-        "password": config.DEVELOPMENT_ADMIN_PASSWORD
+        "username": context.admin_username,
+        "password": context.admin_password
     }
     headers = {"Content-Type": "application/json"}
-    response = requests.post("{}rest/V1/integration/admin/token".format(config.DEVELOPMENT_ENV_BASEURL), headers=headers,data=json.dumps(payload))
+    response = requests.post("{}rest/V1/integration/admin/token".format(context.baseurl), headers=headers,data=json.dumps(payload))
     context.admin_token = response.json()
     yield context.admin_token
