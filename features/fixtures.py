@@ -1,4 +1,5 @@
 import core_config.all as config
+import requests, json
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 from stere import Stere
@@ -81,3 +82,14 @@ def splinter_browser_chrome_headless(context):
     yield context.browser
     # -- CLEANUP-FIXTURE PART:
     context.browser.quit()
+
+@fixture
+def integration_admin_token(context):
+    payload = {
+        "username": config.DEVELOPMENT_ADMIN_USERNAME,
+        "password": config.DEVELOPMENT_ADMIN_PASSWORD
+    }
+    headers = {"Content-Type": "application/json"}
+    response = requests.post("{}rest/V1/integration/admin/token".format(config.DEVELOPMENT_ENV_BASEURL), headers=headers,data=json.dumps(payload))
+    context.admin_token = response.json()
+    yield context.admin_token
