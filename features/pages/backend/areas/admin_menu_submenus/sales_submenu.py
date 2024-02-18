@@ -1,10 +1,12 @@
 import core_config.all as config
 from stere.areas import Area
+from stere.fields import Root
 from pages.backend.fields.sales_submenu_links import *
 
 class SalesSubmenu(Area):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
+        self.root = Root(config.ADMIN_MENU_ROOT['strategy'], config.ADMIN_MENU_ROOT['locator'])
         self.orders = Orders(config.SALES_SUBMENU_ORDERS_LINK_LOCATOR['strategy'], config.SALES_SUBMENU_ORDERS_LINK_LOCATOR['locator'])
         self.invoices = Invoices(config.SALES_SUBMENU_INVOICES_LINK_LOCATOR['strategy'], config.SALES_SUBMENU_INVOICES_LINK_LOCATOR['locator'])
         self.shipments = Shipments(config.SALES_SUBMENU_SHIPMENTS_LINK_LOCATOR['strategy'], config.SALES_SUBMENU_SHIPMENTS_LINK_LOCATOR['locator'])

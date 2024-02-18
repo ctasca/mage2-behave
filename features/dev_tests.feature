@@ -1,16 +1,19 @@
 @fixture.integration.admin.token
 Feature: As a mage2-behave developer I want to test the funcionality of my code So That I can assure all is properly working
 
+@browser
 @fixture.splinter.browser.chrome
 Scenario: Browser Chrome fixture test
     Given I visit Google search page
      Then the title should be "Google"
 
+@browser
 @fixture.splinter.browser.chrome.fullscreen
 Scenario: Browser Chrome fixture test
     Given I visit Google search page
      Then the title should be "Google"
 
+@browser
 @fixture.splinter.browser.chrome.screen.size.200:200
 Scenario: Browser Chrome custom size screen fixture test
     Given I visit Google search page
@@ -51,7 +54,21 @@ Scenario: Admin login and perform clicks in admin menu
     When I click the "Customers" menu item
     Then I should see the "Customers" submenu links
 
-@do
+@backend.grid
+@fixture.splinter.browser.chrome
+Scenario: Admin can view the customers grid
+    Given I am logged in the backend
+    When I want to view all my customers 
+    Then I should be viewing the customer grid
+
+@backend.grid.filters
+@fixture.splinter.browser.chrome
+Scenario: Admin can view the customers grid and click the filters button
+    Given I am logged in the backend
+    When I am on the all customers grid
+    Then I want to be able to apply filters for searching purposes
+
+@api
 Scenario: Create an integration admin token
     Given I have made an integration admin token request
     Then I expect a successful response
