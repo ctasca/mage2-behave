@@ -1,5 +1,7 @@
-from .backend_page import BackendPage
+from stere import Page
+from .areas.admin_menu import AdminMenu
 
-class Dashboard(BackendPage):
+class Dashboard(Page):
     def __init__(self) -> None:
         super().__init__()
+        self.admin_menu = AdminMenu()
