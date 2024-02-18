@@ -1,10 +1,10 @@
 from behave import *
 from pages.google import Google
 
-@given(u'I visit "https://www.google.com/"')
+@given(u'I visit Google search page')
 def step_impl(context):
    with Google() as page:
-        page.base_url = "https://www.google.com/"
+        page.base_url = 'https://www.google.com/'
         page.navigate()
 
 
