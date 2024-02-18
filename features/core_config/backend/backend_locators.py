@@ -39,7 +39,15 @@ MARKETING_SUBMENU_SEARCH_SYNONYMS_LINK_LOCATOR = {'strategy':'css','locator':'.i
 MARKETING_SUBMENU_SITE_MAP_LINK_LOCATOR = {'strategy':'css','locator':'.item-catalog-sitemap'}
 MARKETING_SUBMENU_ALL_REVIEWS_LINK_LOCATOR = {'strategy':'css','locator':'.item-catalog-reviews-ratings-reviews-all'}
 MARKETING_SUBMENU_PENDING_REVIEWS_LINK_LOCATOR = {'strategy':'css','locator':'.item-catalog-reviews-ratings-pending'}
-
+# Using xpath strategy for Pages link as had test is_visible failure via css strategy
+CONTENT_SUBMENU_PAGES_LINK_LOCATOR = {'strategy':'xpath','locator':"//a[.//span[text()='Pages']]"}
+CONTENT_SUBMENU_BLOCKS_LINK_LOCATOR = {'strategy':'css','locator':'.item-cms-block'}
+CONTENT_SUBMENU_WIDGETS_LINK_LOCATOR = {'strategy':'css','locator':'.item-cms-widget-instance'}
+CONTENT_SUBMENU_TEMPLATES_LINK_LOCATOR = {'strategy':'css','locator':'.item-templates'}
+CONTENT_SUBMENU_MEDIA_GALLERY_LINK_LOCATOR = {'strategy':'css','locator':'.item-media-gallery'}
+CONTENT_SUBMENU_DESIGN_CONFIGURATION_LINK_LOCATOR = {'strategy':'css','locator':'.item-design-config'}
+CONTENT_SUBMENU_DESIGN_THEMES_LINK_LOCATOR = {'strategy':'css','locator':'.item-system-design-theme'}
+CONTENT_SUBMENU_DESIGN_SCHEDULE_LINK_LOCATOR = {'strategy':'css','locator':'.item-system-design-schedule'}
 # Grids
 GRID_FILTER_BUTTON_LOCATOR = {'strategy':'xpath', 'locator':"//button[text()='Filters']"}
 

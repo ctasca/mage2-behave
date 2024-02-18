@@ -48,6 +48,8 @@ def step_impl(context, item):
             page.admin_menu.customers.click()
         if item == 'Marketing':
             page.admin_menu.marketing.click()
+        if item == 'Content':
+            page.admin_menu.content.click()
 
 @then(u'I should see the "{item}" submenu links')
 def step_impl(context, item):
@@ -84,6 +86,17 @@ def step_impl(context, item):
             assert page.admin_menu.submenus['marketing'].site_map.is_visible() is True
             assert page.admin_menu.submenus['marketing'].all_reviews.is_visible() is True
             assert page.admin_menu.submenus['marketing'].pending_reviews.is_visible() is True
+
+        if item == 'Content':
+            assert page.admin_menu.submenus['content'].pages.is_visible() is True
+            assert page.admin_menu.submenus['content'].blocks.is_visible() is True
+            assert page.admin_menu.submenus['content'].widgets.is_visible() is True
+            assert page.admin_menu.submenus['content'].templates.is_visible() is True
+            assert page.admin_menu.submenus['content'].media_gallery.is_visible() is True
+            assert page.admin_menu.submenus['content'].design_configuration.is_visible() is True
+            assert page.admin_menu.submenus['content'].design_themes.is_visible() is True
+            assert page.admin_menu.submenus['content'].design_schedule.is_visible() is True
+        
 
 @when(u'I want to view all my customers')
 def step_impl(context):
