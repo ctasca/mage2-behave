@@ -1,7 +1,7 @@
 # Login form
-ADMIN_LOGIN_FORM_USERNAME_LOCATOR = 'username'
-ADMIN_LOGIN_FORM_PASSWORD_LOCATOR = 'login'
-ADMIN_LOGIN_FORM_SIGNIN_BUTTON_LOCATOR = '.action-login.action-primary'
+ADMIN_LOGIN_FORM_USERNAME_LOCATOR = {'strategy':'id', 'locator':'username'}
+ADMIN_LOGIN_FORM_PASSWORD_LOCATOR = {'strategy':'id', 'locator':'login'}
+ADMIN_LOGIN_FORM_SIGNIN_BUTTON_LOCATOR = {'strategy':'css', 'locator':'.action-login.action-primary'}
 # Admin menu
 ADMIN_MENU_DASHBOARD_LINK_LOCATOR = {'strategy':'css', 'locator':'.item-dashboard'}
 ADMIN_MENU_SALES_LINK_LOCATOR = {'strategy':'css', 'locator':'.item-sales'}
