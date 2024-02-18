@@ -46,6 +46,8 @@ def step_impl(context, item):
             page.admin_menu.catalog.click()
         if item == 'Customers':
             page.admin_menu.customers.click()
+        if item == 'Marketing':
+            page.admin_menu.marketing.click()
 
 @then(u'I should see the "{item}" submenu links')
 def step_impl(context, item):
@@ -69,6 +71,20 @@ def step_impl(context, item):
             assert page.admin_menu.submenus['customers'].login_as_customer_log.is_visible() is True
             assert page.admin_menu.submenus['customers'].customer_groups.is_visible() is True
 
+        if item == 'Marketing':
+            assert page.admin_menu.submenus['marketing'].catalog_price_rule.is_visible() is True
+            assert page.admin_menu.submenus['marketing'].cart_price_rules.is_visible() is True
+            assert page.admin_menu.submenus['marketing'].email_templates.is_visible() is True
+            assert page.admin_menu.submenus['marketing'].newsletter_templates.is_visible() is True
+            assert page.admin_menu.submenus['marketing'].newsletter_queue.is_visible() is True
+            assert page.admin_menu.submenus['marketing'].newsletter_subscribers.is_visible() is True
+            assert page.admin_menu.submenus['marketing'].url_rewrites.is_visible() is True
+            assert page.admin_menu.submenus['marketing'].search_terms.is_visible() is True
+            assert page.admin_menu.submenus['marketing'].search_synonyms.is_visible() is True
+            assert page.admin_menu.submenus['marketing'].site_map.is_visible() is True
+            assert page.admin_menu.submenus['marketing'].all_reviews.is_visible() is True
+            assert page.admin_menu.submenus['marketing'].pending_reviews.is_visible() is True
+
 @when(u'I want to view all my customers')
 def step_impl(context):
     with Dashboard() as page:
@@ -87,7 +103,6 @@ def step_impl(context):
     context.execute_steps(f'''
         {view_all_customers_grid}
     ''')
-
 
 @then(u'I want to be able to apply filters for searching purposes')
 def step_impl(context):

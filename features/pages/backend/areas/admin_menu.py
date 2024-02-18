@@ -5,6 +5,7 @@ from stere.areas import Area
 from .admin_menu_submenus.sales_submenu import SalesSubmenu
 from .admin_menu_submenus.catalog_submenu import CatalogSubmenu
 from .admin_menu_submenus.customers_submenu import CustomersSubmenu
+from .admin_menu_submenus.marketing_submenu import MarketingSubmenu
 
 class AdminMenu(Area):
     def __init__(self, *args, **kwargs):
@@ -21,6 +22,7 @@ class AdminMenu(Area):
         self.submenus = {
             'sales': SalesSubmenu(),
             'catalog': CatalogSubmenu(),
-            'customers': CustomersSubmenu()
+            'customers': CustomersSubmenu(),
+            'marketing': MarketingSubmenu()
         }
         

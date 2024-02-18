@@ -27,6 +27,19 @@ CUSTOMERS_SUBMENU_ALL_CUSTOMERS_LINK_LOCATOR =  {'strategy':'css','locator':'.it
 CUSTOMERS_SUBMENU_ONLINE_LINK_LOCATOR =  {'strategy':'css','locator':'.item-customer-online'}
 CUSTOMERS_SUBMENU_AS_CUSTOMER_LOG_LINK_LOCATOR =  {'strategy':'css','locator':'.item-login-log'}
 CUSTOMERS_SUBMENU_GROUPS_LINK_LOCATOR =  {'strategy':'css','locator':'.item-customer-group'}
+MARKETING_SUBMENU_CATALOG_PRICE_RULE_LINK_LOCATOR = {'strategy':'css','locator':'.item-promo-catalog'}
+MARKETING_SUBMENU_CART_PRICE_RULES_LINK_LOCATOR = {'strategy':'css','locator':'.item-promo-quote'}
+MARKETING_SUBMENU_EMAIL_TEMPLATES_LINK_LOCATOR = {'strategy':'css','locator':'.item-template'}
+MARKETING_SUBMENU_NEWSLETTER_TEMPLATES_LINK_LOCATOR = {'strategy':'css','locator':'.item-newsletter-template'}
+MARKETING_SUBMENU_NEWSLETTER_QUEUE_LINK_LOCATOR = {'strategy':'css','locator':'.item-newsletter-queue'}
+MARKETING_SUBMENU_NEWSLETTER_SUBSCIBERS_LINK_LOCATOR = {'strategy':'css','locator':'.item-newsletter-subscriber'}
+MARKETING_SUBMENU_URL_REWRITES_LINK_LOCATOR = {'strategy':'css','locator':'.item-urlrewrite'}
+MARKETING_SUBMENU_SEARCH_TERMS_LINK_LOCATOR = {'strategy':'css','locator':'.item-search-terms'}
+MARKETING_SUBMENU_SEARCH_SYNONYMS_LINK_LOCATOR = {'strategy':'css','locator':'.item-search-synonyms'}
+MARKETING_SUBMENU_SITE_MAP_LINK_LOCATOR = {'strategy':'css','locator':'.item-catalog-sitemap'}
+MARKETING_SUBMENU_ALL_REVIEWS_LINK_LOCATOR = {'strategy':'css','locator':'.item-catalog-reviews-ratings-reviews-all'}
+MARKETING_SUBMENU_PENDING_REVIEWS_LINK_LOCATOR = {'strategy':'css','locator':'.item-catalog-reviews-ratings-pending'}
+
 # Grids
 GRID_FILTER_BUTTON_LOCATOR = {'strategy':'xpath', 'locator':"//button[text()='Filters']"}
 
