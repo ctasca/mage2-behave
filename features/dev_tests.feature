@@ -61,12 +61,19 @@ Scenario: Admin login and perform clicks in admin menu
     When I click the "Marketing" menu item
     Then I should see the "Marketing" submenu links
 
-@backend-content
-@fixture.splinter.browser.chrome
+@backend
+@fixture.splinter.browser.chrome.headless
 Scenario: Admin login and perform clicks in admin menu
     Given I am logged in the backend
     When I click the "Content" menu item
     Then I should see the "Content" submenu links
+
+@backend
+@fixture.splinter.browser.chrome.headless
+Scenario: Admin login and perform clicks in admin menu
+    Given I am logged in the backend
+    When I click the "Reports" menu item
+    Then I should see the "Reports" submenu links
 
 @backend.grid
 @fixture.splinter.browser.chrome

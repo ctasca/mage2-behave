@@ -7,6 +7,7 @@ from .admin_menu_submenus.catalog_submenu import CatalogSubmenu
 from .admin_menu_submenus.customers_submenu import CustomersSubmenu
 from .admin_menu_submenus.marketing_submenu import MarketingSubmenu
 from .admin_menu_submenus.content_submenu import ContentSubmenu
+from .admin_menu_submenus.reports_submenu import ReportsSubmenu
 
 class AdminMenu(Area):
     def __init__(self, *args, **kwargs):
@@ -25,6 +26,7 @@ class AdminMenu(Area):
             'catalog': CatalogSubmenu(),
             'customers': CustomersSubmenu(),
             'marketing': MarketingSubmenu(),
-            'content': ContentSubmenu()
+            'content': ContentSubmenu(),
+            'reports': ReportsSubmenu()
         }
         

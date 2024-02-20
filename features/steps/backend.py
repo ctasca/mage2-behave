@@ -50,6 +50,8 @@ def step_impl(context, item):
             page.admin_menu.marketing.click()
         if item == 'Content':
             page.admin_menu.content.click()
+        if item == 'Reports':
+            page.admin_menu.reports.click()
 
 @then(u'I should see the "{item}" submenu links')
 def step_impl(context, item):
@@ -96,6 +98,34 @@ def step_impl(context, item):
             assert page.admin_menu.submenus['content'].design_configuration.is_visible() is True
             assert page.admin_menu.submenus['content'].design_themes.is_visible() is True
             assert page.admin_menu.submenus['content'].design_schedule.is_visible() is True
+
+        if item == 'Reports':
+            assert page.admin_menu.submenus['reports'].products_in_cart.is_visible() is True
+            assert page.admin_menu.submenus['reports'].search_terms.is_visible() is True
+            assert page.admin_menu.submenus['reports'].abandoned_carts.is_visible() is True
+            assert page.admin_menu.submenus['reports'].newsletter_problem_reports.is_visible() is True
+            assert page.admin_menu.submenus['reports'].by_customers.is_visible() is True
+            assert page.admin_menu.submenus['reports'].by_products.is_visible() is True
+            assert page.admin_menu.submenus['reports'].orders.is_visible() is True
+            assert page.admin_menu.submenus['reports'].tax.is_visible() is True
+            assert page.admin_menu.submenus['reports'].invoiced.is_visible() is True
+            assert page.admin_menu.submenus['reports'].shipping.is_visible() is True
+            assert page.admin_menu.submenus['reports'].refunds.is_visible() is True
+            assert page.admin_menu.submenus['reports'].coupons.is_visible() is True
+            assert page.admin_menu.submenus['reports'].paypal_settlement.is_visible() is True
+            assert page.admin_menu.submenus['reports'].braintree_settlement.is_visible() is True
+            assert page.admin_menu.submenus['reports'].order_total.is_visible() is True
+            assert page.admin_menu.submenus['reports'].order_count.is_visible() is True
+            assert page.admin_menu.submenus['reports'].new.is_visible() is True
+            assert page.admin_menu.submenus['reports'].views.is_visible() is True
+            assert page.admin_menu.submenus['reports'].bestsellers.is_visible() is True
+            assert page.admin_menu.submenus['reports'].low_stock.is_visible() is True
+            assert page.admin_menu.submenus['reports'].ordered.is_visible() is True
+            assert page.admin_menu.submenus['reports'].downloads.is_visible() is True
+            assert page.admin_menu.submenus['reports'].refresh_statistics.is_visible() is True
+            assert page.admin_menu.submenus['reports'].advanced_reporting.is_visible() is True
+            assert page.admin_menu.submenus['reports'].bi_essentials.is_visible() is True
+        
         
 
 @when(u'I want to view all my customers')
