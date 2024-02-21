@@ -1,4 +1,4 @@
-import features.core_config.all as config
+import features.core_config.config as config
 from stere.fields import Button
 
 

@@ -1,4 +1,4 @@
-import features.core_config.all as config
+import features.core_config.config as config
 import re
 from features.fixtures import *
 

@@ -66,3 +66,4 @@ def step_impl(context):
 def step_impl(context):
     with CustomersGrid() as page:
         page.filters_button.click()
+        # @TODO complete with some filtering action

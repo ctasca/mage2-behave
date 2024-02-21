@@ -136,4 +136,4 @@ def step_impl(context):
 @then("I should be able to select the store I want to switch to")
 def step_impl(context):
     with Dashboard() as page:
-        page.store_change_button.switch_to_store('Default Store View')
+        page.store_switcher.switch_to_store('Default Store View')
