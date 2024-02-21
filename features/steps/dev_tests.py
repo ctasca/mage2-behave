@@ -127,3 +127,13 @@ def step_impl(context, item):
             assert page.admin_menu.submenus['system'].custom_variables.is_visible() is True
             assert page.admin_menu.submenus['system'].manage_encryption_key.is_visible() is True
 
+
+@when("I want to change store scope")
+def step_impl(context):
+    assert True is not False
+
+
+@then("I should be able to select the store I want to switch to")
+def step_impl(context):
+    with Dashboard() as page:
+        page.store_change_button.switch_to_store('Default Store View')

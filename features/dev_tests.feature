@@ -96,6 +96,13 @@ Scenario: Admin can view the customers grid
     When I want to view all my customers
     Then I should be viewing the customer grid
 
+@store.switcher
+@fixture.splinter.browser.chrome
+Scenario: Admin can change store scope
+    Given I am logged in the backend
+    When I want to change store scope
+    Then I should be able to select the store I want to switch to
+
 @backend.grid.filters
 @fixture.splinter.browser.chrome.headless
 Scenario: Admin can view the customers grid and click the filters button

@@ -140,5 +140,7 @@ SYSTEM_SUBMENU_NOTIFICATIONS_LINK_LOCATOR: Dict[str, str] = \
 SYSTEM_SUBMENU_CUSTOM_VARIABLES_LINK_LOCATOR: Dict[str, str] = {"strategy": "css", "locator": ".item-system-variable"}
 SYSTEM_SUBMENU_MANAGE_ENCRYPTION_KEY_LINK_LOCATOR: Dict[str, str] = \
     {"strategy": "css", "locator": ".item-system-crypt-key"}
+# Scope Button
+STORE_CHANGE_BUTTON_LINK_LOCATOR: Dict[str, str] = {"strategy": "id", "locator": "store-change-button"}
 # Grids
 GRID_FILTER_BUTTON_LOCATOR: Dict[str, str] = {"strategy": "xpath", "locator": "//button[text()=\"Filters\"]"}
