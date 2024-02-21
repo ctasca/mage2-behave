@@ -75,6 +75,13 @@ Scenario: Admin login and perform clicks in admin menu
     When I click the "Reports" menu item
     Then I should see the "Reports" submenu links
 
+@backend
+@fixture.splinter.browser.chrome.headless
+Scenario: Admin login and perform clicks in admin menu
+    Given I am logged in the backend
+    When I click the "Stores" menu item
+    Then I should see the "Stores" submenu links
+
 @backend.grid
 @fixture.splinter.browser.chrome
 Scenario: Admin can view the customers grid

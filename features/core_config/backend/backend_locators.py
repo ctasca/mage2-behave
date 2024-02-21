@@ -3,7 +3,7 @@ ADMIN_LOGIN_FORM_USERNAME_LOCATOR = {'strategy':'id', 'locator':'username'}
 ADMIN_LOGIN_FORM_PASSWORD_LOCATOR = {'strategy':'id', 'locator':'login'}
 ADMIN_LOGIN_FORM_SIGNIN_BUTTON_LOCATOR = {'strategy':'css', 'locator':'.action-login.action-primary'}
 # Admin menu
-ADMIN_MENU_ROOT = {'strategy':'css', 'locator':'.admin__menu'}
+ADMIN_MENU_ROOT = {'strategy':'id', 'locator':'nav'}
 ADMIN_MENU_DASHBOARD_LINK_LOCATOR = {'strategy':'id', 'locator':'menu-magento-backend-dashboard'}
 ADMIN_MENU_SALES_LINK_LOCATOR = {'strategy':'id', 'locator':'menu-magento-sales-sales'}
 ADMIN_MENU_CATALOG_LINK_LOCATOR = {'strategy':'id', 'locator':'menu-magento-catalog-catalog'}
@@ -39,8 +39,7 @@ MARKETING_SUBMENU_SEARCH_SYNONYMS_LINK_LOCATOR = {'strategy':'css','locator':'.i
 MARKETING_SUBMENU_SITE_MAP_LINK_LOCATOR = {'strategy':'css','locator':'.item-catalog-sitemap'}
 MARKETING_SUBMENU_ALL_REVIEWS_LINK_LOCATOR = {'strategy':'css','locator':'.item-catalog-reviews-ratings-reviews-all'}
 MARKETING_SUBMENU_PENDING_REVIEWS_LINK_LOCATOR = {'strategy':'css','locator':'.item-catalog-reviews-ratings-pending'}
-# Using xpath strategy for Pages link as had test is_visible failure via css strategy
-CONTENT_SUBMENU_PAGES_LINK_LOCATOR = {'strategy':'xpath','locator':"//a[.//span[text()='Pages']]"}
+CONTENT_SUBMENU_PAGES_LINK_LOCATOR = {'strategy':'css','locator':".item-cms-page"}
 CONTENT_SUBMENU_BLOCKS_LINK_LOCATOR = {'strategy':'css','locator':'.item-cms-block'}
 CONTENT_SUBMENU_WIDGETS_LINK_LOCATOR = {'strategy':'css','locator':'.item-cms-widget-instance'}
 CONTENT_SUBMENU_TEMPLATES_LINK_LOCATOR = {'strategy':'css','locator':'.item-templates'}
@@ -73,6 +72,19 @@ REPORTS_SUBMENU_DOWNLOADS_LINK_LOCATOR = {'strategy':'css','locator':'.item-repo
 REPORTS_SUBMENU_REFRESH_STATISTICS_LINK_LOCATOR = {'strategy':'css','locator':'.item-report-products-sold'}
 REPORTS_SUBMENU_ADVANCED_REPORTING_LINK_LOCATOR = {'strategy':'css','locator':'.item-report-products-sold'}
 REPORTS_SUBMENU_BI_ESSENTIALS_LINK_LOCATOR = {'strategy':'css','locator':'.item-bi-essentials'}
+STORES_SUBMENU_ALL_STORES_LINK_LOCATOR = {'strategy':'css','locator':'.item-system-store'}
+STORES_SUBMENU_CONFIGURATION_LINK_LOCATOR = {'strategy':'css','locator':'.item-system-config'}
+STORES_SUBMENU_TERMS_AND_CONDITIONS_LINK_LOCATOR = {'strategy':'css','locator':'.item-sales-checkoutagreement'}
+STORES_SUBMENU_ORDER_STATUS_LINK_LOCATOR = {'strategy':'css','locator':'.item-system-order-statuses'}
+STORES_SUBMENU_SOURCES_LINK_LOCATOR = {'strategy':'css','locator':'.item-source'}
+STORES_SUBMENU_STOCKS_LINK_LOCATOR = {'strategy':'css','locator':'.item-stock'}
+STORES_SUBMENU_TAX_RULES_LINK_LOCATOR = {'strategy':'css','locator':'.item-sales-tax-rules'}
+STORES_SUBMENU_TAX_ZONES_AND_RATES_LINK_LOCATOR = {'strategy':'css','locator':'.item-sales-tax-rates'}
+STORES_SUBMENU_CURRENCY_RATES_LINK_LOCATOR = {'strategy':'css','locator':'.item-system-currency-rates'}
+STORES_SUBMENU_CURRENCY_SYMBOLS_LINK_LOCATOR = {'strategy':'css','locator':'.item-system-currency-symbols'}
+STORES_SUBMENU_PRODUCT_LINK_LOCATOR = {'strategy':'css','locator':'.item-catalog-attributes-attributes'}
+STORES_SUBMENU_ATTRIBUTE_SET_LINK_LOCATOR = {'strategy':'css','locator':'.item-catalog-attributes-sets'}
+STORES_SUBMENU_RATING_LINK_LOCATOR = {'strategy':'css','locator':'.item-catalog-reviews-ratings-ratings'}
 # Grids
 GRID_FILTER_BUTTON_LOCATOR = {'strategy':'xpath', 'locator':"//button[text()='Filters']"}
 
