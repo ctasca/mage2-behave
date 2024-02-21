@@ -67,3 +67,21 @@ def step_impl(context):
     with CustomersGrid() as page:
         page.filters_button.click()
         # @TODO complete with some filtering action
+
+
+@given("I am on the backend Dashboard page")
+def step_impl(context):
+    open_login_page = 'Given I am on the admin login page'
+    fill_fields = 'When I enter my credentials'
+    signin = 'And I sign in'
+    context.execute_steps(f'''
+            {open_login_page}
+            {fill_fields}
+            {signin}
+        ''')
+
+
+@then("I want to be able to reload data")
+def step_impl(context):
+    with Dashboard() as page:
+        page.reload_data_button.click()

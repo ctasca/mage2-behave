@@ -96,6 +96,7 @@ Scenario: Admin can view the customers grid
     When I want to view all my customers
     Then I should be viewing the customer grid
 
+@backend
 @store.switcher
 @fixture.splinter.browser.chrome.headless
 Scenario: Admin can change store scope
@@ -103,12 +104,20 @@ Scenario: Admin can change store scope
     When I want to change store scope
     Then I should be able to select the store I want to switch to
 
+@backend
 @backend.grid.filters
 @fixture.splinter.browser.chrome.headless
 Scenario: Admin can view the customers grid and click the filters button
     Given I am logged in the backend
     When I am on the all customers grid
     Then I want to be able to apply filters for searching purposes
+
+@backend
+@backend.grid.filters
+@fixture.splinter.browser.chrome.headless
+Scenario: Admin can reload data on the Dashboard page
+    Given I am on the backend Dashboard page
+    Then I want to be able to reload data
 
 @api
 Scenario: Create an amin user integration bearer token

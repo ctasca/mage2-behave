@@ -146,3 +146,5 @@ STORE_SCOPE_LIST_ROOT_LOCATOR: Dict[str, str] = {"strategy": "xpath", "locator":
 SET_STORE_SCOPE_LOCATOR_FORMAT: str = "//a[contains(text(), '{}')]"
 # Grids
 GRID_FILTER_BUTTON_LOCATOR: Dict[str, str] = {"strategy": "xpath", "locator": "//button[text()=\"Filters\"]"}
+DASHBOARD_RELOAD_DATA_BUTTON_LOCATOR: Dict[str, str] = \
+    {"strategy": "xpath", "locator": "//button[@title=\"Reload Data\"]"}
