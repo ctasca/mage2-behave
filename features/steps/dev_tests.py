@@ -1,5 +1,6 @@
 from behave import *
-from pages.backend.dashboard import Dashboard
+from features.pages.backend.dashboard import Dashboard
+
 
 @when(u'I click the "{item}" menu item')
 def step_impl(context, item):
@@ -19,6 +20,7 @@ def step_impl(context, item):
         if item == 'Stores':
             page.admin_menu.stores.click()
 
+
 @then(u'I should see the "{item}" submenu links')
 def step_impl(context, item):
     with Dashboard() as page:
@@ -34,7 +36,7 @@ def step_impl(context, item):
         if item == 'Catalog':
             assert page.admin_menu.submenus['catalog'].products.is_visible() is True
             assert page.admin_menu.submenus['catalog'].categories.is_visible() is True
-        
+
         if item == 'Customers':
             assert page.admin_menu.submenus['customers'].all_customers.is_visible() is True
             assert page.admin_menu.submenus['customers'].now_online.is_visible() is True
@@ -106,4 +108,3 @@ def step_impl(context, item):
             assert page.admin_menu.submenus['stores'].product.is_visible() is True
             assert page.admin_menu.submenus['stores'].attribute_set.is_visible() is True
             assert page.admin_menu.submenus['stores'].rating.is_visible() is True
-            

@@ -1,5 +1,5 @@
 @fixture.integration.admin.token
-Feature: As a mage2-behave developer I want to test the funcionality of my code So That I can assure all is properly working
+Feature: As a mage2-behave developer I want to test the functionality of my code So That I can assure all is properly working
 
 @browser
 @fixture.splinter.browser.chrome
@@ -86,7 +86,7 @@ Scenario: Admin login and perform clicks in admin menu
 @fixture.splinter.browser.chrome
 Scenario: Admin can view the customers grid
     Given I am logged in the backend
-    When I want to view all my customers 
+    When I want to view all my customers
     Then I should be viewing the customer grid
 
 @backend.grid.filters

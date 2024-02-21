@@ -1,5 +1,6 @@
 from stere.areas import Area
-from pages.backend.fields.login_form_fields import Username, Password, SignInButton
+from features.pages.backend.fields.login_form_fields import Username, Password, SignInButton
+
 
 class LoginForm(Area):
     def __init__(self, *args, **kwargs):

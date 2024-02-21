@@ -1,8 +1,8 @@
 from behave import *
-from pages.backend.login import Login
-from pages.backend.dashboard import Dashboard
-from pages.backend.customers_grid import CustomersGrid
-import time
+from features.pages.backend.login import Login
+from features.pages.backend.dashboard import Dashboard
+from features.pages.backend.customers_grid import CustomersGrid
+
 
 @given(u'I am on the admin login page')
 def step_impl(context):
@@ -11,20 +11,24 @@ def step_impl(context):
         page.url_suffix = context.backend + 'login'
         page.navigate()
 
+
 @when(u'I enter my credentials')
 def step_impl(context):
     with Login() as page:
         page.form.username.fill(context.admin_username)
         page.form.password.fill(context.admin_password)
 
+
 @when(u'I sign in')
 def step_impl(context):
     with Login() as page:
         page.form.signin.click()
 
+
 @then(u'I should see a dashboard header')
 def step_impl(context):
     assert context.browser.is_text_present("Dashboard") is True
+
 
 @given(u'I am logged in the backend')
 def step_impl(context):
@@ -35,7 +39,8 @@ def step_impl(context):
         {open_login_page}
         {fill_fields}
         {signin}
-    ''')    
+    ''')
+
 
 @when(u'I want to view all my customers')
 def step_impl(context):
@@ -47,7 +52,8 @@ def step_impl(context):
 @then(u'I should be viewing the customer grid')
 def step_impl(context):
     with CustomersGrid() as page:
-        assert 'customer/' in context.browser.url 
+        assert 'customer/' in context.browser.url
+
 
 @when(u'I am on the all customers grid')
 def step_impl(context):
@@ -56,10 +62,8 @@ def step_impl(context):
         {view_all_customers_grid}
     ''')
 
+
 @then(u'I want to be able to apply filters for searching purposes')
 def step_impl(context):
     with CustomersGrid() as page:
         page.filters_button.click()
-
-
-
