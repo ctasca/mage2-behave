@@ -35,52 +35,59 @@ Scenario: Navigate to Admin Login Page
 
 @backend
 @fixture.splinter.browser.chrome.headless
-Scenario: Admin login and perform clicks in admin menu
+Scenario: Admin login and click the Sales menu item
     Given I am logged in the backend
     When I click the "Sales" menu item
     Then I should see the "Sales" submenu links
 
 @backend
 @fixture.splinter.browser.chrome.headless
-Scenario: Admin login and perform clicks in admin menu
+Scenario: Admin login and click the Catalog menu item
     Given I am logged in the backend
     When I click the "Catalog" menu item
     Then I should see the "Catalog" submenu links
 
 @backend
 @fixture.splinter.browser.chrome.headless
-Scenario: Admin login and perform clicks in admin menu
+Scenario: Admin login and click the Customers menu item
     Given I am logged in the backend
     When I click the "Customers" menu item
     Then I should see the "Customers" submenu links
 
 @backend
 @fixture.splinter.browser.chrome.headless
-Scenario: Admin login and perform clicks in admin menu
+Scenario: Admin login and click the Marketing menu item
     Given I am logged in the backend
     When I click the "Marketing" menu item
     Then I should see the "Marketing" submenu links
 
 @backend
 @fixture.splinter.browser.chrome.headless
-Scenario: Admin login and perform clicks in admin menu
+Scenario: Admin login and click the Content menu item
     Given I am logged in the backend
     When I click the "Content" menu item
     Then I should see the "Content" submenu links
 
 @backend
 @fixture.splinter.browser.chrome.headless
-Scenario: Admin login and perform clicks in admin menu
+Scenario: Admin login and click the Reports menu item
     Given I am logged in the backend
     When I click the "Reports" menu item
     Then I should see the "Reports" submenu links
 
 @backend
 @fixture.splinter.browser.chrome.headless
-Scenario: Admin login and perform clicks in admin menu
+Scenario: Admin login and click the Stores menu item
     Given I am logged in the backend
     When I click the "Stores" menu item
     Then I should see the "Stores" submenu links
+
+@backend
+@fixture.splinter.browser.chrome.headless
+Scenario: Admin login and click the System menu item
+    Given I am logged in the backend
+    When I click the "System" menu item
+    Then I should see the "System" submenu links
 
 @backend.grid
 @fixture.splinter.browser.chrome.headless
@@ -97,6 +104,6 @@ Scenario: Admin can view the customers grid and click the filters button
     Then I want to be able to apply filters for searching purposes
 
 @api
-Scenario: Create an integration admin token
+Scenario: Create an amin user integration bearer token
     Given I have made an integration admin token request
     Then I expect a successful response

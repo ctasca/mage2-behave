@@ -122,5 +122,23 @@ STORES_SUBMENU_ATTRIBUTE_SET_LINK_LOCATOR: Dict[str, str] = \
     {"strategy": "css", "locator": ".item-catalog-attributes-sets"}
 STORES_SUBMENU_RATING_LINK_LOCATOR: Dict[str, str] = \
     {"strategy": "css", "locator": ".item-catalog-reviews-ratings-ratings"}
+SYSTEM_SUBMENU_IMPORT_LINK_LOCATOR: Dict[str, str] = {"strategy": "css", "locator": ".item-system-convert-import"}
+SYSTEM_SUBMENU_EXPORT_LINK_LOCATOR: Dict[str, str] = {"strategy": "css", "locator": ".item-system-convert-export"}
+SYSTEM_SUBMENU_IMPORT_EXPORT_LINK_LOCATOR: Dict[str, str] = {"strategy": "css", "locator": ".item-system-convert-tax"}
+SYSTEM_SUBMENU_IMPORT_HISTORY_LINK_LOCATOR: Dict[str, str] = \
+    {"strategy": "css", "locator": ".item-system-convert-history"}
+SYSTEM_SUBMENU_INTEGRATIONS_LINK_LOCATOR: Dict[str, str] = {"strategy": "css", "locator": ".item-system-integrations"}
+SYSTEM_SUBMENU_CACHE_MANAGEMENT_LINK_LOCATOR: Dict[str, str] = {"strategy": "css", "locator": ".item-system-cache"}
+SYSTEM_SUBMENU_INDEX_MANAGEMENT_LINK_LOCATOR: Dict[str, str] = {"strategy": "css", "locator": ".item-system-index"}
+SYSTEM_SUBMENU_ALL_USERS_LINK_LOCATOR: Dict[str, str] = {"strategy": "css", "locator": ".item-system-acl-users"}
+SYSTEM_SUBMENU_LOCKED_USERS_LINK_LOCATOR: Dict[str, str] = {"strategy": "css", "locator": ".item-system-acl-locks"}
+SYSTEM_SUBMENU_USER_ROLES_LINK_LOCATOR: Dict[str, str] = {"strategy": "css", "locator": ".item-system-acl-roles"}
+SYSTEM_SUBMENU_BULK_ACTIONS_LINK_LOCATOR: Dict[str, str] = \
+    {"strategy": "css", "locator": ".item-system-magento-logging-bulk-operations"}
+SYSTEM_SUBMENU_NOTIFICATIONS_LINK_LOCATOR: Dict[str, str] = \
+    {"strategy": "css", "locator": ".item-system-adminnotification"}
+SYSTEM_SUBMENU_CUSTOM_VARIABLES_LINK_LOCATOR: Dict[str, str] = {"strategy": "css", "locator": ".item-system-variable"}
+SYSTEM_SUBMENU_MANAGE_ENCRYPTION_KEY_LINK_LOCATOR: Dict[str, str] = \
+    {"strategy": "css", "locator": ".item-system-crypt-key"}
 # Grids
 GRID_FILTER_BUTTON_LOCATOR: Dict[str, str] = {"strategy": "xpath", "locator": "//button[text()=\"Filters\"]"}

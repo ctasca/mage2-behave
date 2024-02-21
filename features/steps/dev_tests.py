@@ -19,6 +19,8 @@ def step_impl(context, item):
             page.admin_menu.reports.click()
         if item == 'Stores':
             page.admin_menu.stores.click()
+        if item == 'System':
+            page.admin_menu.system.click()
 
 
 @then(u'I should see the "{item}" submenu links')
@@ -108,3 +110,20 @@ def step_impl(context, item):
             assert page.admin_menu.submenus['stores'].product.is_visible() is True
             assert page.admin_menu.submenus['stores'].attribute_set.is_visible() is True
             assert page.admin_menu.submenus['stores'].rating.is_visible() is True
+
+        if item == 'System':
+            assert page.admin_menu.submenus['system'].system_import.is_visible() is True
+            assert page.admin_menu.submenus['system'].export.is_visible() is True
+            assert page.admin_menu.submenus['system'].import_export_tax_rates.is_visible() is True
+            assert page.admin_menu.submenus['system'].import_history.is_visible() is True
+            assert page.admin_menu.submenus['system'].integrations.is_visible() is True
+            assert page.admin_menu.submenus['system'].cache_management.is_visible() is True
+            assert page.admin_menu.submenus['system'].index_management.is_visible() is True
+            assert page.admin_menu.submenus['system'].all_users.is_visible() is True
+            assert page.admin_menu.submenus['system'].locked_users.is_visible() is True
+            assert page.admin_menu.submenus['system'].user_roles.is_visible() is True
+            assert page.admin_menu.submenus['system'].bulk_actions.is_visible() is True
+            assert page.admin_menu.submenus['system'].notifications.is_visible() is True
+            assert page.admin_menu.submenus['system'].custom_variables.is_visible() is True
+            assert page.admin_menu.submenus['system'].manage_encryption_key.is_visible() is True
+

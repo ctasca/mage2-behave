@@ -9,6 +9,7 @@ from .admin_menu_submenus.marketing_submenu import MarketingSubmenu
 from .admin_menu_submenus.content_submenu import ContentSubmenu
 from .admin_menu_submenus.reports_submenu import ReportsSubmenu
 from .admin_menu_submenus.stores_submenu import StoresSubmenu
+from .admin_menu_submenus.system_submenu import SystemSubmenu
 
 
 class AdminMenu(Area):
@@ -39,5 +40,6 @@ class AdminMenu(Area):
             'marketing': MarketingSubmenu(),
             'content': ContentSubmenu(),
             'reports': ReportsSubmenu(),
-            'stores': StoresSubmenu()
+            'stores': StoresSubmenu(),
+            'system': SystemSubmenu()
         }
