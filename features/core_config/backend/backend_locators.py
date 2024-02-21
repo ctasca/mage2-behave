@@ -80,7 +80,7 @@ REPORTS_SUBMENU_SHIPPING_LINK_LOCATOR: Dict[str, str] = \
 REPORTS_SUBMENU_REFUNDS_LINK_LOCATOR: Dict[str, str] = {"strategy": "css", "locator": ".item-report-salesroot-refunded"}
 REPORTS_SUBMENU_COUPONS_LINK_LOCATOR: Dict[str, str] = {"strategy": "css", "locator": ".item-report-salesroot-coupons"}
 REPORTS_SUBMENU_PAYPAL_SETTLEMENT_LINK_LOCATOR: Dict[str, str] = \
-    {"strategy": "css","locator": ".item-report-salesroot-paypal-settlement-reports"}
+    {"strategy": "css", "locator": ".item-report-salesroot-paypal-settlement-reports"}
 REPORTS_SUBMENU_BRAINTREE_SETTLEMENT_LINK_LOCATOR: Dict[str, str] = \
     {"strategy": "css", "locator": ".item-settlement-report"}
 REPORTS_SUBMENU_ORDER_TOTAL_LINK_LOCATOR: Dict[str, str] = \
@@ -110,7 +110,8 @@ STORES_SUBMENU_ORDER_STATUS_LINK_LOCATOR: Dict[str, str] = {"strategy": "css", "
 STORES_SUBMENU_SOURCES_LINK_LOCATOR: Dict[str, str] = {"strategy": "css", "locator": ".item-source"}
 STORES_SUBMENU_STOCKS_LINK_LOCATOR: Dict[str, str] = {"strategy": "css", "locator": ".item-stock"}
 STORES_SUBMENU_TAX_RULES_LINK_LOCATOR: Dict[str, str] = {"strategy": "css", "locator": ".item-sales-tax-rules"}
-STORES_SUBMENU_TAX_ZONES_AND_RATES_LINK_LOCATOR: Dict[str, str] = {"strategy": "css", "locator": ".item-sales-tax-rates"}
+STORES_SUBMENU_TAX_ZONES_AND_RATES_LINK_LOCATOR: Dict[str, str] = \
+    {"strategy": "css", "locator": ".item-sales-tax-rates"}
 STORES_SUBMENU_CURRENCY_RATES_LINK_LOCATOR: Dict[str, str] = \
     {"strategy": "css", "locator": ".item-system-currency-rates"}
 STORES_SUBMENU_CURRENCY_SYMBOLS_LINK_LOCATOR: Dict[str, str] = \

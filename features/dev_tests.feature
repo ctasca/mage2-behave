@@ -83,14 +83,14 @@ Scenario: Admin login and perform clicks in admin menu
     Then I should see the "Stores" submenu links
 
 @backend.grid
-@fixture.splinter.browser.chrome
+@fixture.splinter.browser.chrome.headless
 Scenario: Admin can view the customers grid
     Given I am logged in the backend
     When I want to view all my customers
     Then I should be viewing the customer grid
 
 @backend.grid.filters
-@fixture.splinter.browser.chrome
+@fixture.splinter.browser.chrome.headless
 Scenario: Admin can view the customers grid and click the filters button
     Given I am logged in the backend
     When I am on the all customers grid

@@ -51,8 +51,7 @@ def step_impl(context):
 
 @then(u'I should be viewing the customer grid')
 def step_impl(context):
-    with CustomersGrid() as page:
-        assert 'customer/' in context.browser.url
+    assert 'customer/' in context.browser.url
 
 
 @when(u'I am on the all customers grid')
