@@ -12,7 +12,8 @@ setup(
         'mariadb',
         'webdriver-manager',
         'sshtunnel',
-        'stere>=0.31.0'
+        'stere>=0.31.0',
+        'colorama'
     ],
     python_requires='>=3.8',
 )
