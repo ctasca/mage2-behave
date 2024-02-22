@@ -1,3 +1,6 @@
 .idea
+.env
+*.egg-info
+*.pyc
 features/core_config/core_config_baseurls.py
 features/core_config/core_config_backend.py
