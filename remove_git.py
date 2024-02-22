@@ -1,4 +1,8 @@
 # remove_git.py
+"""
+This script should be used to drop the mage2-behave git repository from the current working directory,
+in order to include the project as part of the Magento 2 repository.
+"""
 import os
 import shutil
 from colorama import Fore, Style
