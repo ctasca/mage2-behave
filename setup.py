@@ -6,6 +6,7 @@ setup(
     packages=find_packages(),
     install_requires=[
         'behave',
+        'requests',
         'selenium',
         'splinter>=0.21.0',
         'waiting',

@@ -84,4 +84,5 @@ def step_impl(context):
 @then("I want to be able to reload data")
 def step_impl(context):
     with Dashboard() as page:
+        assert page.reload_data_button.is_visible(10)
         page.reload_data_button.click()

@@ -1,4 +1,4 @@
-from features.core_config.config import *
+from features.core_config.backend.backend_locators import *
 from stere.fields import Button
 
 

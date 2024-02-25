@@ -1,4 +1,5 @@
-from features.core_config.config import *
+from features.core_config.core_config_baseurls import *
+from features.core_config.core_config_backend import *
 import re
 from features.fixtures import *
 
