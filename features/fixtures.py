@@ -9,6 +9,7 @@ from webdriver_manager.chrome import ChromeDriverManager
 from features.core_config.core_config_baseurls import *
 from features.core_config.core_config_backend import *
 from features.core_config.dummy_customer import *
+from decouple import config
 from colorama import Fore, Style
 
 # Install Chrome web driver by default
@@ -102,7 +103,7 @@ def dummy_customer_create(context):
                 "countryId": CUSTOMER_ADDRESS_COUNTRY_ID
             }]
         },
-        "password": CUSTOMER_PASSWORD
+        "password": config('CUSTOMER_PASSWORD')
     }
     headers = {"Content-Type": "application/json", "Authorization": "Bearer {}".format(context.admin_token)}
     response = requests.post("{}rest/V1/customers".format(context.baseurl), headers=headers,
@@ -149,7 +150,7 @@ def _set_development_environment(context):
     context.secure_baseurl = DEVELOPMENT_ENV_SECURE_BASEURL
     context.backend = DEVELOPMENT_BACKEND_URL
     context.admin_username = DEVELOPMENT_ADMIN_USERNAME
-    context.admin_password = DEVELOPMENT_ADMIN_PASSWORD
+    context.admin_password = config('DEVELOPMENT_ADMIN_PASSWORD')
 
 
 def _set_integration_environment(context):
@@ -157,7 +158,7 @@ def _set_integration_environment(context):
     context.secure_baseurl = INTEGRATION_ENV_SECURE_BASEURL
     context.backend = INTEGRATION_BACKEND_URL
     context.admin_username = INTEGRATION_ADMIN_USERNAME
-    context.admin_password = INTEGRATION_ADMIN_PASSWORD
+    context.admin_password = config('INTEGRATION_ADMIN_PASSWORD')
 
 
 def _set_test_environment(context):
@@ -165,7 +166,7 @@ def _set_test_environment(context):
     context.secure_baseurl = TEST_ENV_SECURE_BASEURL
     context.backend = TEST_BACKEND_URL
     context.admin_username = TEST_ADMIN_USERNAME
-    context.admin_password = TEST_ADMIN_PASSWORD
+    context.admin_password = config('TEST_ADMIN_PASSWORD')
 
 
 def _set_staging_environment(context):
@@ -173,7 +174,7 @@ def _set_staging_environment(context):
     context.secure_baseurl = STAGING_ENV_SECURE_BASEURL
     context.backend = STAGING_BACKEND_URL
     context.admin_username = STAGING_ADMIN_USERNAME
-    context.admin_password = STAGING_ADMIN_PASSWORD
+    context.admin_password = config('STAGING_ADMIN_PASSWORD')
 
 
 def _set_pre_production_environment(context):
@@ -181,7 +182,7 @@ def _set_pre_production_environment(context):
     context.secure_baseurl = PRE_PRODUCTION_ENV_SECURE_BASEURL
     context.backend = PRE_PRODUCTION_BACKEND_URL
     context.admin_username = PRE_PRODUCTION_ADMIN_USERNAME
-    context.admin_password = PRE_PRODUCTION_ADMIN_PASSWORD
+    context.admin_password = config('PRE_PRODUCTION_ADMIN_PASSWORD')
 
 
 def _set_production_environment(context):
@@ -189,4 +190,4 @@ def _set_production_environment(context):
     context.secure_baseurl = PRODUCTION_ENV_SECURE_BASEURL
     context.backend = PRODUCTION_BACKEND_URL
     context.admin_username = PRODUCTION_ADMIN_USERNAME
-    context.admin_password = PRODUCTION_ADMIN_PASSWORD
+    context.admin_password = config('PRODUCTION_ADMIN_PASSWORD')

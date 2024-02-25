@@ -14,7 +14,8 @@ setup(
         'webdriver-manager',
         'sshtunnel',
         'stere>=0.31.0',
-        'colorama'
+        'colorama',
+        'python-decouple>=3.8'
     ],
     python_requires='>=3.8',
 )
