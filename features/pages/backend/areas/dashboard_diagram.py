@@ -8,5 +8,5 @@ class DashboardDiagram(Area):
         super().__init__(*args, **kwargs)
         self.orders_tab = DiagramOrdersTab(DASHBOARD_DIAGRAM_ORDER_TAB_LOCATOR['strategy'],
                                            DASHBOARD_DIAGRAM_ORDER_TAB_LOCATOR['locator'])
-        self.amount_tab = DiagramAmountsTab(DASHBOARD_DIAGRAM_AMOUNTS_TAB_LOCATOR['strategy'],
+        self.amounts_tab = DiagramAmountsTab(DASHBOARD_DIAGRAM_AMOUNTS_TAB_LOCATOR['strategy'],
                                             DASHBOARD_DIAGRAM_AMOUNTS_TAB_LOCATOR['locator'])

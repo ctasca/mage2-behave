@@ -111,13 +111,28 @@ Scenario: Admin can view the customers grid and click the filters button
     Given I am logged in the backend
     When I am on the all customers grid
     Then I want to be able to apply filters for searching purposes
+    # TODO complete step when implemented customers grid filters area
 
 @backend
-@backend.grid.filters
+@backend.dashboard
 @fixture.splinter.browser.chrome.headless
 Scenario: Admin can reload data on the Dashboard page
     Given I am on the backend Dashboard page
     Then I want to be able to reload data
+
+@backend
+@backend.dashboard
+@fixture.splinter.browser.chrome.headless
+Scenario: Admin can click diagram tabs on Dashboard page
+    Given I am on the backend Dashboard page
+    Then I want to be able to choose and view the diagram tabs
+
+@backend
+@backend.dashboard
+@fixture.splinter.browser.chrome.headless
+Scenario: Admin can click store statistics tabs on Dashboard page
+    Given I am on the backend Dashboard page
+    Then I want to be able to choose and view the store statistics tabs
 
 @api
 Scenario: Create an amin user integration bearer token
