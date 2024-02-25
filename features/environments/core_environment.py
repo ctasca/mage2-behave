@@ -1,6 +1,4 @@
 import re
-from features.core_config.core_config_baseurls import *
-from features.core_config.core_config_backend import *
 from features.fixtures import *
 from colorama import Fore, Style
 
@@ -14,6 +12,7 @@ def core_before_all(context):
 
 
 def core_before_feature(context, feature):
+    _set_environment(context, feature)
     _integration_admin_token(context, feature.tags)
     _skip(context, feature, 'feature')
     _dummy_customer_create(context, feature)
@@ -33,6 +32,7 @@ def core_before_scenario(context, scenario):
         for data in matches:
             use_fixture(splinter_browser_chrome_screen_size, context, data[1])
 
+    _set_environment(context, scenario)
     _integration_admin_token(context, scenario.tags)
     _skip(context, scenario, 'scenario')
     _dummy_customer_create(context, scenario)
@@ -48,6 +48,13 @@ def core_after_feature(context, feature):
 
 def _regex_fixture_tag_matches(hook, fixture_tag: str) -> list:
     return re.findall(rf"(\b{fixture_tag}\b)+(\b[\w*-?+]+\b)+", '|'.join(hook.tags))
+
+
+def _set_environment(context, hook) -> None:
+    if matches := _regex_fixture_tag_matches(hook, 'fixture.set.environment.'):
+        for data in matches:
+            # Note: set_environment expects a string not a list.
+            use_fixture(set_environment, context, data[1])
 
 
 def _integration_admin_token(context, tags: list) -> None:

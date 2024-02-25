@@ -6,7 +6,10 @@ from selenium.webdriver.chrome.service import Service
 from splinter import Browser, Config
 from stere import Stere
 from webdriver_manager.chrome import ChromeDriverManager
+from features.core_config.core_config_baseurls import *
+from features.core_config.core_config_backend import *
 from features.core_config.dummy_customer import *
+from colorama import Fore, Style
 
 # Install Chrome web driver by default
 driver = ChromeDriverManager().install()
@@ -48,6 +51,24 @@ def splinter_browser_chrome_headless(context):
 
 
 @fixture
+def set_environment(context, environment: str):
+    switch = {
+        'development': _set_development_environment,
+        'integration': _set_integration_environment,
+        'test': _set_test_environment,
+        'staging': _set_staging_environment,
+        'pre_production': _set_pre_production_environment,
+        'production': _set_production_environment
+    }
+    try:
+        func = switch.get(environment)
+        func(context)
+    except Exception:
+        raise Exception(f'{Fore.RED}Unknown environment {environment}{Style.RESET_ALL}')
+
+
+
+@fixture
 def integration_admin_token(context):
     payload = {
         "username": context.admin_username,
@@ -62,6 +83,7 @@ def integration_admin_token(context):
 
 @fixture
 def dummy_customer_create(context):
+    """Note: when using this fixture the request for an admin token is automatically made"""
     payload = {
         "customer": {
             "email": CUSTOMER_USERNAME,
@@ -120,3 +142,51 @@ def _init_context_browser(context, browser_config: Config, custom_size=None) -> 
     Stere.browser = browser
     Stere.url_navigator = 'visit'
     context.browser = browser
+
+
+def _set_development_environment(context):
+    context.baseurl = DEVELOPMENT_ENV_BASEURL
+    context.secure_baseurl = DEVELOPMENT_ENV_SECURE_BASEURL
+    context.backend = DEVELOPMENT_BACKEND_URL
+    context.admin_username = DEVELOPMENT_ADMIN_USERNAME
+    context.admin_password = DEVELOPMENT_ADMIN_PASSWORD
+
+
+def _set_integration_environment(context):
+    context.baseurl = INTEGRATION_ENV_BASEURL
+    context.secure_baseurl = INTEGRATION_ENV_SECURE_BASEURL
+    context.backend = INTEGRATION_BACKEND_URL
+    context.admin_username = INTEGRATION_ADMIN_USERNAME
+    context.admin_password = INTEGRATION_ADMIN_PASSWORD
+
+
+def _set_test_environment(context):
+    context.baseurl = TEST_ENV_BASEURL
+    context.secure_baseurl = TEST_ENV_SECURE_BASEURL
+    context.backend = TEST_BACKEND_URL
+    context.admin_username = TEST_ADMIN_USERNAME
+    context.admin_password = TEST_ADMIN_PASSWORD
+
+
+def _set_staging_environment(context):
+    context.baseurl = STAGING_ENV_BASEURL
+    context.secure_baseurl = STAGING_ENV_SECURE_BASEURL
+    context.backend = STAGING_BACKEND_URL
+    context.admin_username = STAGING_ADMIN_USERNAME
+    context.admin_password = STAGING_ADMIN_PASSWORD
+
+
+def _set_pre_production_environment(context):
+    context.baseurl = PRE_PRODUCTION_ENV_BASEURL
+    context.secure_baseurl = PRE_PRODUCTION_ENV_SECURE_BASEURL
+    context.backend = PRE_PRODUCTION_BACKEND_URL
+    context.admin_username = PRE_PRODUCTION_ADMIN_USERNAME
+    context.admin_password = PRE_PRODUCTION_ADMIN_PASSWORD
+
+
+def _set_production_environment(context):
+    context.baseurl = PRODUCTION_ENV_BASEURL
+    context.secure_baseurl = PRODUCTION_ENV_SECURE_BASEURL
+    context.backend = PRODUCTION_BACKEND_URL
+    context.admin_username = PRODUCTION_ADMIN_USERNAME
+    context.admin_password = PRODUCTION_ADMIN_PASSWORD
