@@ -174,3 +174,13 @@ def step_impl(context):
 @then("I should have a context dummy customer id")
 def step_impl(context):
     assert context.dummy_customer_id is not None
+
+
+@given("I have needed products in stock")
+def step_impl(context):
+    pass
+
+
+@then("I should be able to add them to my shopping cart")
+def step_impl(context):
+    pass

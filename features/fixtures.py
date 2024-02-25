@@ -9,6 +9,7 @@ from webdriver_manager.chrome import ChromeDriverManager
 from features.core_config.core_config_baseurls import *
 from features.core_config.core_config_backend import *
 from features.core_config.dummy_customer import *
+from features.core_config.api import *
 from decouple import config
 from colorama import Fore, Style
 
@@ -68,7 +69,6 @@ def set_environment(context, environment: str):
         raise Exception(f'{Fore.RED}Unknown environment {environment}{Style.RESET_ALL}')
 
 
-
 @fixture
 def integration_admin_token(context):
     payload = {
@@ -76,7 +76,7 @@ def integration_admin_token(context):
         "password": context.admin_password
     }
     headers = {"Content-Type": "application/json"}
-    response = requests.post("{}rest/V1/integration/admin/token".format(context.baseurl), headers=headers,
+    response = requests.post("{}{}".format(context.baseurl, ADMIN_INTEGRATION_TOKEN_REST_PATH), headers=headers,
                              data=json.dumps(payload))
     context.admin_token = response.json()
     yield context.admin_token
@@ -106,7 +106,7 @@ def dummy_customer_create(context):
         "password": config('CUSTOMER_PASSWORD')
     }
     headers = {"Content-Type": "application/json", "Authorization": "Bearer {}".format(context.admin_token)}
-    response = requests.post("{}rest/V1/customers".format(context.baseurl), headers=headers,
+    response = requests.post("{}{}".format(context.baseurl, CUSTOMERS_REST_PATH), headers=headers,
                              data=json.dumps(payload))
 
     if response.status_code != 200:
@@ -121,11 +121,43 @@ def dummy_customer_create(context):
 def dummy_customer_delete(context):
     headers = {"Content-Type": "application/json", "Authorization": "Bearer {}".format(context.admin_token)}
     response = requests.delete(
-        "{}rest/V1/customers/{}".format(context.baseurl, context.dummy_customer_id),
+        "{}{}{}".format(context.baseurl, CUSTOMERS_REST_PATH, context.dummy_customer_id),
         headers=headers)
 
     if response.status_code != 200:
         raise Exception('Could not delete customer with ID {}'.format(context.dummy_customer_id))
+
+
+@fixture
+def set_products_in_stock(context, data):
+    """Note: when using this fixture the request for an admin token is automatically made"""
+    _set_product_is_in_stock_request(context, data, 'true')
+
+
+@fixture
+def set_products_out_of_stock(context, data):
+    """Note: when using this fixture the request for an admin token is automatically made"""
+    _set_product_is_in_stock_request(context, data, 'false')
+
+
+def _set_product_is_in_stock_request(context, data, is_in_stock: str):
+    skus = data.split(":")
+    api_endpoint_uri_format = "{}{}".format(context.baseurl, PRODUCTS_REST_PATH)
+    for sku in skus:
+        endpoint = "{}{}".format(api_endpoint_uri_format, sku)
+        payload = {
+            "product": {
+                "extension_attributes": {
+                    "stock_item": {
+                        "is_in_stock": is_in_stock
+                    }
+                }
+            }
+        }
+        headers = {'Authorization': 'Bearer {} '.format(context.admin_token), "Content-Type": "application/json"}
+        response = requests.put(endpoint, headers=headers, data=json.dumps(payload))
+        if response.status_code != 200:
+            raise Exception('Could not update product stock status')
 
 
 def _init_context_browser(context, browser_config: Config, custom_size=None) -> None:

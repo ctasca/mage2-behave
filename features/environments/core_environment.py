@@ -17,6 +17,8 @@ def core_before_feature(context, feature):
     _integration_admin_token(context, feature.tags)
     _skip(context, feature, 'feature')
     _dummy_customer_create(context, feature)
+    _set_products_in_stock(context, feature)
+    _set_products_out_of_stock(context, feature)
 
 
 def core_before_scenario(context, scenario):
@@ -37,6 +39,8 @@ def core_before_scenario(context, scenario):
     _integration_admin_token(context, scenario.tags)
     _skip(context, scenario, 'scenario')
     _dummy_customer_create(context, scenario)
+    _set_products_in_stock(context, scenario)
+    _set_products_out_of_stock(context, scenario)
 
 
 def core_after_scenario(context, scenario):
@@ -86,3 +90,17 @@ def _dummy_customer_delete(context, hook):
     """ Delete dummy customer via fixture tag @fixture.dummy.customer.delete"""
     if "fixture.dummy.customer.delete" in hook.tags:
         use_fixture(dummy_customer_delete, context)
+
+
+def _set_products_in_stock(context, hook):
+    use_fixture(integration_admin_token, context)
+    if matches := _regex_fixture_tag_matches(hook, 'fixture.set.products.in.stock.'):
+        for data in matches:
+            use_fixture(set_products_in_stock, context, data[1])
+
+
+def _set_products_out_of_stock(context, hook):
+    use_fixture(integration_admin_token, context)
+    if matches := _regex_fixture_tag_matches(hook, 'fixture.set.products.out.of.stock.'):
+        for data in matches:
+            use_fixture(set_products_out_of_stock, context, data[1])
