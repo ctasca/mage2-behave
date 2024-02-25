@@ -6,6 +6,7 @@ from selenium.webdriver.chrome.service import Service
 from splinter import Browser, Config
 from stere import Stere
 from webdriver_manager.chrome import ChromeDriverManager
+from features.core_config.dummy_customer import *
 
 # Install Chrome web driver by default
 driver = ChromeDriverManager().install()
@@ -57,6 +58,51 @@ def integration_admin_token(context):
                              data=json.dumps(payload))
     context.admin_token = response.json()
     yield context.admin_token
+
+
+@fixture
+def dummy_customer_create(context):
+    payload = {
+        "customer": {
+            "email": CUSTOMER_USERNAME,
+            "firstname": CUSTOMER_FIRSTNAME,
+            "lastname": CUSTOMER_FIRSTNAME,
+            "addresses": [{
+                "defaultShipping": "true",
+                "defaultBilling": "true",
+                "firstname": CUSTOMER_FIRSTNAME,
+                "lastname": CUSTOMER_LASTNAME,
+                "region": CUSTOMER_ADDRESS_REGION,
+                "postcode": CUSTOMER_ADDRESS_POSTCODE,
+                "street": CUSTOMER_ADDRESS_STREET,
+                "city": CUSTOMER_ADDRESS_CITY,
+                "telephone": CUSTOMER_ADDRESS_TELEPHONE,
+                "countryId": CUSTOMER_ADDRESS_COUNTRY_ID
+            }]
+        },
+        "password": CUSTOMER_PASSWORD
+    }
+    headers = {"Content-Type": "application/json", "Authorization": "Bearer {}".format(context.admin_token)}
+    response = requests.post("{}rest/V1/customers".format(context.baseurl), headers=headers,
+                             data=json.dumps(payload))
+
+    if response.status_code != 200:
+        raise Exception('Could not create dummy customer')
+
+    response_json = response.json()
+    context.dummy_customer_id = response_json['id']
+    yield context.dummy_customer_id
+
+
+@fixture
+def dummy_customer_delete(context):
+    headers = {"Content-Type": "application/json", "Authorization": "Bearer {}".format(context.admin_token)}
+    response = requests.delete(
+        "{}rest/V1/customers/{}".format(context.baseurl, context.dummy_customer_id),
+        headers=headers)
+
+    if response.status_code != 200:
+        raise Exception('Could not delete customer with ID {}'.format(context.dummy_customer_id))
 
 
 def _init_context_browser(context, browser_config: Config, custom_size=None) -> None:

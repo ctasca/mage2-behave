@@ -159,3 +159,18 @@ def step_impl(context):
         page.dashboard_store_stats.most_viewed_products_tab.click()
         page.dashboard_store_stats.new_customers_tab.click()
         page.dashboard_store_stats.customers_tab.click()
+
+
+@given("I want to create a dummy customer for my tests")
+def step_impl(context):
+    pass
+
+
+@when("the request is made")
+def step_impl(context):
+    pass
+
+
+@then("I should have a context dummy customer id")
+def step_impl(context):
+    assert context.dummy_customer_id is not None

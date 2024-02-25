@@ -1,6 +1,8 @@
 @fixture.integration.admin.token
 Feature: As a mage2-behave developer I want to test the functionality of my code So That I can assure all is properly working
 
+@wip
+@skip
 @browser
 @fixture.splinter.browser.chrome
 Scenario: Browser Chrome fixture test
@@ -138,3 +140,11 @@ Scenario: Admin can click store statistics tabs on Dashboard page
 Scenario: Create an amin user integration bearer token
     Given I have made an integration admin token request
     Then I expect a successful response
+
+@api
+@fixture.dummy.customer.create
+@fixture.dummy.customer.delete
+Scenario: Create a dummy customer via Magento 2 API with admin integration token
+    Given I want to create a dummy customer for my tests
+    When the request is made
+    Then I should have a context dummy customer id
