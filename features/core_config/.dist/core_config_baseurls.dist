@@ -1,0 +1,23 @@
+[Development]
+development_env_baseurl =
+development_env_secure_baseurl =
+
+[Integration]
+integration_env_baseurl =
+integration_env_secure_baseurl =
+
+[Test]
+test_env_baseurl =
+test_env_secure_baseurl =
+
+[Staging]
+staging_env_baseurl =
+staging_env_secure_baseurl =
+
+[PreProduction]
+pre_production_env_baseurl =
+pre_production_env_secure_baseurl =
+
+[Production]
+production_env_baseurl =
+production_env_secure_baseurl =

@@ -1,0 +1,10 @@
+[DummyCustomer]
+customer_username = dummy-customer@yopmail.com
+customer_firstname = Mage2
+customer_lastname = Behave
+customer_address_street = ["123 Oak Ave"]
+customer_address_city = Purchase
+customer_address_postcode = 10755
+customer_address_region = {"regionCode": "NY", "region": "New York", "regionId": 43}
+customer_address_telephone = 512-555-1111
+customer_address_country_id = US

@@ -1,9 +1,0 @@
-CUSTOMER_USERNAME: str = 'dummy-customer@yopmail.com'
-CUSTOMER_FIRSTNAME: str = 'Mage2'
-CUSTOMER_LASTNAME: str = 'Behave'
-CUSTOMER_ADDRESS_STREET: list = ["123 Oak Ave"]
-CUSTOMER_ADDRESS_CITY: str = 'Purchase'
-CUSTOMER_ADDRESS_POSTCODE: str = '10755'
-CUSTOMER_ADDRESS_REGION: dict = {"regionCode": "NY", "region": "New York", "regionId": 43}
-CUSTOMER_ADDRESS_TELEPHONE: str = '512-555-1111'
-CUSTOMER_ADDRESS_COUNTRY_ID: str = 'US'

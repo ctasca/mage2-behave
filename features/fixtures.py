@@ -1,3 +1,5 @@
+import configparser
+import os
 import json
 import requests
 from behave import *
@@ -6,12 +8,9 @@ from selenium.webdriver.chrome.service import Service
 from splinter import Browser, Config
 from stere import Stere
 from webdriver_manager.chrome import ChromeDriverManager
-from features.core_config.core_config_baseurls import *
-from features.core_config.core_config_backend import *
-from features.core_config.dummy_customer import *
-from features.core_config.api import *
 from decouple import config
 from colorama import Fore, Style
+from core_config.bundle import config_parser, SECTIONS, context_development_environment
 
 # Install Chrome web driver by default
 driver = ChromeDriverManager().install()
@@ -55,7 +54,7 @@ def splinter_browser_chrome_headless(context):
 @fixture
 def set_environment(context, environment: str):
     switch = {
-        'development': _set_development_environment,
+        SECTIONS.get('dev'): _set_development_environment,
         'integration': _set_integration_environment,
         'test': _set_test_environment,
         'staging': _set_staging_environment,
@@ -75,8 +74,9 @@ def integration_admin_token(context):
         "username": context.admin_username,
         "password": context.admin_password
     }
+    integration_admin_token_path = config_parser.get(SECTIONS.get('api'), 'ADMIN_INTEGRATION_TOKEN_REST_PATH')
     headers = {"Content-Type": "application/json"}
-    response = requests.post("{}{}".format(context.baseurl, ADMIN_INTEGRATION_TOKEN_REST_PATH), headers=headers,
+    response = requests.post("{}{}".format(context.baseurl, integration_admin_token_path), headers=headers,
                              data=json.dumps(payload))
     context.admin_token = response.json()
     yield context.admin_token
@@ -87,27 +87,28 @@ def dummy_customer_create(context):
     """Note: when using this fixture the request for an admin token is automatically made"""
     payload = {
         "customer": {
-            "email": CUSTOMER_USERNAME,
-            "firstname": CUSTOMER_FIRSTNAME,
-            "lastname": CUSTOMER_FIRSTNAME,
+            "email": config_parser.get(SECTIONS.get('customer'), 'CUSTOMER_USERNAME'),
+            "firstname": config_parser.get(SECTIONS.get('customer'), 'CUSTOMER_FIRSTNAME'),
+            "lastname": config_parser.get(SECTIONS.get('customer'), 'CUSTOMER_LASTNAME'),
             "addresses": [{
                 "defaultShipping": "true",
                 "defaultBilling": "true",
-                "firstname": CUSTOMER_FIRSTNAME,
-                "lastname": CUSTOMER_LASTNAME,
-                "region": CUSTOMER_ADDRESS_REGION,
-                "postcode": CUSTOMER_ADDRESS_POSTCODE,
-                "street": CUSTOMER_ADDRESS_STREET,
-                "city": CUSTOMER_ADDRESS_CITY,
-                "telephone": CUSTOMER_ADDRESS_TELEPHONE,
-                "countryId": CUSTOMER_ADDRESS_COUNTRY_ID
+                "firstname": config_parser.get(SECTIONS.get('customer'), 'CUSTOMER_FIRSTNAME'),
+                "lastname": config_parser.get(SECTIONS.get('customer'), 'CUSTOMER_LASTNAME'),
+                "region": json.loads(config_parser.get(SECTIONS.get('customer'), 'CUSTOMER_ADDRESS_REGION')),
+                "postcode": config_parser.get(SECTIONS.get('customer'), 'CUSTOMER_ADDRESS_POSTCODE'),
+                "street": json.loads(config_parser.get(SECTIONS.get('customer'), 'CUSTOMER_ADDRESS_STREET')),
+                "city": config_parser.get(SECTIONS.get('customer'), 'CUSTOMER_ADDRESS_CITY'),
+                "telephone": config_parser.get(SECTIONS.get('customer'), 'CUSTOMER_ADDRESS_TELEPHONE'),
+                "countryId": config_parser.get(SECTIONS.get('customer'), 'CUSTOMER_ADDRESS_COUNTRY_ID')
             }]
         },
         "password": config('CUSTOMER_PASSWORD')
     }
     headers = {"Content-Type": "application/json", "Authorization": "Bearer {}".format(context.admin_token)}
-    response = requests.post("{}{}".format(context.baseurl, CUSTOMERS_REST_PATH), headers=headers,
-                             data=json.dumps(payload))
+    response = requests.post("{}{}".format(context.baseurl,
+                                           config_parser.get(SECTIONS.get('api'), 'CUSTOMERS_REST_PATH')),
+                             headers=headers, data=json.dumps(payload))
 
     if response.status_code != 200:
         raise Exception('Could not create dummy customer')
@@ -121,7 +122,7 @@ def dummy_customer_create(context):
 def dummy_customer_delete(context):
     headers = {"Content-Type": "application/json", "Authorization": "Bearer {}".format(context.admin_token)}
     response = requests.delete(
-        "{}{}{}".format(context.baseurl, CUSTOMERS_REST_PATH, context.dummy_customer_id),
+        "{}{}{}".format(context.baseurl, config_parser.get(SECTIONS.get('api'), 'CUSTOMERS_REST_PATH'), context.dummy_customer_id),
         headers=headers)
 
     if response.status_code != 200:
@@ -142,7 +143,8 @@ def set_products_out_of_stock(context, data):
 
 def _set_product_is_in_stock_request(context, data, is_in_stock: str):
     skus = data.split(":")
-    api_endpoint_uri_format = "{}{}".format(context.baseurl, PRODUCTS_REST_PATH)
+    api_endpoint_uri_format = "{}{}".format(context.baseurl,
+                                            config_parser.get(SECTIONS.get('api'), 'PRODUCTS_REST_PATH'), context)
     for sku in skus:
         endpoint = "{}{}".format(api_endpoint_uri_format, sku)
         payload = {
@@ -178,48 +180,44 @@ def _init_context_browser(context, browser_config: Config, custom_size=None) -> 
 
 
 def _set_development_environment(context):
-    context.baseurl = DEVELOPMENT_ENV_BASEURL
-    context.secure_baseurl = DEVELOPMENT_ENV_SECURE_BASEURL
-    context.backend = DEVELOPMENT_BACKEND_URL
-    context.admin_username = DEVELOPMENT_ADMIN_USERNAME
-    context.admin_password = config('DEVELOPMENT_ADMIN_PASSWORD')
+    context_development_environment(context, config)
 
 
 def _set_integration_environment(context):
-    context.baseurl = INTEGRATION_ENV_BASEURL
-    context.secure_baseurl = INTEGRATION_ENV_SECURE_BASEURL
-    context.backend = INTEGRATION_BACKEND_URL
-    context.admin_username = INTEGRATION_ADMIN_USERNAME
+    context.baseurl = config_parser.get(SECTIONS.get('integration'), 'INTEGRATION_ENV_BASEURL')
+    context.secure_baseurl = config_parser.get(SECTIONS.get('integration'), 'INTEGRATION_ENV_SECURE_BASEURL')
+    context.backend = config_parser.get(SECTIONS.get('integration'), 'INTEGRATION_BACKEND_URL')
+    context.admin_username = config_parser.get(SECTIONS.get('integration'), 'INTEGRATION_ADMIN_USERNAME')
     context.admin_password = config('INTEGRATION_ADMIN_PASSWORD')
 
 
 def _set_test_environment(context):
-    context.baseurl = TEST_ENV_BASEURL
-    context.secure_baseurl = TEST_ENV_SECURE_BASEURL
-    context.backend = TEST_BACKEND_URL
-    context.admin_username = TEST_ADMIN_USERNAME
+    context.baseurl = config_parser.get(SECTIONS.get('test'), 'TEST_ENV_BASEURL')
+    context.secure_baseurl = config_parser.get(SECTIONS.get('test'), 'TEST_ENV_SECURE_BASEURL')
+    context.backend = config_parser.get(SECTIONS.get('test'), 'TEST_BACKEND_URL')
+    context.admin_username = config_parser.get(SECTIONS.get('test'), 'TEST_ADMIN_USERNAME')
     context.admin_password = config('TEST_ADMIN_PASSWORD')
 
 
 def _set_staging_environment(context):
-    context.baseurl = STAGING_ENV_BASEURL
-    context.secure_baseurl = STAGING_ENV_SECURE_BASEURL
-    context.backend = STAGING_BACKEND_URL
-    context.admin_username = STAGING_ADMIN_USERNAME
+    context.baseurl = config_parser.get(SECTIONS.get('stage'), 'STAGING_ENV_BASEURL')
+    context.secure_baseurl = config_parser.get(SECTIONS.get('stage'), 'STAGING_ENV_SECURE_BASEURL')
+    context.backend = config_parser.get(SECTIONS.get('stage'), 'STAGING_BACKEND_URL')
+    context.admin_username = config_parser.get(SECTIONS.get('stage'), 'STAGING_ADMIN_USERNAME')
     context.admin_password = config('STAGING_ADMIN_PASSWORD')
 
 
 def _set_pre_production_environment(context):
-    context.baseurl = PRE_PRODUCTION_ENV_BASEURL
-    context.secure_baseurl = PRE_PRODUCTION_ENV_SECURE_BASEURL
-    context.backend = PRE_PRODUCTION_BACKEND_URL
-    context.admin_username = PRE_PRODUCTION_ADMIN_USERNAME
+    context.baseurl = config_parser.get(SECTIONS.get('pre_prod'), 'PRE_PRODUCTION_ENV_BASEURL')
+    context.secure_baseurl = config_parser.get(SECTIONS.get('pre_prod'), 'PRE_PRODUCTION_ENV_SECURE_BASEURL')
+    context.backend = config_parser.get(SECTIONS.get('pre_prod'), 'PRE_PRODUCTION_BACKEND_URL')
+    context.admin_username = config_parser.get(SECTIONS.get('pre_prod'), 'PRE_PRODUCTION_ADMIN_USERNAME')
     context.admin_password = config('PRE_PRODUCTION_ADMIN_PASSWORD')
 
 
 def _set_production_environment(context):
-    context.baseurl = PRODUCTION_ENV_BASEURL
-    context.secure_baseurl = PRODUCTION_ENV_SECURE_BASEURL
-    context.backend = PRODUCTION_BACKEND_URL
-    context.admin_username = PRODUCTION_ADMIN_USERNAME
+    context.baseurl = config_parser.get(SECTIONS.get('prod'), 'PRODUCTION_ENV_BASEURL')
+    context.secure_baseurl = config_parser.get(SECTIONS.get('prod'), 'PRODUCTION_ENV_SECURE_BASEURL')
+    context.backend = config_parser.get(SECTIONS.get('prod'), 'PRODUCTION_BACKEND_URL')
+    context.admin_username = config_parser.get(SECTIONS.get('prod'), 'PRODUCTION_ADMIN_USERNAME')
     context.admin_password = config('PRODUCTION_ADMIN_PASSWORD')

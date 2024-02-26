@@ -2,9 +2,9 @@
 .env
 *.egg-info
 *.pyc
-/features/core_config/core_config_baseurls.py
-/features/core_config/core_config_backend.py
-/features/core_config/dummy_customer.py
+/features/core_config/core_config_baseurls.ini
+/features/core_config/core_config_backend.ini
+/features/core_config/dummy_customer.ini
 /.ipynb_checkpoints/
 /*.ipynb
 /myenv/

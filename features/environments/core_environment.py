@@ -2,14 +2,11 @@ import re
 from features.fixtures import *
 from decouple import config
 from colorama import Fore, Style
+from features.core_config.bundle import context_development_environment
 
 
 def core_before_all(context):
-    context.baseurl = DEVELOPMENT_ENV_BASEURL
-    context.secure_baseurl = DEVELOPMENT_ENV_SECURE_BASEURL
-    context.backend = DEVELOPMENT_BACKEND_URL
-    context.admin_username = DEVELOPMENT_ADMIN_USERNAME
-    context.admin_password = config('DEVELOPMENT_ADMIN_PASSWORD')
+    context_development_environment(context, config)
 
 
 def core_before_feature(context, feature):
