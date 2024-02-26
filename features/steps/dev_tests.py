@@ -184,3 +184,13 @@ def step_impl(context):
 @then("I should be able to add them to my shopping cart")
 def step_impl(context):
     pass
+
+
+@given("I have products out of in stock")
+def step_impl(context):
+    pass
+
+
+@then("I should not be able to add them to my shopping cart")
+def step_impl(context):
+    pass

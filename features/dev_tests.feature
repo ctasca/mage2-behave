@@ -160,6 +160,6 @@ Feature: As a mage2-behave developer I want to test the functionality of my code
     @products
     @fixture.set.products.out.of.stock.WJ12:WJ10
     Scenario: Products stock items are set in stock for each sku given
-        Given I have needed products in stock
-        Then I should be able to add them to my shopping cart
+        Given I have products out of in stock
+        Then I should not be able to add them to my shopping cart
 

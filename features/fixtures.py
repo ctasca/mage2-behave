@@ -1,5 +1,3 @@
-import configparser
-import os
 import json
 import requests
 from behave import *
@@ -8,6 +6,7 @@ from selenium.webdriver.chrome.service import Service
 from splinter import Browser, Config
 from stere import Stere
 from webdriver_manager.chrome import ChromeDriverManager
+# noinspection PyPackageRequirements
 from decouple import config
 from colorama import Fore, Style
 from core_config.bundle import config_parser, SECTIONS, context_development_environment
@@ -122,8 +121,8 @@ def dummy_customer_create(context):
 def dummy_customer_delete(context):
     headers = {"Content-Type": "application/json", "Authorization": "Bearer {}".format(context.admin_token)}
     response = requests.delete(
-        "{}{}{}".format(context.baseurl, config_parser.get(SECTIONS.get('api'), 'CUSTOMERS_REST_PATH'), context.dummy_customer_id),
-        headers=headers)
+        "{}{}{}".format(context.baseurl, config_parser.get(SECTIONS.get('api'), 'CUSTOMERS_REST_PATH'),
+                        context.dummy_customer_id), headers=headers)
 
     if response.status_code != 200:
         raise Exception('Could not delete customer with ID {}'.format(context.dummy_customer_id))

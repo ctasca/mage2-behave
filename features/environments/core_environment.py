@@ -1,5 +1,6 @@
 import re
 from features.fixtures import *
+# noinspection PyPackageRequirements
 from decouple import config
 from colorama import Fore, Style
 from features.core_config.bundle import context_development_environment
