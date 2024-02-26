@@ -206,3 +206,11 @@ def step_impl(context):
         page.filters_button.click()
         page.fulltext_search_button.click()
         assert page.browser.is_text_present("We couldn't find any records.") is True
+
+
+@step("I want to be able to reset the applied filters")
+def step_impl(context):
+    with CustomersGrid() as page:
+        active_filters = page.active_filters_buttons.children()
+        for active_filter in active_filters:
+            active_filter.remove_button.click()

@@ -149,6 +149,9 @@ GRID_FILTER_BUTTON_LOCATOR: Dict[str, str] = {"strategy": "xpath", "locator": "/
 GRID_FULLTEXT_INPUT_LOCATOR: Dict[str, str] = {"strategy": "id", "locator": "fulltext"}
 GRID_FULLTEXT_SEARCH_BUTTON_LOCATOR: Dict[str, str] = \
     {"strategy": "xpath", "locator": "(//div[@class='data-grid-search-control-wrap']/button)[1]"}
+GRID_ACTIVE_FILTERS_ROOT_LOCATOR: Dict[str, str] = \
+    {"strategy": "xpath", "locator": '(//ul[@data-role="filter-list"]//li)[1]'}
+GRID_ACTIVE_FILERS_BUTTON_LOCATOR: Dict[str, str] = {"strategy": "xpath", "locator": './button'}
 GRID_APPLY_FILTERS_BUTTON_LOCATOR: Dict[str, str] = \
     {"strategy": "xpath", "locator": "//button[@data-action='grid-filter-apply']"}
 # Dashboard page

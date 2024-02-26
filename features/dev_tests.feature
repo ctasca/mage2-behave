@@ -122,6 +122,7 @@ Feature: As a mage2-behave developer I want to test the functionality of my code
         Given I am logged in the backend
         When I am on the all customers grid
         Then I want to be able to use the search fulltext input to filter the grid
+        And I want to be able to reset the applied filters
 
     @backend
     @backend.dashboard
