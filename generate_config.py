@@ -1,6 +1,8 @@
+import configparser
 import os
 import shutil
-import configparser
+
+from colorama import Fore, Style
 
 # Specify source directory (where your .dist files are) and destination directory
 source_dir = 'features/core_config/.dist'
@@ -38,8 +40,8 @@ for dist_file in dist_files:
             for key in src_config[section]:
                 # If the variable isn't in the destination config file, prompt the user to set it
                 if not dest_config.has_option(section, key):
-                    print(f'Variable {key.upper()} in section {section} is not set.')
-                    value = input('Please provide a value, or press enter to skip: ')
+                    print(f'{Fore.YELLOW}Variable {Fore.LIGHTCYAN_EX}{key}{Style.RESET_ALL}{Fore.YELLOW} in section {section} is not set.{Style.RESET_ALL}')
+                    value = input(f'>>> {Fore.LIGHTBLUE_EX}Please provide a value, or press enter to skip: {Style.RESET_ALL}')
                     if value is None or value.strip() == '':
                         continue
                     dest_config.set(section, key, value)
