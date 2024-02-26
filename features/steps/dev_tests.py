@@ -1,5 +1,8 @@
+import time
+
 from behave import *
 from features.pages.backend.dashboard import Dashboard
+from features.pages.backend.customers_grid import CustomersGrid
 
 
 @when(u'I click the "{item}" menu item')
@@ -194,3 +197,12 @@ def step_impl(context):
 @then("I should not be able to add them to my shopping cart")
 def step_impl(context):
     pass
+
+
+@then("I want to be able to use the search fulltext input to filter the grid")
+def step_impl(context):
+    with CustomersGrid() as page:
+        page.fulltext_search_input.fill('search text')
+        page.filters_button.click()
+        page.fulltext_search_button.click()
+        assert page.browser.is_text_present("We couldn't find any records.") is True

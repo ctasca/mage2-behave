@@ -116,6 +116,14 @@ Feature: As a mage2-behave developer I want to test the functionality of my code
         # TODO complete step when implemented customers grid filters area
 
     @backend
+    @backend.grid.search.fulltext
+    @fixture.splinter.browser.chrome
+    Scenario: Admin can view the customers grid and use the search fulltext input
+        Given I am logged in the backend
+        When I am on the all customers grid
+        Then I want to be able to use the search fulltext input to filter the grid
+
+    @backend
     @backend.dashboard
     @fixture.splinter.browser.chrome.headless
     Scenario: Admin can reload data on the Dashboard page
