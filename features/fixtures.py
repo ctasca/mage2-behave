@@ -1,5 +1,6 @@
 import json
 import requests
+import colorama
 from behave import *
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
@@ -8,7 +9,6 @@ from stere import Stere
 from webdriver_manager.chrome import ChromeDriverManager
 # noinspection PyPackageRequirements
 from decouple import config
-from colorama import Fore, Style
 from core_config.bundle import config_parser, SECTIONS, context_development_environment
 
 # Install Chrome web driver by default
@@ -64,7 +64,7 @@ def set_environment(context, environment: str):
         func = switch.get(environment)
         func(context)
     except Exception:
-        raise Exception(f'{Fore.RED}Unknown environment {environment}{Style.RESET_ALL}')
+        raise Exception(f'{colorama.Fore.RED}Unknown environment {environment}{colorama.Style.RESET_ALL}')
 
 
 @fixture
@@ -105,13 +105,10 @@ def dummy_customer_create(context):
         "password": config('CUSTOMER_PASSWORD')
     }
     headers = {"Content-Type": "application/json", "Authorization": "Bearer {}".format(context.admin_token)}
-    response = requests.post("{}{}".format(context.baseurl,
-                                           config_parser.get(SECTIONS.get('api'), 'CUSTOMERS_REST_PATH')),
-                             headers=headers, data=json.dumps(payload))
-
+    customers_rest_path = config_parser.get(SECTIONS.get('api'), 'CUSTOMERS_REST_PATH')
+    response = requests.post(f"{context.baseurl}{customers_rest_path}", headers=headers, data=json.dumps(payload))
     if response.status_code != 200:
         raise Exception('Could not create dummy customer')
-
     response_json = response.json()
     context.dummy_customer_id = response_json['id']
     yield context.dummy_customer_id

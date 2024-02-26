@@ -5,10 +5,10 @@ in order to include the project as part of the Magento 2 repository.
 """
 import os
 import shutil
-from colorama import Fore, Style
+import colorama
 
-print(f'{Fore.YELLOW}WARNING:{Style.RESET_ALL} '
-      f'{Fore.RED}This action will delete the .git directory and cannot be undone.{Style.RESET_ALL}')
+print(f'{colorama.Fore.YELLOW}WARNING:{colorama.Style.RESET_ALL} '
+      f'{colorama.Fore.RED}This action will delete the .git directory and cannot be undone.{colorama.Style.RESET_ALL}')
 
 
 def remove_git_dir():
@@ -16,15 +16,16 @@ def remove_git_dir():
     if os.path.exists(git_dir):
         print(f'Removing {git_dir}...')
         shutil.rmtree(git_dir)
-        print(f'{Fore.GREEN}Successfully removed .git directory{Style.RESET_ALL}')
+        print(f'{colorama.Fore.GREEN}Successfully removed .git directory{colorama.Style.RESET_ALL}')
     else:
-        print(f'{Fore.YELLOW}.git directory not found{Style.RESET_ALL}')
+        print(f'{colorama.Fore.YELLOW}.git directory not found{colorama.Style.RESET_ALL}')
 
 
 if __name__ == "__main__":
-    consent = input(f'{Fore.YELLOW}Are you sure you want to delete the .git directory?{Style.RESET_ALL} '
-                    f'{Fore.LIGHTBLUE_EX}(yes/no): {Style.RESET_ALL}')
+    consent = input(f'{colorama.Fore.YELLOW}Are you sure you want to '
+                    f'delete the .git directory?{colorama.Style.RESET_ALL} '
+                    f'{colorama.Fore.LIGHTBLUE_EX}(yes/no): {colorama.Style.RESET_ALL}')
     if consent.lower() == 'yes':
         remove_git_dir()
     else:
-        print(f'{Fore.GREEN}No actions were taken{Style.RESET_ALL}')
+        print(f'{colorama.Fore.GREEN}No actions were taken{colorama.Style.RESET_ALL}')

@@ -1,8 +1,8 @@
 import re
+import colorama
 from features.fixtures import *
 # noinspection PyPackageRequirements
 from decouple import config
-from colorama import Fore, Style
 from features.core_config.bundle import context_development_environment
 
 
@@ -68,8 +68,8 @@ def _integration_admin_token(context, tags: list) -> None:
 
 def _skip(context, hook, hook_type: str) -> None:
     if "skip" in hook.tags:
-        message = (f"{Fore.LIGHTYELLOW_EX}Skipped {hook_type} due to 'skip' tag "
-                   f"in {context.feature.filename} file{Style.RESET_ALL}")
+        message = (f"{colorama.Fore.LIGHTYELLOW_EX}Skipped {hook_type} due to 'skip' tag "
+                   f"in {context.feature.filename} file{colorama.Style.RESET_ALL}")
         if hook_type == 'feature':
             hook.skip(message)
         if hook_type == 'scenario':
