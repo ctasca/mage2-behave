@@ -21,6 +21,7 @@ for dist_file in dist_files:
     dest_file_name = os.path.splitext(dist_file)[0] + '.ini'
     template_file = os.path.join(source_dir, '.{}.template'.format(dest_file_name))
     dest_file = os.path.join(dest_dir, dest_file_name)
+    skip_all = False
 
     # If the file doesn't exist in destination directory, copy it
     # from template file
@@ -39,7 +40,6 @@ for dist_file in dist_files:
         # Parse destination config file
         dest_config = configparser.ConfigParser()
         dest_config.read(dest_file)
-        skip_all = False
         # Iterate over each variable in source config file
         for section in src_config.sections():
             if skip_all is True:
@@ -62,7 +62,7 @@ for dist_file in dist_files:
                                   f' or type {colorama.Fore.RED}skip{colorama.Style.RESET_ALL} '
                                   f'{colorama.Fore.LIGHTBLUE_EX}to jump to the next configuration file: '
                                   f'{colorama.Style.RESET_ALL}')
-                    if value == 'skip':
+                    if value.strip() == 'skip':
                         skip_all = True
                         break
                     if value is None or value.strip() == '':

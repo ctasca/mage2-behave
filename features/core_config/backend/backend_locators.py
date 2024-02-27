@@ -154,6 +154,7 @@ GRID_ACTIVE_FILTERS_ROOT_LOCATOR: Dict[str, str] = \
 GRID_ACTIVE_FILERS_BUTTON_LOCATOR: Dict[str, str] = {"strategy": "xpath", "locator": './button'}
 GRID_APPLY_FILTERS_BUTTON_LOCATOR: Dict[str, str] = \
     {"strategy": "xpath", "locator": "//button[@data-action='grid-filter-apply']"}
+GRID_FILTERS_ROOT_LOCATOR: Dict[str, str] = {"strategy": "xpath", "locator": '//div[@data-part="filter-form"]'}
 # Dashboard page
 DASHBOARD_RELOAD_DATA_BUTTON_LOCATOR: Dict[str, str] = \
     {"strategy": "xpath", "locator": "//button[@title=\"Reload Data\"]"}
@@ -163,3 +164,6 @@ DASHBOARD_BESTSELLERS_TAB_LOCATOR: Dict[str, str] = {"strategy": "id", "locator"
 DASHBOARD_REVIEWED_PRODUCTS_TAB_LOCATOR: Dict[str, str] = {"strategy": "id", "locator": "grid_tab_reviewed_products"}
 DASHBOARD_NEW_CUSTOMERS_TAB_LOCATOR: Dict[str, str] = {"strategy": "id", "locator": "grid_tab_new_customers"}
 DASHBOARD_CUSTOMERS_TAB_LOCATOR: Dict[str, str] = {"strategy": "id", "locator": "grid_tab_customers"}
+# Customers grid filters
+CUSTOMERS_FROM_ID_INPUT_LOCATOR: Dict[str, str] = {"strategy": "xpath", "locator": "//input[@name=\"entity_id[from]\""}
+CUSTOMERS_TO_ID_INPUT_LOCATOR: Dict[str, str] = {"strategy": "xpath", "locator": "//input[@name=\"entity_id[to]\""}
