@@ -59,10 +59,16 @@ Remember, the decision between Python and PHP depends on the requirements of the
 
 2. **Creating a Virtual Environment**
 
+    Firstly clone the `mage2-behave` project in the root of your Magento 2 installation.
+
+    ```bash
+    git clone https://github.com/ctasca/mage2-behave.git 
+   ```
+   
     Navigate to the project directory where you want to setup the virtual environment and run:
 
     ```bash
-    cd path_to_your_mage2-behave_project
+    cd <magento_root>/mage2-behave
     virtualenv venv   # "venv" can be replaced with your preferred name
     ```
 
@@ -110,4 +116,4 @@ Remember, the decision between Python and PHP depends on the requirements of the
 
 ---
 
-This setup ensures that the various Python projects on your system are isolated from each other, each with their own set of dependencies, thus eliminating any potential conflicts.
+This setup ensures that the various Magento 2/mage2-behave projects on your system are isolated from each other, each with their own set of dependencies, thus eliminating any potential conflicts.
