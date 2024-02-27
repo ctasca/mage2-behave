@@ -65,7 +65,7 @@ Remember, the decision between Python and PHP depends on the requirements of the
     git clone https://github.com/ctasca/mage2-behave.git 
    ```
    
-    Navigate to the project directory where you want to setup the virtual environment and run:
+    Navigate to the project directory where you want to set up the virtual environment and run:
 
     ```bash
     cd <magento_root>/mage2-behave
