@@ -1,4 +1,5 @@
-from features.core_config.backend.backend_locators import GRID_ACTIVE_FILTERS_ROOT_LOCATOR, GRID_ACTIVE_FILERS_BUTTON_LOCATOR
+from features.core_config.backend.backend_locators import (GRID_ACTIVE_FILTERS_ROOT_LOCATOR,
+                                                           GRID_ACTIVE_FILERS_BUTTON_LOCATOR)
 from stere.areas import RepeatingArea
 from stere.fields import Root, Button
 
@@ -16,4 +17,3 @@ class GridActiveFiltersButtons(RepeatingArea):
                 GRID_ACTIVE_FILERS_BUTTON_LOCATOR['locator']
             )
         )
-

@@ -2,6 +2,7 @@ from features.core_config.backend.backend_locators import *
 from stere.areas import Area
 from stere.fields import Root
 from features.pages.backend.fields.sales_submenu_links import *
+from typing import List
 
 
 class SalesSubmenu(Area):
@@ -22,3 +23,14 @@ class SalesSubmenu(Area):
                                          SALES_SUBMENU_TRANSACTIONS_LINK_LOCATOR['locator'])
         self.virtual_terminal = BraintreeVirualTerminal(SALES_SUBMENU_VIRTUAL_TERMINAL_LINK_LOCATOR['strategy'],
                                                         SALES_SUBMENU_VIRTUAL_TERMINAL_LINK_LOCATOR['locator'])
+
+    def links(self) -> List[Link]:
+        return [
+            self.orders,
+            self.invoices,
+            self.shipments,
+            self.creditmemos,
+            self.billing_agreements,
+            self.transactions,
+            self.virtual_terminal
+        ]

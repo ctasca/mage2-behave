@@ -2,6 +2,7 @@ from features.core_config.backend.backend_locators import *
 from stere.areas import Area
 from stere.fields import Root
 from features.pages.backend.fields.reports_submenu_links import *
+from typing import List
 
 
 class ReportsSubmenu(Area):
@@ -60,3 +61,32 @@ class ReportsSubmenu(Area):
                                                     REPORTS_SUBMENU_ADVANCED_REPORTING_LINK_LOCATOR['locator'])
         self.bi_essentials = BiEssentials(REPORTS_SUBMENU_BI_ESSENTIALS_LINK_LOCATOR['strategy'],
                                           REPORTS_SUBMENU_BI_ESSENTIALS_LINK_LOCATOR['locator'])
+
+    def links(self) -> List[Link]:
+        return [
+            self.products_in_cart,
+            self.search_terms,
+            self.abandoned_carts,
+            self.newsletter_problem_reports,
+            self.by_customers,
+            self.by_products,
+            self.orders,
+            self.tax,
+            self.invoiced,
+            self.shipping,
+            self.refunds,
+            self.coupons,
+            self.paypal_settlement,
+            self.braintree_settlement,
+            self.order_total,
+            self.order_count,
+            self.new,
+            self.views,
+            self.bestsellers,
+            self.low_stock,
+            self.ordered,
+            self.downloads,
+            self.refresh_statistics,
+            self.advanced_reporting,
+            self.bi_essentials
+        ]

@@ -1,5 +1,3 @@
-import time
-
 from behave import *
 from features.pages.backend.dashboard import Dashboard
 from features.pages.backend.customers_grid import CustomersGrid
@@ -30,105 +28,36 @@ def step_impl(context, item):
 def step_impl(context, item):
     with Dashboard() as page:
         if item == "Sales":
-            assert page.admin_menu.submenus['sales'].orders.is_visible(10) is True
-            assert page.admin_menu.submenus['sales'].invoices.is_visible(10) is True
-            assert page.admin_menu.submenus['sales'].shipments.is_visible(10) is True
-            assert page.admin_menu.submenus['sales'].creditmemos.is_visible(10) is True
-            assert page.admin_menu.submenus['sales'].billing_agreements.is_visible(10) is True
-            assert page.admin_menu.submenus['sales'].transactions.is_visible(10) is True
-            assert page.admin_menu.submenus['sales'].virtual_terminal.is_visible(10) is True
+            sales_submenu_links = page.admin_menu.submenus['sales'].links()
+            assert all(link.is_visible(10) for link in sales_submenu_links)
 
         if item == 'Catalog':
-            assert page.admin_menu.submenus['catalog'].products.is_visible(10) is True
-            assert page.admin_menu.submenus['catalog'].categories.is_visible(10) is True
+            catalog_submenu_links = page.admin_menu.submenus['catalog'].links()
+            assert all(link.is_visible(10) for link in catalog_submenu_links)
 
         if item == 'Customers':
-            assert page.admin_menu.submenus['customers'].all_customers.is_visible(10) is True
-            assert page.admin_menu.submenus['customers'].now_online.is_visible(10) is True
-            assert page.admin_menu.submenus['customers'].login_as_customer_log.is_visible(10) is True
-            assert page.admin_menu.submenus['customers'].customer_groups.is_visible(10) is True
+            customer_submenu_links = page.admin_menu.submenus['customers'].links()
+            assert all(link.is_visible(10) for link in customer_submenu_links)
 
         if item == 'Marketing':
-            assert page.admin_menu.submenus['marketing'].catalog_price_rule.is_visible(10) is True
-            assert page.admin_menu.submenus['marketing'].cart_price_rules.is_visible(10) is True
-            assert page.admin_menu.submenus['marketing'].email_templates.is_visible(10) is True
-            assert page.admin_menu.submenus['marketing'].newsletter_templates.is_visible(10) is True
-            assert page.admin_menu.submenus['marketing'].newsletter_queue.is_visible(10) is True
-            assert page.admin_menu.submenus['marketing'].newsletter_subscribers.is_visible(10) is True
-            assert page.admin_menu.submenus['marketing'].url_rewrites.is_visible(10) is True
-            assert page.admin_menu.submenus['marketing'].search_terms.is_visible(10) is True
-            assert page.admin_menu.submenus['marketing'].search_synonyms.is_visible(10) is True
-            assert page.admin_menu.submenus['marketing'].site_map.is_visible(10) is True
-            assert page.admin_menu.submenus['marketing'].all_reviews.is_visible(10) is True
-            assert page.admin_menu.submenus['marketing'].pending_reviews.is_visible(10) is True
+            marketing_submenus_links = page.admin_menu.submenus['marketing'].links()
+            assert all(link.is_visible(10) for link in marketing_submenus_links)
 
         if item == 'Content':
-            assert page.admin_menu.submenus['content'].pages.is_visible(10) is True
-            assert page.admin_menu.submenus['content'].blocks.is_visible(10) is True
-            assert page.admin_menu.submenus['content'].widgets.is_visible(10) is True
-            assert page.admin_menu.submenus['content'].templates.is_visible(10) is True
-            assert page.admin_menu.submenus['content'].media_gallery.is_visible(10) is True
-            assert page.admin_menu.submenus['content'].design_configuration.is_visible(10) is True
-            assert page.admin_menu.submenus['content'].design_themes.is_visible(10) is True
-            assert page.admin_menu.submenus['content'].design_schedule.is_visible(10) is True
+            content_submenus_links = page.admin_menu.submenus['content'].links()
+            assert all(link.is_visible(10) for link in content_submenus_links)
 
         if item == 'Reports':
-            assert page.admin_menu.submenus['reports'].products_in_cart.is_visible(10) is True
-            assert page.admin_menu.submenus['reports'].search_terms.is_visible(10) is True
-            assert page.admin_menu.submenus['reports'].abandoned_carts.is_visible(10) is True
-            assert page.admin_menu.submenus['reports'].newsletter_problem_reports.is_visible(10) is True
-            assert page.admin_menu.submenus['reports'].by_customers.is_visible(10) is True
-            assert page.admin_menu.submenus['reports'].by_products.is_visible(10) is True
-            assert page.admin_menu.submenus['reports'].orders.is_visible(10) is True
-            assert page.admin_menu.submenus['reports'].tax.is_visible(10) is True
-            assert page.admin_menu.submenus['reports'].invoiced.is_visible(10) is True
-            assert page.admin_menu.submenus['reports'].shipping.is_visible(10) is True
-            assert page.admin_menu.submenus['reports'].refunds.is_visible(10) is True
-            assert page.admin_menu.submenus['reports'].coupons.is_visible(10) is True
-            assert page.admin_menu.submenus['reports'].paypal_settlement.is_visible(10) is True
-            assert page.admin_menu.submenus['reports'].braintree_settlement.is_visible(10) is True
-            assert page.admin_menu.submenus['reports'].order_total.is_visible(10) is True
-            assert page.admin_menu.submenus['reports'].order_count.is_visible(10) is True
-            assert page.admin_menu.submenus['reports'].new.is_visible(10) is True
-            assert page.admin_menu.submenus['reports'].views.is_visible(10) is True
-            assert page.admin_menu.submenus['reports'].bestsellers.is_visible(10) is True
-            assert page.admin_menu.submenus['reports'].low_stock.is_visible(10) is True
-            assert page.admin_menu.submenus['reports'].ordered.is_visible(10) is True
-            assert page.admin_menu.submenus['reports'].downloads.is_visible(10) is True
-            assert page.admin_menu.submenus['reports'].refresh_statistics.is_visible(10) is True
-            assert page.admin_menu.submenus['reports'].advanced_reporting.is_visible(10) is True
-            assert page.admin_menu.submenus['reports'].bi_essentials.is_visible(10) is True
+            report_submenus_links = page.admin_menu.submenus['reports'].links()
+            assert all(link.is_visible(10) for link in report_submenus_links)
 
         if item == 'Stores':
-            assert page.admin_menu.submenus['stores'].all_stores.is_visible(10) is True
-            assert page.admin_menu.submenus['stores'].configuration.is_visible(10) is True
-            assert page.admin_menu.submenus['stores'].terms_and_conditions.is_visible(10) is True
-            assert page.admin_menu.submenus['stores'].order_status.is_visible(10) is True
-            assert page.admin_menu.submenus['stores'].sources.is_visible(10) is True
-            assert page.admin_menu.submenus['stores'].stocks.is_visible(10) is True
-            assert page.admin_menu.submenus['stores'].tax_rules.is_visible(10) is True
-            assert page.admin_menu.submenus['stores'].tax_zones_and_rates.is_visible(10) is True
-            assert page.admin_menu.submenus['stores'].currency_rates.is_visible(10) is True
-            assert page.admin_menu.submenus['stores'].currency_symbols.is_visible(10) is True
-            assert page.admin_menu.submenus['stores'].product.is_visible(10) is True
-            assert page.admin_menu.submenus['stores'].attribute_set.is_visible(10) is True
-            assert page.admin_menu.submenus['stores'].rating.is_visible(10) is True
+            stores_submenus_links = page.admin_menu.submenus['stores'].links()
+            assert all(link.is_visible(10) for link in stores_submenus_links)
 
         if item == 'System':
-            assert page.admin_menu.submenus['system'].system_import.is_visible(10) is True
-            assert page.admin_menu.submenus['system'].export.is_visible(10) is True
-            assert page.admin_menu.submenus['system'].import_export_tax_rates.is_visible(10) is True
-            assert page.admin_menu.submenus['system'].import_history.is_visible(10) is True
-            assert page.admin_menu.submenus['system'].integrations.is_visible(10) is True
-            assert page.admin_menu.submenus['system'].cache_management.is_visible(10) is True
-            assert page.admin_menu.submenus['system'].index_management.is_visible(10) is True
-            assert page.admin_menu.submenus['system'].all_users.is_visible(10) is True
-            assert page.admin_menu.submenus['system'].locked_users.is_visible(10) is True
-            assert page.admin_menu.submenus['system'].user_roles.is_visible(10) is True
-            assert page.admin_menu.submenus['system'].bulk_actions.is_visible(10) is True
-            assert page.admin_menu.submenus['system'].notifications.is_visible(10) is True
-            assert page.admin_menu.submenus['system'].custom_variables.is_visible(10) is True
-            assert page.admin_menu.submenus['system'].manage_encryption_key.is_visible(10) is True
+            system_submenus_links = page.admin_menu.submenus['system'].links()
+            assert all(link.is_visible(10) for link in system_submenus_links)
 
 
 @when("I want to change store scope")

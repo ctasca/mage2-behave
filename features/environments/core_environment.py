@@ -1,5 +1,4 @@
 import re
-import colorama
 from features.fixtures import *
 # noinspection PyPackageRequirements
 from decouple import config

@@ -56,6 +56,7 @@ Feature: As a mage2-behave developer I want to test the functionality of my code
         When I click the "Customers" menu item
         Then I should see the "Customers" submenu links
 
+        @wip
     @backend
     @fixture.splinter.browser.chrome.headless
     Scenario: Admin login and click the Marketing menu item
@@ -117,7 +118,7 @@ Feature: As a mage2-behave developer I want to test the functionality of my code
 
     @backend
     @backend.grid.search.fulltext
-    @fixture.splinter.browser.chrome
+    @fixture.splinter.browser.chrome.headless
     Scenario: Admin can view the customers grid and use the search fulltext input
         Given I am logged in the backend
         When I am on the all customers grid
