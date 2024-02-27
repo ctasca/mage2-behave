@@ -2,7 +2,7 @@
 
 ### Introduction
 
-mage2-behave is a project that leverages Python 3.8 and greater for development. The project uses various Python packages to achieve its objectives, with some of the notable ones being selenium, `behave`, `splinter`, `stere` and `webdriver-manager` among others.
+**mage2-behave** is a project that leverages Python 3.8 and greater for development. The project uses various Python packages to achieve its objectives, with some of the notable ones being `selenium`, `behave`, `splinter`, `stere`,`maria-db` and `webdriver-manager` among others.
 
 This project endeavors to create Magento2/Adobe Commerce projects that are robust, maintainable, and solves real-world problems effectively. Key concepts of software development, such as object-oriented design and clean code, are embraced fully.
 
@@ -29,7 +29,7 @@ Behavior-Driven Development (BDD) is a powerful approach that aligns software de
 
 In essence, utilizing BDD in a Magento 2 project using Python facilitates effective communication, ensures optimal focus on delivering user value, enhances requirement clarity, aids in early bug detection, and promotes seamless integration with Agile and continuous delivery practices.
 
-### Why Python Instead of PHP?
+### Why using Python Instead of PHP for BDD in Magento 2?
 
 While PHP has served as a strong language for web development over the years, Python offers certain advantages that make it a preferred choice for projects like mage2-behave. Here's why:
 
@@ -42,6 +42,8 @@ While PHP has served as a strong language for web development over the years, Py
 4. **Strong Community**: Python has a vibrant community that contributes to a rich ecosystem of libraries and frameworks. This means you are likely to find help or an existing solution to your problem faster than in PHP.
 
 5. **Integration Feature**: Python can be easily integrated with languages like C, C++, and Java, making it a powerful tool for web application development.
+
+6. **Independent of PHP version used by Magento 2**: Tests written in Python will be easily more portable to other Magento 2 projects without the need to refactor code due to a different PHP version used by Magento 2.
 
 Remember, the decision between Python and PHP depends on the requirements of the project, and each has its strengths. However, for mage2-behave, Python's strengths align more closely with the project's goals and needs.
 
