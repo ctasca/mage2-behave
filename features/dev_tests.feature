@@ -114,7 +114,7 @@ Feature: As a mage2-behave developer I want to test the functionality of my code
         Given I am logged in the backend
         When I am on the all customers grid
         Then I want to be able to apply filters for searching purposes
-        # TODO complete step when implemented customers grid filters area
+        And I want to be able to reset the applied filters
 
     @backend
     @backend.grid.search.fulltext

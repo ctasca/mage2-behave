@@ -165,5 +165,5 @@ DASHBOARD_REVIEWED_PRODUCTS_TAB_LOCATOR: Dict[str, str] = {"strategy": "id", "lo
 DASHBOARD_NEW_CUSTOMERS_TAB_LOCATOR: Dict[str, str] = {"strategy": "id", "locator": "grid_tab_new_customers"}
 DASHBOARD_CUSTOMERS_TAB_LOCATOR: Dict[str, str] = {"strategy": "id", "locator": "grid_tab_customers"}
 # Customers grid filters
-CUSTOMERS_FROM_ID_INPUT_LOCATOR: Dict[str, str] = {"strategy": "xpath", "locator": "//input[@name=\"entity_id[from]\""}
-CUSTOMERS_TO_ID_INPUT_LOCATOR: Dict[str, str] = {"strategy": "xpath", "locator": "//input[@name=\"entity_id[to]\""}
+CUSTOMERS_FROM_ID_INPUT_LOCATOR: Dict[str, str] = {"strategy": "xpath", "locator": "//input[@name=\"entity_id[from]\"]"}
+CUSTOMERS_TO_ID_INPUT_LOCATOR: Dict[str, str] = {"strategy": "xpath", "locator": "//input[@name=\"entity_id[to]\"]"}

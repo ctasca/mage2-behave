@@ -1,6 +1,7 @@
 from behave import *
 from features.pages.backend.dashboard import Dashboard
 from features.pages.backend.customers_grid import CustomersGrid
+from features.pages.backend.utils.ui_grid import reset_all_active_filters
 
 
 @when(u'I click the "{item}" menu item')
@@ -141,5 +142,4 @@ def step_impl(context):
 def step_impl(context):
     with CustomersGrid() as page:
         active_filters = page.active_filters_buttons.children()
-        for active_filter in active_filters:
-            active_filter.remove_button.click()
+        reset_all_active_filters(active_filters)

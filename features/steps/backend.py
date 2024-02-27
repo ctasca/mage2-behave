@@ -2,6 +2,7 @@ from behave import *
 from features.pages.backend.login import Login
 from features.pages.backend.dashboard import Dashboard
 from features.pages.backend.customers_grid import CustomersGrid
+from features.pages.backend.utils.ui_grid import reset_all_active_filters
 
 
 @given(u'I am on the admin login page')
@@ -66,7 +67,10 @@ def step_impl(context):
 def step_impl(context):
     with CustomersGrid() as page:
         page.filters_button.click()
-        # @TODO complete with some filtering action
+        page.customers_grid_filters.from_id_input.fill(10)
+        page.customers_grid_filters.to_id_input.fill(20)
+        page.apply_filters_button.click()
+        assert page.browser.is_text_present("We couldn't find any records.") is True
 
 
 @given("I am on the backend Dashboard page")
