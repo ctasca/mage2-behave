@@ -35,7 +35,7 @@ While PHP has served as a strong language for web development over the years, Py
 
 1. **Readability and Syntax:** Python follows a strict indentation enforcement, which leads to clear, readable code. Its syntax is designed to be easy to understand and use.
 
-2. **Extensive Libraries:** Python is known for its vast selection of libraries, many of which simplify tasks that would be more complex in PHP, such as scientific computing, machine learning, or image processing.
+2. **Extensive Libraries:** Python is known for its vast selection of libraries, many of which simplify tasks that would be more complex in PHP, e.g. setting up the environment for BDD development.
 
 3. **Versatility:** Python is highly versatile and is not just limited to web development. It can be used to develop a variety of applications, from web and desktop applications to network servers and machine learning algorithms.
 
@@ -117,3 +117,35 @@ Remember, the decision between Python and PHP depends on the requirements of the
 ---
 
 This setup ensures that the various Magento 2/mage2-behave projects on your system are isolated from each other, each with their own set of dependencies, thus eliminating any potential conflicts.
+
+## Integrating the 'mage2-behave' Project with Magento 2 Repository or Separately
+
+When integrating the 'mage2-behave' project into the Magento 2 repository or when migrating it to a separate repository altogether, it is important to remove the `.git` directory in the 'mage2-behave' project. Here's why:
+
+The `.git` directory contains all the important metadata for a project under Git version control. This includes information about commits, remote repository addresses, etc.
+
+If you attempt to migrate the project without removing the `.git` directory, there can be several complications:
+
+1. **Commit History Confusions:** The commit history of the 'mage2-behave' project will be retained and can conflict with the commit history of the Magento 2 repository or the new repository. This might lead to confusion in understanding the evolution and progression of the project.
+2. **Configuration Clashes:** The `.git` directory also holds the configuration details for the 'mage2-behave' repository. These details might conflict with the settings of the Magento 2 or new repository causing integration issues.
+3. **Nested Git Repository:** If the Magento 2 repository is itself a Git repository, including the `.git` directory creates a nested repository situation. This situation is generally complex to manage and can cause several operational issues.
+
+So, before integrating 'mage2-behave' with the Magento 2 repository or moving it to a new Git repository, make sure to delete the `.git` directory from 'mage2-behave'. This will result in a smoother and more streamlined project integration process.
+
+To do so, simple navigate to the `mage2-behave` directory in the root of your Magento 2 project and run the following command:
+
+```bash
+python3 remove_git.py
+```
+## Note on Python Command Usage Across Different Operating Systems
+
+In various operating systems, the command-line interface command to invoke Python can differ. Some systems use `python`, while others use `python3`. The discrepancy mainly comes from the fact that different systems may still have Python 2.x versions installed and set 'python' command to point to that version.
+
+Here's a general guideline to follow:
+
+- **Windows / Linux**: If both Python 2.x and Python 3.x versions are installed, `python` likely refers to Python 2.x version and `python3` to Python 3.x version. If only Python 3.x is installed then `python` should invoke the Python 3.x version.
+- **MacOS**: Modern MacOS versions come pre-installed with Python 2.x and 'python' command refers to that version. Users need to install Python 3.x separately which can be invoked with `python3` command. 
+
+A good way to check your Python version and to validate the command is by typing `python --version` or `python3 --version` in your terminal. It should return the Python version that the command points to.
+
+To ensure compatibility across multiple systems, it is recommended to use `python3` in all the commands and scripts for this project. Also, consider using [virtual environments](https://docs.python.org/3/library/venv.html) to isolate your Python environment per project.
