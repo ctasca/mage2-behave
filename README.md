@@ -47,3 +47,67 @@ While PHP has served as a strong language for web development over the years, Py
 
 Remember, the decision between Python and PHP depends on the requirements of the project, and each has its strengths. However, for mage2-behave, Python's strengths align more closely with the project's goals and needs.
 
+## Setting Up a Virtual Python Environment for the mage2-behave Project
+
+1. **Installing the `virtualenv` package**
+
+    Before we begin, ensure that you have the `virtualenv` package installed. If not, you can install it using pip:
+
+    ```bash
+    pip install virtualenv
+    ```
+
+2. **Creating a Virtual Environment**
+
+    Navigate to the project directory where you want to setup the virtual environment and run:
+
+    ```bash
+    cd path_to_your_mage2-behave_project
+    virtualenv venv   # "venv" can be replaced with your preferred name
+    ```
+
+    This will create a new virtual environment in the `mage2-behave` project directory.
+
+3. **Activating the Virtual Environment**
+
+    Activate the virtual environment using one of the following commands based on your operating system:
+
+    - On macOS/Linux:
+
+        ```bash
+        source venv/bin/activate
+        ```
+
+    - On Windows:
+
+        ```bash
+        .\\venv\Scripts\activate
+        ```
+
+    You should now see the virtual environment name in the terminal prompt. This indicates that the virtual environment is active.
+
+4. **Install Necessary Dependencies**
+
+    With the virtual environment activated, install the necessary dependencies for `mage2-behave` project as defined in the `requirements.txt` file:
+
+    ```bash
+    pip install -r requirements.txt
+    ```
+
+5. **Running the Project**
+
+    You are now ready to run the project. Always ensure that the virtual environment is activated (i.e., you can see its name in terminal) whenever you are running or making changes to the project.
+
+6. **Deactivate the Virtual Environment**
+
+    Once you're done, you can deactivate the virtual environment:
+
+    ```bash
+    deactivate
+    ```
+
+    This command will bring back the system’s default Python interpreter. 
+
+---
+
+This setup ensures that the various Python projects on your system are isolated from each other, each with their own set of dependencies, thus eliminating any potential conflicts.

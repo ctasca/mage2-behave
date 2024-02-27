@@ -1,0 +1,11 @@
+behave
+requests
+selenium
+splinter>=0.21.0
+waiting
+mariadb
+webdriver-manager
+sshtunnel
+stere>=0.31.0
+colorama
+python-decouple>=3.8
