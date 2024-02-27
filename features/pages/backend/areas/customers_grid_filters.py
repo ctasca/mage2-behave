@@ -10,5 +10,5 @@ class CustomersGridFilters(Area):
         self.root = Root(bl.GRID_FILTERS_ROOT_LOCATOR['strategy'], bl.GRID_FILTERS_ROOT_LOCATOR['locator'])
         self.from_id_input = FromIdInput(bl.CUSTOMERS_FROM_ID_INPUT_LOCATOR['strategy'],
                                          bl.CUSTOMERS_FROM_ID_INPUT_LOCATOR['locator'])
-        self.to_id_input = FromIdInput(bl.CUSTOMERS_TO_ID_INPUT_LOCATOR['strategy'],
-                                       bl.CUSTOMERS_TO_ID_INPUT_LOCATOR['locator'])
+        self.to_id_input = ToIdInput(bl.CUSTOMERS_TO_ID_INPUT_LOCATOR['strategy'],
+                                     bl.CUSTOMERS_TO_ID_INPUT_LOCATOR['locator'])

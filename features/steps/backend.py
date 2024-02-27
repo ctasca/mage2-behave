@@ -2,7 +2,6 @@ from behave import *
 from features.pages.backend.login import Login
 from features.pages.backend.dashboard import Dashboard
 from features.pages.backend.customers_grid import CustomersGrid
-from features.pages.backend.utils.ui_grid import reset_all_active_filters
 
 
 @given(u'I am on the admin login page')
