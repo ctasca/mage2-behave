@@ -28,9 +28,6 @@ def core_before_scenario(context, scenario):
     if "fixture.splinter.browser.chrome.headless" in scenario.tags:
         use_fixture(splinter_browser_chrome_headless, context)
 
-    if "fixture.docker.bin.magento" in scenario.tags:
-        use_fixture(docker_bin_magento, context)
-
     if matches := _regex_fixture_tag_matches(scenario, 'fixture.splinter.browser.chrome.screen.size.'):
         for data in matches:
             use_fixture(splinter_browser_chrome_screen_size, context, data[1])
