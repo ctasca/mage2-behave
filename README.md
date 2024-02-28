@@ -2,7 +2,7 @@
 
 ### Introduction
 
-**mage2-behave** is a project that leverages Python for Behavior-Driven Development (BDD) development in Magento 2 projects. The project uses various Python packages to achieve its objectives, with some of the notable ones being `selenium`, `behave`, `splinter`, `stere`,`maria-db` and `webdriver-manager` among others.
+**mage2-behave** is a project that leverages Python for Behavior-Driven Development (BDD) development in Magento 2 projects. The project uses various Python packages to achieve its objectives, with some of the notable ones being `selenium`, `behave`, `splinter`, `stere`,`maria-db`, `docker` and `webdriver-manager` among others.
 
 This project endeavors to create Magento2/Adobe Commerce projects that are robust, maintainable, and solves real-world problems effectively. Key concepts of software development, such as object-oriented design and clean code, are embraced fully.
 
