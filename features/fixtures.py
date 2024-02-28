@@ -102,7 +102,7 @@ def dummy_customer_create(context):
                 "countryId": config_parser.get(SECTIONS.get('customer'), 'CUSTOMER_ADDRESS_COUNTRY_ID')
             }]
         },
-        "password": config('CUSTOMER_PASSWORD')
+        "password": config('customer_password')
     }
     headers = {"Content-Type": "application/json", "Authorization": "Bearer {}".format(context.admin_token)}
     customers_rest_path = config_parser.get(SECTIONS.get('api'), 'CUSTOMERS_REST_PATH')
@@ -184,7 +184,7 @@ def _set_integration_environment(context):
     context.secure_baseurl = config_parser.get(SECTIONS.get('integration'), 'INTEGRATION_ENV_SECURE_BASEURL')
     context.backend = config_parser.get(SECTIONS.get('integration'), 'INTEGRATION_BACKEND_URL')
     context.admin_username = config_parser.get(SECTIONS.get('integration'), 'INTEGRATION_ADMIN_USERNAME')
-    context.admin_password = config('INTEGRATION_ADMIN_PASSWORD')
+    context.admin_password = config('integration_admin_password')
 
 
 def _set_test_environment(context):
@@ -192,7 +192,7 @@ def _set_test_environment(context):
     context.secure_baseurl = config_parser.get(SECTIONS.get('test'), 'TEST_ENV_SECURE_BASEURL')
     context.backend = config_parser.get(SECTIONS.get('test'), 'TEST_BACKEND_URL')
     context.admin_username = config_parser.get(SECTIONS.get('test'), 'TEST_ADMIN_USERNAME')
-    context.admin_password = config('TEST_ADMIN_PASSWORD')
+    context.admin_password = config('test_admin_password')
 
 
 def _set_staging_environment(context):
@@ -200,7 +200,7 @@ def _set_staging_environment(context):
     context.secure_baseurl = config_parser.get(SECTIONS.get('stage'), 'STAGING_ENV_SECURE_BASEURL')
     context.backend = config_parser.get(SECTIONS.get('stage'), 'STAGING_BACKEND_URL')
     context.admin_username = config_parser.get(SECTIONS.get('stage'), 'STAGING_ADMIN_USERNAME')
-    context.admin_password = config('STAGING_ADMIN_PASSWORD')
+    context.admin_password = config('staging_admin_password')
 
 
 def _set_pre_production_environment(context):
@@ -208,7 +208,7 @@ def _set_pre_production_environment(context):
     context.secure_baseurl = config_parser.get(SECTIONS.get('pre_prod'), 'PRE_PRODUCTION_ENV_SECURE_BASEURL')
     context.backend = config_parser.get(SECTIONS.get('pre_prod'), 'PRE_PRODUCTION_BACKEND_URL')
     context.admin_username = config_parser.get(SECTIONS.get('pre_prod'), 'PRE_PRODUCTION_ADMIN_USERNAME')
-    context.admin_password = config('PRE_PRODUCTION_ADMIN_PASSWORD')
+    context.admin_password = config('pre_production_admin_password')
 
 
 def _set_production_environment(context):
@@ -216,4 +216,4 @@ def _set_production_environment(context):
     context.secure_baseurl = config_parser.get(SECTIONS.get('prod'), 'PRODUCTION_ENV_SECURE_BASEURL')
     context.backend = config_parser.get(SECTIONS.get('prod'), 'PRODUCTION_BACKEND_URL')
     context.admin_username = config_parser.get(SECTIONS.get('prod'), 'PRODUCTION_ADMIN_USERNAME')
-    context.admin_password = config('PRODUCTION_ADMIN_PASSWORD')
+    context.admin_password = config('production_admin_password')

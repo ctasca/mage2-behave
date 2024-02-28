@@ -26,4 +26,4 @@ def context_development_environment(context, config):
     context.secure_baseurl = config_parser.get(SECTIONS.get('dev'), 'DEVELOPMENT_ENV_SECURE_BASEURL')
     context.backend = config_parser.get(SECTIONS.get('dev'), 'DEVELOPMENT_BACKEND_URL')
     context.admin_username = config_parser.get(SECTIONS.get('dev'), 'DEVELOPMENT_ADMIN_USERNAME')
-    context.admin_password = config('DEVELOPMENT_ADMIN_PASSWORD')
+    context.admin_password = config('development_admin_password')
