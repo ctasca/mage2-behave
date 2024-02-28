@@ -8,24 +8,17 @@ def process_dist_file(source_directory, dest_directory, source_filename, destina
     template_file = os.path.join(source_directory, '.{}.template'.format(destination_file_name))
     dest_file = os.path.join(dest_directory, destination_file_name)
     skip_all = False
-    # If the file doesn't exist in destination directory, copy it
-    # from template file
     if not os.path.exists(dest_file):
         print(f'{colorama.Fore.GREEN}Copying {template_file} to {dest_file}{colorama.Style.RESET_ALL}')
         print(f'{colorama.Fore.RED} Re-run this script to be able to set the parameters in {dest_file}'
               f'{colorama.Style.RESET_ALL}')
         shutil.copy2(template_file, destination_file_name)
     else:
-        # If the file does exist, merge variables
-
-        # Parse source config file
         src_config = configparser.ConfigParser()
         src_config.read(source_filename)
-
-        # Parse destination config file
         dest_config = configparser.ConfigParser()
         dest_config.read(dest_file)
-        # Iterate over each variable in source config file
+
         for section in src_config.sections():
             if skip_all is True:
                 break
@@ -53,6 +46,5 @@ def process_dist_file(source_directory, dest_directory, source_filename, destina
                     if value is None or value.strip() == '':
                         continue
                     dest_config.set(section, key, value)
-        # Write updated config to destination file
         with open(dest_file, 'w') as configfile:
             dest_config.write(configfile)
