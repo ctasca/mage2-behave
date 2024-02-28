@@ -5,12 +5,14 @@ from docker.client import DockerClient
 from features.core_config.bundle import config_parser, SECTIONS
 
 
-def client() -> DockerClient:
+def docker_client_from_env() -> DockerClient:
+    """ Returns a DockerClient from the environment"""
     return docker.from_env()
 
 
 def container_id_search(search: str) -> str:
-    docker_client = docker.from_env()
+    """ Performs a search to find the container ID from the environment """
+    docker_client = docker_client_from_env()
     containers = docker_client.containers.list()
     for container in containers:
         if re.search(search, container.name):
@@ -19,6 +21,7 @@ def container_id_search(search: str) -> str:
 
 
 def docker_bin_magento(command: str):
+    """ Runs a bin/magento command in php-fpm service container """
     magento_php_fom_service = config_parser.get(SECTIONS.get('docker'), 'PHP_FPM_SERVICE')
     container_id = container_id_search(magento_php_fom_service)
     command = 'bin/magento {}'.format(command)

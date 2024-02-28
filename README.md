@@ -248,3 +248,45 @@ To run this script, follow these steps:
 
 Please ensure that you are in the 'mage2-behave' directory where the script is located before running the command.
 
+## Docker Magento Function Usage
+
+### `docker_bin_magento()`
+
+This project provides a utility function: `docker_bin_magento()`, for running Magento CLI commands from a Docker container in a development environment.
+
+This function is defined in the `utils/docker_env.py` module and takes as input a string specifying the Magento CLI command to be run inside the Docker container that's serving as the PHP environment for the Magento application.
+
+Here's how to use it:
+
+```bash
+docker_bin_magento('cache:clean')
+```
+
+In the example above, `cache:clean` is the Magento CLI command that we want to run. This command will clean the Magento cache.
+
+This utility performs the following sequence of actions:
+
+1. Reads the name of the PHP-FPM service from the project configuration.
+2. Searches for a running Docker container that matches the PHP-FPM service name.
+3. Constructs a Docker command to execute the Magento CLI command within the identified Docker container.
+4. Uses `subprocess` to execute the Docker command.
+
+Please note that it is necessary to have a Docker environment up and running for the tests to be able to interact with the Magento application.
+
+**This function can be beneficial for writing tests that require changing the Magento state as per the test's needs.**
+
+The function assumes that your Docker environment includes a service that provides a PHP-FPM environment suitable for running the Magento application. The name of this service is read from the project configuration (the `docker_config.ini` file).
+
+It's important to ensure that the Docker environment is running, and the PHP-FPM service is correctly defined in your configuration before calling this function.
+
+Here is an example of usage in `behave steps`:
+
+```python
+from behave import *
+from utils import docker_env as denv
+
+
+@given("I have flushed the magento cache")
+def step_impl(context):
+    denv.docker_bin_magento('ca:fl')
+```
