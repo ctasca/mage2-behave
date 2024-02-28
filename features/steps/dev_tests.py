@@ -2,7 +2,7 @@ from behave import *
 from features.pages.backend.dashboard import Dashboard
 from features.pages.backend.customers_grid import CustomersGrid
 from features.pages.backend.utils.ui_grid import reset_all_active_filters
-from utils import docker_env as denv
+
 
 @when(u'I click the "{item}" menu item')
 def step_impl(context, item):
@@ -143,8 +143,3 @@ def step_impl(context):
     with CustomersGrid() as page:
         active_filters = page.active_filters_buttons.children()
         reset_all_active_filters(active_filters)
-
-
-@given("I have flushed the magento cache")
-def step_impl(context):
-    denv.docker_bin_magento('ca:fl')
