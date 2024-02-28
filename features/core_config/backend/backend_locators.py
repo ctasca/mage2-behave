@@ -145,7 +145,9 @@ STORE_CHANGE_BUTTON_LINK_LOCATOR: Dict[str, str] = {"strategy": "id", "locator":
 STORE_SCOPE_LIST_ROOT_LOCATOR: Dict[str, str] = {"strategy": "xpath", "locator": "//ul[@data-role='stores-list']"}
 SET_STORE_SCOPE_LOCATOR_FORMAT: str = "//a[contains(text(), '{}')]"
 # Grids
-GRID_FILTER_BUTTON_LOCATOR: Dict[str, str] = {"strategy": "xpath", "locator": "//button[text()=\"Filters\"]"}
+GRID_FILTER_BUTTON_LOCATOR: Dict[str, str] = \
+    {"strategy": "xpath", "locator": "(//div[@class=\"data-grid-filters-action-wrap\"]//button["
+                                     "@data-action=\"grid-filter-expand\"])[1]"}
 GRID_FULLTEXT_INPUT_LOCATOR: Dict[str, str] = {"strategy": "id", "locator": "fulltext"}
 GRID_FULLTEXT_SEARCH_BUTTON_LOCATOR: Dict[str, str] = \
     {"strategy": "xpath", "locator": "(//div[@class='data-grid-search-control-wrap']/button)[1]"}

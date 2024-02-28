@@ -29,35 +29,35 @@ def step_impl(context, item):
 def step_impl(context, item):
     with Dashboard() as page:
         if item == "Sales":
-            sales_submenu_links = page.admin_menu.submenus['sales'].links()
+            sales_submenu_links = page.admin_menu.submenu('sales').links()
             assert all(link.is_visible(10) for link in sales_submenu_links)
 
         if item == 'Catalog':
-            catalog_submenu_links = page.admin_menu.submenus['catalog'].links()
+            catalog_submenu_links = page.admin_menu.submenu('catalog').links()
             assert all(link.is_visible(10) for link in catalog_submenu_links)
 
         if item == 'Customers':
-            customer_submenu_links = page.admin_menu.submenus['customers'].links()
+            customer_submenu_links = page.admin_menu.submenu('customers').links()
             assert all(link.is_visible(10) for link in customer_submenu_links)
 
         if item == 'Marketing':
-            marketing_submenus_links = page.admin_menu.submenus['marketing'].links()
+            marketing_submenus_links = page.admin_menu.submenu('marketing').links()
             assert all(link.is_visible(10) for link in marketing_submenus_links)
 
         if item == 'Content':
-            content_submenus_links = page.admin_menu.submenus['content'].links()
+            content_submenus_links = page.admin_menu.submenu('content').links()
             assert all(link.is_visible(10) for link in content_submenus_links)
 
         if item == 'Reports':
-            report_submenus_links = page.admin_menu.submenus['reports'].links()
+            report_submenus_links = page.admin_menu.submenu('reports').links()
             assert all(link.is_visible(10) for link in report_submenus_links)
 
         if item == 'Stores':
-            stores_submenus_links = page.admin_menu.submenus['stores'].links()
+            stores_submenus_links = page.admin_menu.submenu('stores').links()
             assert all(link.is_visible(10) for link in stores_submenus_links)
 
         if item == 'System':
-            system_submenus_links = page.admin_menu.submenus['system'].links()
+            system_submenus_links = page.admin_menu.submenu('system').links()
             assert all(link.is_visible(10) for link in system_submenus_links)
 
 

@@ -43,3 +43,6 @@ class AdminMenu(Area):
             'stores': StoresSubmenu(),
             'system': SystemSubmenu()
         }
+
+    def submenu(self, key: str):
+        return self.submenus[key]

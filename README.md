@@ -144,7 +144,7 @@ In various operating systems, the command-line interface command to invoke Pytho
 Here's a general guideline to follow:
 
 - **Windows / Linux**: If both Python 2.x and Python 3.x versions are installed, `python` likely refers to Python 2.x version and `python3` to Python 3.x version. If only Python 3.x is installed then `python` should invoke the Python 3.x version.
-- **MacOS**: Modern MacOS versions come pre-installed with Python 2.x and 'python' command refers to that version. Users need to install Python 3.x separately which can be invoked with `python3` command. 
+- **MacOS**: Modern macOS versions come pre-installed with Python 2.x and 'python' command refers to that version. Users need to install Python 3.x separately which can be invoked with `python3` command. 
 
 A good way to check your Python version and to validate the command is by typing `python --version` or `python3 --version` in your terminal. It should return the Python version that the command points to.
 
@@ -220,5 +220,31 @@ To run this script, follow these steps:
     python3 generate_config.py
     ```
 
-Please ensure that you are in the correct directory where the script is located before running the command.
+Please ensure that you are in the 'mage2-behave' directory where the script is located before running the command.
+
+### Running the `sensitive_data_config.py` Script
+
+To run this script, follow these steps:
+
+1. Open a terminal.
+
+2. Navigate to the directory where the `sensitive_data_config.py` script is located:
+
+    ```sh
+    cd <magento_root>/mage2-behave
+    ```
+
+3. Execute the script using Python or Python3 (based on your OS):
+
+    ```sh
+    python sensitive_data_config.py
+    ```
+
+    or
+
+    ```sh
+    python3 sensitive_data_config.py
+    ```
+
+Please ensure that you are in the 'mage2-behave' directory where the script is located before running the command.
 
