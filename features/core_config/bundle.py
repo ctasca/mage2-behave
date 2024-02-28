@@ -9,7 +9,8 @@ SECTIONS: dict[str, str] = {
     "pre_prod": "PreProduction",
     "prod": "Production",
     "customer": "DummyCustomer",
-    "api": "Api"
+    "api": "Api",
+    "docker": "Docker"
 }
 
 config_parser = configparser.ConfigParser()
@@ -18,6 +19,7 @@ current_dir = os.path.dirname(os.path.abspath(__file__))
 config_parser.read(os.path.join(current_dir, 'core_config_baseurls.ini'))
 config_parser.read(os.path.join(current_dir, 'core_config_backend.ini'))
 config_parser.read(os.path.join(current_dir, 'dummy_customer.ini'))
+config_parser.read(os.path.join(current_dir, 'docker_config.ini'))
 config_parser.read(os.path.join(current_dir, 'api.ini'))
 
 

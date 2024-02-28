@@ -28,6 +28,9 @@ def core_before_scenario(context, scenario):
     if "fixture.splinter.browser.chrome.headless" in scenario.tags:
         use_fixture(splinter_browser_chrome_headless, context)
 
+    if "fixture.docker.bin.magento" in scenario.tags:
+        use_fixture(docker_bin_magento, context)
+
     if matches := _regex_fixture_tag_matches(scenario, 'fixture.splinter.browser.chrome.screen.size.'):
         for data in matches:
             use_fixture(splinter_browser_chrome_screen_size, context, data[1])
@@ -69,10 +72,7 @@ def _skip(context, hook, hook_type: str) -> None:
     if "skip" in hook.tags:
         message = (f"{colorama.Fore.LIGHTYELLOW_EX}Skipped {hook_type} due to 'skip' tag "
                    f"in {context.feature.filename} file{colorama.Style.RESET_ALL}")
-        if hook_type == 'feature':
-            hook.skip(message)
-        if hook_type == 'scenario':
-            hook.skip(message)
+        hook.skip(message)
         return
 
 

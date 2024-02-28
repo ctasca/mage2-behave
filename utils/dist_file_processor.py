@@ -5,14 +5,17 @@ import colorama
 
 
 def process_dist_file(source_directory, dest_directory, source_filename, destination_file_name):
-    template_file = os.path.join(source_directory, '.{}.template'.format(destination_file_name))
+    template_filename = '.{}.template'.format(destination_file_name)
+    template_file = os.path.join(source_directory, template_filename)
     dest_file = os.path.join(dest_directory, destination_file_name)
     skip_all = False
     if not os.path.exists(dest_file):
         print(f'{colorama.Fore.GREEN}Copying {template_file} to {dest_file}{colorama.Style.RESET_ALL}')
         print(f'{colorama.Fore.RED} Re-run this script to be able to set the parameters in {dest_file}'
               f'{colorama.Style.RESET_ALL}')
-        shutil.copy2(template_file, destination_file_name)
+        shutil.copy2(template_file, dest_directory)
+        copied_template_file = os.path.join(dest_directory, template_filename)
+        os.rename(copied_template_file, dest_file)
     else:
         src_config = configparser.ConfigParser()
         src_config.read(source_filename)

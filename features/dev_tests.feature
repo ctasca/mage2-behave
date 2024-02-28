@@ -173,3 +173,6 @@ Feature: As a mage2-behave developer I want to test the functionality of my code
         Given I have products out of in stock
         Then I should not be able to add them to my shopping cart
 
+    @bin.magento
+    Scenario: Configured docker php-fpm service container executes bin/magento commands
+        Given I have flushed the magento cache

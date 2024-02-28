@@ -1,5 +1,5 @@
 import os
-from dist_file_processor import process_dist_file
+from utils.dist_file_processor import process_dist_file
 
 root_dir = os.getcwd()
 

@@ -126,6 +126,11 @@ def dummy_customer_delete(context):
 
 
 @fixture
+def skip(context):
+    pass
+
+
+@fixture
 def set_products_in_stock(context, data):
     """Note: when using this fixture the request for an admin token is automatically made"""
     _set_product_is_in_stock_request(context, data, 'true')
