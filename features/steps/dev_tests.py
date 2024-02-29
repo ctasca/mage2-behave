@@ -1,7 +1,6 @@
 from behave import *
 from features.pages.backend.dashboard import Dashboard
 from features.pages.backend.customers_grid import CustomersGrid
-from features.pages.backend.utils.ui_grid import reset_all_active_filters
 from features.core_config.backend.backend_locators import (SALES_SUBMENU, CATALOG_SUBMENU, CUSTOMERS_SUBMENU,
                                                            MARKETING_SUBMENU, CONTENT_SUBMENU, REPORTS_SUBMENU,
                                                            STORES_SUBMENU, SYSTEM_SUBMENU)
@@ -136,7 +135,6 @@ def step_impl(context):
 def step_impl(context):
     with CustomersGrid() as page:
         page.fulltext_search_input.fill('search text')
-        page.filters_button.click()
         page.fulltext_search_button.click()
         assert page.browser.is_text_present("We couldn't find any records.") is True
 
@@ -144,5 +142,6 @@ def step_impl(context):
 @step("I want to be able to reset the applied filters")
 def step_impl(context):
     with CustomersGrid() as page:
-        active_filters = page.active_filters_buttons.children()
-        reset_all_active_filters(active_filters)
+        filters = page.customers_grid_filters
+        filters.clear_all()
+        assert filters.get_root().is_not_visible(10) is True

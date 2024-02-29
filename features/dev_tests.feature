@@ -1,7 +1,6 @@
 @fixture.integration.admin.token
 Feature: As a mage2-behave developer I want to test the functionality of my code So That I can assure all is properly working
 
-    @wip
     @skip
     @browser
     @fixture.splinter.browser.chrome
@@ -9,12 +8,14 @@ Feature: As a mage2-behave developer I want to test the functionality of my code
         Given I visit Google search page
          Then the title should be "Google"
 
+    @skip
     @browser
     @fixture.splinter.browser.chrome.fullscreen
     Scenario: Browser Chrome fixture test
         Given I visit Google search page
          Then the title should be "Google"
 
+    @skip
     @browser
     @fixture.splinter.browser.chrome.screen.size.200:200
     Scenario: Browser Chrome custom size screen fixture test
