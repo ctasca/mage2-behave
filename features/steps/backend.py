@@ -1,11 +1,8 @@
-import time
 
 from behave import *
 from features.pages.backend.login import Login
 from features.pages.backend.dashboard import Dashboard
-from features.core_config.backend.backend_locators import (SALES_SUBMENU, CATALOG_SUBMENU, CUSTOMERS_SUBMENU,
-                                                           MARKETING_SUBMENU, CONTENT_SUBMENU, REPORTS_SUBMENU,
-                                                           STORES_SUBMENU, SYSTEM_SUBMENU)
+from features.core_config.backend.backend_locators import (SALES_SUBMENU, CUSTOMERS_SUBMENU)
 
 
 @given(u'I am on the admin login page')
@@ -31,7 +28,8 @@ def step_impl(context):
 
 @then(u'I should see a dashboard header')
 def step_impl(context):
-    assert context.browser.is_text_present("Dashboard") is True
+    with Dashboard() as page:
+        assert page.browser.is_text_present("Dashboard") is True
 
 
 @given(u'I am logged in the backend')

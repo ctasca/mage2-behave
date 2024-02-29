@@ -30,9 +30,9 @@ class SalesOrdersGridFilters(Area):
                                                          bl.GRID_DATEPICKER_BUTTON_LOCATOR[LOCATOR_KEY]
                                                          .format('created_at[to]'))
         self.base_grand_total_from = InputFilter(bl.ORDERS_BASE_GRAND_TOTAL_FROM_INPUT_FILTER_LOCATOR[STRATEGY_KEY],
-                                                bl.ORDERS_BASE_GRAND_TOTAL_FROM_INPUT_FILTER_LOCATOR[LOCATOR_KEY])
+                                                 bl.ORDERS_BASE_GRAND_TOTAL_FROM_INPUT_FILTER_LOCATOR[LOCATOR_KEY])
         self.base_grand_total_to = InputFilter(bl.ORDERS_BASE_GRAND_TOTAL_TO_INPUT_FILTER_LOCATOR[STRATEGY_KEY],
-                                              bl.ORDERS_BASE_GRAND_TOTAL_TO_INPUT_FILTER_LOCATOR[LOCATOR_KEY])
+                                               bl.ORDERS_BASE_GRAND_TOTAL_TO_INPUT_FILTER_LOCATOR[LOCATOR_KEY])
         self.purchased_grand_total_from = InputFilter(
             bl.ORDERS_PURCHASED_GRAND_TOTAL_FROM_INPUT_FILTER_LOCATOR[STRATEGY_KEY],
             bl.ORDERS_PURCHASED_GRAND_TOTAL_FROM_INPUT_FILTER_LOCATOR[LOCATOR_KEY])

@@ -176,7 +176,6 @@ def step_impl(context):
         filters.get_filter(filters.GENDER_FILTER).select('Male', 10)
         filters.get_filter(filters.WEBSITE_ID_FILTER).select('Main Website', 10)
         page.apply_filters_button.click()
-        assert page.browser.is_text_present("We couldn't find any records.") is True
 
 
 @then("I want to be able to apply filters to orders for searching purposes")

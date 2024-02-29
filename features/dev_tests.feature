@@ -11,7 +11,7 @@ Feature: As a mage2-behave developer I want to test the functionality of my code
     @skip
     @browser
     @fixture.splinter.browser.chrome.fullscreen
-    Scenario: Browser Chrome fixture test
+    Scenario: Browser Chrome fixture fullscreen test
         Given I visit Google search page
          Then the title should be "Google"
 
@@ -110,7 +110,7 @@ Feature: As a mage2-behave developer I want to test the functionality of my code
 
     @backend
     @backend.grid.filters
-    @fixture.splinter.browser.chrome
+    @fixture.splinter.browser.chrome.headless
     Scenario: Admin can view the customers grid and click the filters button
         Given I am logged in the backend
         When I am on the all customers grid
@@ -119,7 +119,7 @@ Feature: As a mage2-behave developer I want to test the functionality of my code
 
     @backend
     @backend.grid.filters
-    @fixture.splinter.browser.chrome
+    @fixture.splinter.browser.chrome.headless
     Scenario: Admin can view the customers grid and click the filters button
         Given I am logged in the backend
         When I am on the sales orders grid
