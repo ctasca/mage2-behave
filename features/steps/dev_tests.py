@@ -2,6 +2,9 @@ from behave import *
 from features.pages.backend.dashboard import Dashboard
 from features.pages.backend.customers_grid import CustomersGrid
 from features.pages.backend.utils.ui_grid import reset_all_active_filters
+from features.core_config.backend.backend_locators import (SALES_SUBMENU, CATALOG_SUBMENU, CUSTOMERS_SUBMENU,
+                                                           MARKETING_SUBMENU, CONTENT_SUBMENU, REPORTS_SUBMENU,
+                                                           STORES_SUBMENU, SYSTEM_SUBMENU)
 
 
 @when(u'I click the "{item}" menu item')
@@ -29,35 +32,35 @@ def step_impl(context, item):
 def step_impl(context, item):
     with Dashboard() as page:
         if item == "Sales":
-            sales_submenu_links = page.admin_menu.submenu('sales').links()
+            sales_submenu_links = page.admin_menu.submenu(SALES_SUBMENU).links()
             assert all(link.is_visible(10) for link in sales_submenu_links)
 
         if item == 'Catalog':
-            catalog_submenu_links = page.admin_menu.submenu('catalog').links()
+            catalog_submenu_links = page.admin_menu.submenu(CATALOG_SUBMENU).links()
             assert all(link.is_visible(10) for link in catalog_submenu_links)
 
         if item == 'Customers':
-            customer_submenu_links = page.admin_menu.submenu('customers').links()
+            customer_submenu_links = page.admin_menu.submenu(CUSTOMERS_SUBMENU).links()
             assert all(link.is_visible(10) for link in customer_submenu_links)
 
         if item == 'Marketing':
-            marketing_submenus_links = page.admin_menu.submenu('marketing').links()
+            marketing_submenus_links = page.admin_menu.submenu(MARKETING_SUBMENU).links()
             assert all(link.is_visible(10) for link in marketing_submenus_links)
 
         if item == 'Content':
-            content_submenus_links = page.admin_menu.submenu('content').links()
+            content_submenus_links = page.admin_menu.submenu(CONTENT_SUBMENU).links()
             assert all(link.is_visible(10) for link in content_submenus_links)
 
         if item == 'Reports':
-            report_submenus_links = page.admin_menu.submenu('reports').links()
+            report_submenus_links = page.admin_menu.submenu(REPORTS_SUBMENU).links()
             assert all(link.is_visible(10) for link in report_submenus_links)
 
         if item == 'Stores':
-            stores_submenus_links = page.admin_menu.submenu('stores').links()
+            stores_submenus_links = page.admin_menu.submenu(STORES_SUBMENU).links()
             assert all(link.is_visible(10) for link in stores_submenus_links)
 
         if item == 'System':
-            system_submenus_links = page.admin_menu.submenu('system').links()
+            system_submenus_links = page.admin_menu.submenu(SYSTEM_SUBMENU).links()
             assert all(link.is_visible(10) for link in system_submenus_links)
 
 

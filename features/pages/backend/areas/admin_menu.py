@@ -34,14 +34,14 @@ class AdminMenu(Area):
         self.system = Link(bl.ADMIN_MENU_SYSTEM_LINK_LOCATOR[STRATEGY_KEY],
                            bl.ADMIN_MENU_SYSTEM_LINK_LOCATOR[LOCATOR_KEY])
         self.submenus = {
-            'sales': SalesSubmenu(),
-            'catalog': CatalogSubmenu(),
-            'customers': CustomersSubmenu(),
-            'marketing': MarketingSubmenu(),
-            'content': ContentSubmenu(),
-            'reports': ReportsSubmenu(),
-            'stores': StoresSubmenu(),
-            'system': SystemSubmenu()
+            bl.SALES_SUBMENU: SalesSubmenu(),
+            bl.CATALOG_SUBMENU: CatalogSubmenu(),
+            bl.CUSTOMERS_SUBMENU: CustomersSubmenu(),
+            bl.MARKETING_SUBMENU: MarketingSubmenu(),
+            bl.CONTENT_SUBMENU: ContentSubmenu(),
+            bl.REPORTS_SUBMENU: ReportsSubmenu(),
+            bl.STORES_SUBMENU: StoresSubmenu(),
+            bl.SYSTEM_SUBMENU: SystemSubmenu()
         }
 
     def submenu(self, key: str):
