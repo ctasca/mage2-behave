@@ -10,31 +10,32 @@ def core_before_all(context):
 
 
 def core_before_feature(context, feature):
+    _skip(context, feature, 'feature')
     _set_environment(context, feature)
     _integration_admin_token(context, feature.tags)
-    _skip(context, feature, 'feature')
     _dummy_customer_create(context, feature)
     _set_products_in_stock(context, feature)
     _set_products_out_of_stock(context, feature)
 
 
 def core_before_scenario(context, scenario):
-    if "fixture.splinter.browser.chrome" in scenario.tags:
+    _skip(context, scenario, 'scenario')
+    if "fixture.splinter.browser.chrome" in scenario.tags and not ('skip' in scenario.tags):
         use_fixture(splinter_browser_chrome, context)
 
-    if "fixture.splinter.browser.chrome.fullscreen" in scenario.tags:
+    if "fixture.splinter.browser.chrome.fullscreen" in scenario.tags and not ('skip' in scenario.tags):
         use_fixture(splinter_browser_chrome_fullscreen, context)
 
-    if "fixture.splinter.browser.chrome.headless" in scenario.tags:
+    if "fixture.splinter.browser.chrome.headless" in scenario.tags and not ('skip' in scenario.tags):
         use_fixture(splinter_browser_chrome_headless, context)
 
-    if matches := _regex_fixture_tag_matches(scenario, 'fixture.splinter.browser.chrome.screen.size.'):
+    if matches := (_regex_fixture_tag_matches(scenario, 'fixture.splinter.browser.chrome.screen.size.') and
+                   not ('skip' in scenario.tags)):
         for data in matches:
             use_fixture(splinter_browser_chrome_screen_size, context, data[1])
 
     _set_environment(context, scenario)
     _integration_admin_token(context, scenario.tags)
-    _skip(context, scenario, 'scenario')
     _dummy_customer_create(context, scenario)
     _set_products_in_stock(context, scenario)
     _set_products_out_of_stock(context, scenario)

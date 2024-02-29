@@ -151,7 +151,7 @@ Feature: As a mage2-behave developer I want to test the functionality of my code
     Scenario: Create an amin user integration bearer token
         Given I have made an integration admin token request
         Then I expect a successful response
-
+        
     @api
     @fixture.dummy.customer.create
     @fixture.dummy.customer.delete

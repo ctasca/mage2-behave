@@ -4,7 +4,6 @@ from .fields.grid_filters_button import GridFiltersButton
 from .fields.grid_fulltext_search_input import GridFulltextSearchInput
 from .fields.grid_fulltext_search_button import GridFulltextSearchButton
 from .fields.grid_apply_filters_button import GridApplyFiltersButton
-from features.pages.backend.areas.grid_active_filters_buttons import GridActiveFiltersButtons
 from features.pages.backend.fields.grid_clear_all_filters_button import GridActiveFiltersClearAllButton
 from .areas.customers_grid_filters import CustomersGridFilters
 
@@ -18,5 +17,4 @@ class CustomersGrid(Page):
         self.fulltext_search_button = GridFulltextSearchButton()
         self.apply_filters_button = GridApplyFiltersButton()
         self.clear_all_filters_button = GridActiveFiltersClearAllButton()
-        self.active_filters_buttons = GridActiveFiltersButtons()
         self.customers_grid_filters = CustomersGridFilters()
