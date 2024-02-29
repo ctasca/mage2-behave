@@ -1,0 +1,5 @@
+STRATEGY_KEY = 'strategy'
+LOCATOR_KEY = 'locator'
+XPATH_STRATEGY = 'xpath'
+ID_STRATEGY = 'id'
+CSS_STRATEGY = 'css'

@@ -1,20 +1,23 @@
-from features.core_config.backend.backend_locators import *
+from features.core_config.locators import STRATEGY_KEY, LOCATOR_KEY
+from features.core_config.backend.backend_locators import (ADMIN_LOGIN_FORM_USERNAME_LOCATOR,
+                                                           ADMIN_LOGIN_FORM_PASSWORD_LOCATOR,
+                                                           ADMIN_LOGIN_FORM_SIGNIN_BUTTON_LOCATOR)
 from stere.fields import Input, Button
 
 
 class Username(Input):
     def __init__(self):
-        super().__init__(ADMIN_LOGIN_FORM_USERNAME_LOCATOR['strategy'],
-                         ADMIN_LOGIN_FORM_USERNAME_LOCATOR['locator'])
+        super().__init__(ADMIN_LOGIN_FORM_USERNAME_LOCATOR[STRATEGY_KEY],
+                         ADMIN_LOGIN_FORM_USERNAME_LOCATOR[LOCATOR_KEY])
 
 
 class Password(Input):
     def __init__(self):
-        super().__init__(ADMIN_LOGIN_FORM_PASSWORD_LOCATOR['strategy'],
-                         ADMIN_LOGIN_FORM_PASSWORD_LOCATOR['locator'])
+        super().__init__(ADMIN_LOGIN_FORM_PASSWORD_LOCATOR[STRATEGY_KEY],
+                         ADMIN_LOGIN_FORM_PASSWORD_LOCATOR[LOCATOR_KEY])
 
 
 class SignInButton(Button):
     def __init__(self):
-        super().__init__(ADMIN_LOGIN_FORM_SIGNIN_BUTTON_LOCATOR['strategy'],
-                         ADMIN_LOGIN_FORM_SIGNIN_BUTTON_LOCATOR['locator'])
+        super().__init__(ADMIN_LOGIN_FORM_SIGNIN_BUTTON_LOCATOR[STRATEGY_KEY],
+                         ADMIN_LOGIN_FORM_SIGNIN_BUTTON_LOCATOR[LOCATOR_KEY])
