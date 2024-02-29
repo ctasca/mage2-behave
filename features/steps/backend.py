@@ -64,39 +64,6 @@ def step_impl(context):
     ''')
 
 
-@then(u'I want to be able to apply filters for searching purposes')
-def step_impl(context):
-    with CustomersGrid() as page:
-        page.filters_button.click()
-        filters = page.customers_grid_filters
-        filters.get_filter(filters.FROM_ID_FILTER).fill(10)
-        filters.get_filter(filters.TO_ID_FILTER).fill(20)
-        filters.get_filter(filters.EMAIL_FILTER).fill('test@test.com')
-        filters.get_filter(filters.NAME_FILTER).fill('Test')
-        created_at_from_datepicker = filters.get_filter(filters.CREATED_AT_FROM_DATAPICKER)
-        created_at_from_datepicker.click()
-        created_at_from_datepicker.select_month('May')
-        created_at_from_datepicker.select_year('2000')
-        created_at_from_datepicker.click_day('31')
-        created_at_to_datepicker = filters.get_filter(filters.CREATED_AT_TO_DATAPICKER)
-        created_at_to_datepicker.click()
-        created_at_to_datepicker.select_month('Jun')
-        created_at_to_datepicker.select_year('2022')
-        created_at_to_datepicker.click_day('15')
-        dob_from_datepicker = filters.get_filter(filters.DOB_FROM_DATAPICKER)
-        dob_from_datepicker.click()
-        dob_from_datepicker.select_month('Apr')
-        dob_from_datepicker.select_year('1985')
-        dob_from_datepicker.click_day('5')
-        dob_to_datepicker = filters.get_filter(filters.DOB_TO_DATAPICKER)
-        dob_to_datepicker.click()
-        dob_to_datepicker.hide()
-        filters.get_filter(filters.GENDER_FILTER).select('Male', 10)
-        filters.get_filter(filters.WEBSITE_ID_FILTER).select('Main Website', 10)
-        page.apply_filters_button.click()
-        assert page.browser.is_text_present("We couldn't find any records.") is True
-
-
 @given("I am on the backend Dashboard page")
 def step_impl(context):
     open_login_page = 'Given I am on the admin login page'

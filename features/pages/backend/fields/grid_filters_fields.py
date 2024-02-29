@@ -4,7 +4,8 @@ from features.core_config.backend.backend_locators import (STRATEGY_KEY,
                                                            GRID_DATEPICKER_FILTER_YEAR_SELECT_LOCATOR,
                                                            GRID_DATEPICKER_FILTER_DAY_LINK_LOCATOR,
                                                            GRID_DATEPICKER_GO_TO_TODAY_BUTTON_LOCATOR,
-                                                           GRID_DATEPICKER_HIDE_BUTTON_LOCATOR)
+                                                           GRID_DATEPICKER_HIDE_BUTTON_LOCATOR,
+                                                           GRID_DATEPICKER_TODAY_DAY_LINK_LOCATOR)
 from stere.fields import Input, Button, Dropdown, Link
 
 
@@ -26,6 +27,8 @@ class DatepickerFilter(Button):
         )
         self.go_to_today_button = Button(GRID_DATEPICKER_GO_TO_TODAY_BUTTON_LOCATOR[STRATEGY_KEY],
                                          GRID_DATEPICKER_GO_TO_TODAY_BUTTON_LOCATOR[LOCATOR_KEY])
+        self.today_day = Link(GRID_DATEPICKER_TODAY_DAY_LINK_LOCATOR[STRATEGY_KEY],
+                              GRID_DATEPICKER_TODAY_DAY_LINK_LOCATOR[LOCATOR_KEY])
         self.hide_button = Button(GRID_DATEPICKER_HIDE_BUTTON_LOCATOR[STRATEGY_KEY],
                                   GRID_DATEPICKER_HIDE_BUTTON_LOCATOR[LOCATOR_KEY])
 
@@ -43,6 +46,7 @@ class DatepickerFilter(Button):
 
     def go_to_today(self) -> None:
         self.go_to_today_button.click()
+        self.today_day.click()
 
     def hide(self) -> None:
         self.hide_button.click()
