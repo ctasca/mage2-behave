@@ -11,16 +11,16 @@ class MarketingSubmenu(Area):
         super().__init__(*args, **kwargs)
         self.root = Root(bl.ADMIN_MENU_ROOT[STRATEGY_KEY], bl.ADMIN_MENU_ROOT[LOCATOR_KEY])
         self.catalog_price_rule = SubmenuLink(bl.MARKETING_SUBMENU_CATALOG_PRICE_RULE_LINK_LOCATOR[STRATEGY_KEY],
-                                                   bl.MARKETING_SUBMENU_CATALOG_PRICE_RULE_LINK_LOCATOR[LOCATOR_KEY])
+                                              bl.MARKETING_SUBMENU_CATALOG_PRICE_RULE_LINK_LOCATOR[LOCATOR_KEY])
         self.cart_price_rules = SubmenuLink(bl.MARKETING_SUBMENU_CART_PRICE_RULES_LINK_LOCATOR[STRATEGY_KEY],
-                                               bl.MARKETING_SUBMENU_CART_PRICE_RULES_LINK_LOCATOR[LOCATOR_KEY])
+                                            bl.MARKETING_SUBMENU_CART_PRICE_RULES_LINK_LOCATOR[LOCATOR_KEY])
         self.email_templates = SubmenuLink(bl.MARKETING_SUBMENU_EMAIL_TEMPLATES_LINK_LOCATOR[STRATEGY_KEY],
-                                              bl.MARKETING_SUBMENU_EMAIL_TEMPLATES_LINK_LOCATOR[LOCATOR_KEY])
+                                           bl.MARKETING_SUBMENU_EMAIL_TEMPLATES_LINK_LOCATOR[LOCATOR_KEY])
         self.newsletter_templates = SubmenuLink(
             bl.MARKETING_SUBMENU_NEWSLETTER_TEMPLATES_LINK_LOCATOR[STRATEGY_KEY],
             bl.MARKETING_SUBMENU_NEWSLETTER_TEMPLATES_LINK_LOCATOR[LOCATOR_KEY])
         self.newsletter_queue = SubmenuLink(bl.MARKETING_SUBMENU_NEWSLETTER_QUEUE_LINK_LOCATOR[STRATEGY_KEY],
-                                                bl.MARKETING_SUBMENU_NEWSLETTER_QUEUE_LINK_LOCATOR[LOCATOR_KEY])
+                                            bl.MARKETING_SUBMENU_NEWSLETTER_QUEUE_LINK_LOCATOR[LOCATOR_KEY])
         self.newsletter_subscribers = SubmenuLink(
             bl.MARKETING_SUBMENU_NEWSLETTER_SUBSCIBERS_LINK_LOCATOR[STRATEGY_KEY],
             bl.MARKETING_SUBMENU_NEWSLETTER_SUBSCIBERS_LINK_LOCATOR[LOCATOR_KEY])
@@ -29,13 +29,13 @@ class MarketingSubmenu(Area):
         self.search_terms = SubmenuLink(bl.MARKETING_SUBMENU_SEARCH_TERMS_LINK_LOCATOR[STRATEGY_KEY],
                                         bl.MARKETING_SUBMENU_SEARCH_TERMS_LINK_LOCATOR[LOCATOR_KEY])
         self.search_synonyms = SubmenuLink(bl.MARKETING_SUBMENU_SEARCH_SYNONYMS_LINK_LOCATOR[STRATEGY_KEY],
-                                              bl.MARKETING_SUBMENU_SEARCH_SYNONYMS_LINK_LOCATOR[LOCATOR_KEY])
+                                           bl.MARKETING_SUBMENU_SEARCH_SYNONYMS_LINK_LOCATOR[LOCATOR_KEY])
         self.site_map = SubmenuLink(bl.MARKETING_SUBMENU_SITE_MAP_LINK_LOCATOR[STRATEGY_KEY],
-                                bl.MARKETING_SUBMENU_SITE_MAP_LINK_LOCATOR[LOCATOR_KEY])
+                                    bl.MARKETING_SUBMENU_SITE_MAP_LINK_LOCATOR[LOCATOR_KEY])
         self.all_reviews = SubmenuLink(bl.MARKETING_SUBMENU_ALL_REVIEWS_LINK_LOCATOR[STRATEGY_KEY],
-                                      bl.MARKETING_SUBMENU_ALL_REVIEWS_LINK_LOCATOR[LOCATOR_KEY])
+                                       bl.MARKETING_SUBMENU_ALL_REVIEWS_LINK_LOCATOR[LOCATOR_KEY])
         self.pending_reviews = SubmenuLink(bl.MARKETING_SUBMENU_PENDING_REVIEWS_LINK_LOCATOR[STRATEGY_KEY],
-                                              bl.MARKETING_SUBMENU_PENDING_REVIEWS_LINK_LOCATOR[LOCATOR_KEY])
+                                           bl.MARKETING_SUBMENU_PENDING_REVIEWS_LINK_LOCATOR[LOCATOR_KEY])
 
     def links(self) -> List[Link]:
         return [

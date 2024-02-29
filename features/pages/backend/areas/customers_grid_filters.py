@@ -61,7 +61,7 @@ class CustomersGridFilters(Area):
                                           bl.CUSTOMERS_DOB_FROM_INPUT_FILTER_LOCATOR[LOCATOR_KEY])
         self.dob_from_datapicker = DatepickerFilter(bl.GRID_DATEPICKER_BUTTON_LOCATOR[STRATEGY_KEY],
                                                     bl.GRID_DATEPICKER_BUTTON_LOCATOR[LOCATOR_KEY].format(
-                                                             'dob[from]'))
+                                                        'dob[from]'))
         self.dob_to_input = InputFilter(bl.CUSTOMERS_DOB_TO_INPUT_FILTER_LOCATOR[STRATEGY_KEY],
                                         bl.CUSTOMERS_DOB_TO_INPUT_FILTER_LOCATOR[LOCATOR_KEY])
         self.dob_to_datapicker = DatepickerFilter(bl.GRID_DATEPICKER_BUTTON_LOCATOR[STRATEGY_KEY],

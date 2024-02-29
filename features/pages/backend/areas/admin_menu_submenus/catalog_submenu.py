@@ -11,9 +11,9 @@ class CatalogSubmenu(Area):
         super().__init__(*args, **kwargs)
         self.root = Root(bl.ADMIN_MENU_ROOT[STRATEGY_KEY], bl.ADMIN_MENU_ROOT[LOCATOR_KEY])
         self.products = SubmenuLink(bl.CATALOG_SUBMENU_PRODUCTS_LINK_LOCATOR[STRATEGY_KEY],
-                                 bl.CATALOG_SUBMENU_PRODUCTS_LINK_LOCATOR[LOCATOR_KEY])
+                                    bl.CATALOG_SUBMENU_PRODUCTS_LINK_LOCATOR[LOCATOR_KEY])
         self.categories = SubmenuLink(bl.CATALOG_SUBMENU_CATEGORIES_LINK_LOCATOR[STRATEGY_KEY],
-                                     bl.CATALOG_SUBMENU_CATEGORIES_LINK_LOCATOR[LOCATOR_KEY])
+                                      bl.CATALOG_SUBMENU_CATEGORIES_LINK_LOCATOR[LOCATOR_KEY])
 
     def links(self) -> List[Link]:
         return [
