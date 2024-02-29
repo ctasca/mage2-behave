@@ -1,6 +1,7 @@
 from behave import *
 from features.pages.backend.dashboard import Dashboard
 from features.pages.backend.customers_grid import CustomersGrid
+from features.pages.backend.sales_orders_grid import SalesOrdersGrid
 from features.core_config.backend.backend_locators import (SALES_SUBMENU, CATALOG_SUBMENU, CUSTOMERS_SUBMENU,
                                                            MARKETING_SUBMENU, CONTENT_SUBMENU, REPORTS_SUBMENU,
                                                            STORES_SUBMENU, SYSTEM_SUBMENU)
@@ -139,14 +140,15 @@ def step_impl(context):
         assert page.browser.is_text_present("We couldn't find any records.") is True
 
 
-@step("I want to be able to reset the applied filters")
+@then("I want to be able to reset the applied filters")
 def step_impl(context):
     with CustomersGrid() as page:
         filters = page.customers_grid_filters
         filters.clear_all()
         assert filters.get_root().is_not_visible(10) is True
 
-@then(u'I want to be able to apply filters for searching purposes')
+
+@then(u'I want to be able to apply filters to customers for searching purposes')
 def step_impl(context):
     with CustomersGrid() as page:
         page.filters_button.click()
@@ -175,3 +177,27 @@ def step_impl(context):
         filters.get_filter(filters.WEBSITE_ID_FILTER).select('Main Website', 10)
         page.apply_filters_button.click()
         assert page.browser.is_text_present("We couldn't find any records.") is True
+
+
+@then("I want to be able to apply filters to orders for searching purposes")
+def step_impl(context):
+    with SalesOrdersGrid() as page:
+        page.filters_button.click()
+        filters = page.orders_grid_filters
+        created_at_from_datepicker = filters.get_filter(filters.CREATED_AT_FROM_DATAPICKER)
+        created_at_from_datepicker.click()
+        created_at_from_datepicker.select_month('May')
+        created_at_from_datepicker.select_year('2000')
+        created_at_from_datepicker.click_day('31')
+        created_at_to_datepicker = filters.get_filter(filters.CREATED_AT_TO_DATAPICKER)
+        created_at_to_datepicker.click()
+        created_at_to_datepicker.go_to_today()
+        base_grand_total_from = filters.get_filter(filters.BASE_GRAND_TOTAL_FROM)
+        base_grand_total_from.fill(100)
+        base_grand_total_to = filters.get_filter(filters.BASE_GRAND_TOTAL_TO)
+        base_grand_total_to.fill(200)
+        purchased_grand_total_from = filters.get_filter(filters.PURCHASED_GRAND_TOTAL_FROM)
+        purchased_grand_total_from.fill(300)
+        purchased_grand_total_to = filters.get_filter(filters.PURCHASED_GRAND_TOTAL_TO)
+        purchased_grand_total_to.fill(400)
+        page.apply_filters_button.click()

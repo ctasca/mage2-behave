@@ -3,7 +3,9 @@ import time
 from behave import *
 from features.pages.backend.login import Login
 from features.pages.backend.dashboard import Dashboard
-from features.pages.backend.customers_grid import CustomersGrid
+from features.core_config.backend.backend_locators import (SALES_SUBMENU, CATALOG_SUBMENU, CUSTOMERS_SUBMENU,
+                                                           MARKETING_SUBMENU, CONTENT_SUBMENU, REPORTS_SUBMENU,
+                                                           STORES_SUBMENU, SYSTEM_SUBMENU)
 
 
 @given(u'I am on the admin login page')
@@ -48,7 +50,7 @@ def step_impl(context):
 def step_impl(context):
     with Dashboard() as page:
         page.admin_menu.customers.click()
-        page.admin_menu.submenus['customers'].all_customers.click()
+        page.admin_menu.submenu(CUSTOMERS_SUBMENU).all_customers.click()
 
 
 @then(u'I should be viewing the customer grid')
@@ -81,3 +83,10 @@ def step_impl(context):
     with Dashboard() as page:
         assert page.reload_data_button.is_visible(10)
         page.reload_data_button.click()
+
+
+@when("I am on the sales orders grid")
+def step_impl(context):
+    with Dashboard() as page:
+        page.admin_menu.sales.click()
+        page.admin_menu.submenu(SALES_SUBMENU).orders.click()

@@ -114,7 +114,16 @@ Feature: As a mage2-behave developer I want to test the functionality of my code
     Scenario: Admin can view the customers grid and click the filters button
         Given I am logged in the backend
         When I am on the all customers grid
-        Then I want to be able to apply filters for searching purposes
+        Then I want to be able to apply filters to customers for searching purposes
+        And I want to be able to reset the applied filters
+
+    @backend
+    @backend.grid.filters
+    @fixture.splinter.browser.chrome
+    Scenario: Admin can view the customers grid and click the filters button
+        Given I am logged in the backend
+        When I am on the sales orders grid
+        Then I want to be able to apply filters to orders for searching purposes
         And I want to be able to reset the applied filters
 
     @backend
