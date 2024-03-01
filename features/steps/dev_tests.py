@@ -135,8 +135,8 @@ def step_impl(context):
 @then("I want to be able to use the search fulltext input to filter the grid")
 def step_impl(context):
     with CustomersGrid() as page:
-        page.fulltext_search_input.fill('search text')
-        page.fulltext_search_button.click()
+        filters = page.customers_grid_filters
+        filters.fulltext_search('text')
         assert page.browser.is_text_present("We couldn't find any records.") is True
 
 
@@ -151,8 +151,8 @@ def step_impl(context):
 @then(u'I want to be able to apply filters to customers for searching purposes')
 def step_impl(context):
     with CustomersGrid() as page:
-        page.filters_button.click()
         filters = page.customers_grid_filters
+        filters.start_filtering()
         filters.get_filter(filters.FROM_ID_FILTER).fill(10)
         filters.get_filter(filters.TO_ID_FILTER).fill(20)
         filters.get_filter(filters.EMAIL_FILTER).fill('test@test.com')
@@ -175,14 +175,14 @@ def step_impl(context):
         dob_to_datepicker.hide()
         filters.get_filter(filters.GENDER_FILTER).select('Male', 10)
         filters.get_filter(filters.WEBSITE_ID_FILTER).select('Main Website', 10)
-        page.apply_filters_button.click()
+        filters.apply_filters()
 
 
 @then("I want to be able to apply filters to orders for searching purposes")
 def step_impl(context):
     with SalesOrdersGrid() as page:
-        page.filters_button.click()
         filters = page.orders_grid_filters
+        filters.start_filtering()
         created_at_from_datepicker = filters.get_filter(filters.CREATED_AT_FROM_DATAPICKER)
         created_at_from_datepicker.click()
         created_at_from_datepicker.select_month('May')
@@ -199,4 +199,4 @@ def step_impl(context):
         purchased_grand_total_from.fill(300)
         purchased_grand_total_to = filters.get_filter(filters.PURCHASED_GRAND_TOTAL_TO)
         purchased_grand_total_to.fill(400)
-        page.apply_filters_button.click()
+        filters.apply_filters()

@@ -228,6 +228,9 @@ GRID_DATEPICKER_HIDE_BUTTON_LOCATOR: Dict[str, str] = \
     {STRATEGY_KEY: XPATH_STRATEGY, LOCATOR_KEY: "//button[@data-handler='hide']"}
 GRID_CLEAR_ALL_FILTERS_BUTTON_LOCATOR: Dict[str, str] = \
     {STRATEGY_KEY: XPATH_STRATEGY, LOCATOR_KEY: "(//button[@data-action=\"grid-filter-reset\"])[1]"}
+GRID_ACTIONS_BUTTON_LOCATOR: Dict[str, str] = {
+    STRATEGY_KEY: XPATH_STRATEGY,
+    LOCATOR_KEY: "(//button[@data-bind=\"attr: {title: $t('Select Items')}, click: toggleOpened\"])[1]"}
 # Dashboard page
 DASHBOARD_RELOAD_DATA_BUTTON_LOCATOR: Dict[str, str] = \
     {STRATEGY_KEY: XPATH_STRATEGY, LOCATOR_KEY: "//button[@title=\"Reload Data\"]"}

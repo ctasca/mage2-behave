@@ -12,10 +12,11 @@ def docker_client_from_env() -> DockerClient:
 
 def container_id_search(search: str) -> str:
     """ Performs a search to find the container ID from the environment """
+    pattern = re.compile(rf".*{search}(?!-debug).*")
     docker_client = docker_client_from_env()
     containers = docker_client.containers.list()
     for container in containers:
-        if re.search(search, container.name):
+        if pattern.match(container.name):
             return container.id
     raise Exception("No {} container match".format(search))
 
