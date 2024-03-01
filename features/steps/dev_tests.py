@@ -1,3 +1,5 @@
+import time
+
 from behave import *
 from features.pages.backend.dashboard import Dashboard
 from features.pages.backend.customers_grid import CustomersGrid
@@ -200,3 +202,61 @@ def step_impl(context):
         purchased_grand_total_to = filters.get_filter(filters.PURCHASED_GRAND_TOTAL_TO)
         purchased_grand_total_to.fill(400)
         filters.apply_filters()
+
+
+@then("I want to be able to click the actions button")
+def step_impl(context):
+    with CustomersGrid() as page:
+        page.grid_actions.click_actions_button()
+
+
+@step("I want to choose the action I want to perform")
+def step_impl(context):
+    with CustomersGrid() as page:
+        page.grid_actions.click_action('Delete')
+
+
+@step("if I have not selected a grid item")
+def step_impl(context):
+    pass
+
+
+@then("I should see a warning modal window")
+def step_impl(context):
+    with CustomersGrid() as page:
+        assert page.browser.is_text_present('Attention')
+        assert page.modal.ok_button.is_visible(10) is True
+        page.modal.click_ok_button()
+
+
+@step("I select the first row")
+def step_impl(context):
+    with CustomersGrid() as page:
+        page.grid_rows.click_row_checkbox(1)
+
+
+@step("I choose the Delete action")
+def step_impl(context):
+    with CustomersGrid() as page:
+        page.grid_actions.click_actions_button()
+        page.grid_actions.click_action('Delete')
+
+
+@then("I should see a confirmation modal window")
+def step_impl(context):
+    with CustomersGrid() as page:
+        assert page.browser.is_text_present('Are you sure you want to delete the selected customers?')
+        assert page.modal.cancel_button.is_visible(10) is True
+
+
+@step("I want to cancel the action")
+def step_impl(context):
+    with CustomersGrid() as page:
+        page.modal.click_cancel_button()
+
+
+@step("I choose the Cancel action")
+def step_impl(context):
+    with SalesOrdersGrid() as page:
+        page.grid_actions.click_actions_button()
+        page.grid_actions.click_action('Cancel')

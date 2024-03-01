@@ -197,6 +197,11 @@ STORE_CHANGE_BUTTON_LINK_LOCATOR: Dict[str, str] = {STRATEGY_KEY: ID_STRATEGY, L
 STORE_SCOPE_LIST_ROOT_LOCATOR: Dict[str, str] = \
     {STRATEGY_KEY: XPATH_STRATEGY, LOCATOR_KEY: "//ul[@data-role='stores-list']"}
 SET_STORE_SCOPE_LOCATOR_FORMAT: str = "//a[contains(text(), '{}')]"
+# Modals
+MODAL_OK_BUTTON_LOCATOR: Dict[str, str] = \
+    {STRATEGY_KEY: XPATH_STRATEGY, LOCATOR_KEY: "//button[@data-role='action' and contains(@class, 'action-accept')]"}
+MODAL_CANCEL_BUTTON_LOCATOR: Dict[str, str] = \
+    {STRATEGY_KEY: XPATH_STRATEGY, LOCATOR_KEY: "//button[@data-role='action' and contains(@class, 'action-dismiss')]"}
 # Grids
 GRID_FILTER_BUTTON_LOCATOR: Dict[str, str] = \
     {STRATEGY_KEY: XPATH_STRATEGY, LOCATOR_KEY: "(//div[@class=\"data-grid-filters-action-wrap\"]//button["
@@ -231,6 +236,15 @@ GRID_CLEAR_ALL_FILTERS_BUTTON_LOCATOR: Dict[str, str] = \
 GRID_ACTIONS_BUTTON_LOCATOR: Dict[str, str] = {
     STRATEGY_KEY: XPATH_STRATEGY,
     LOCATOR_KEY: "(//button[@data-bind=\"attr: {title: $t('Select Items')}, click: toggleOpened\"])[1]"}
+GRID_ACTIONS_LIST_ROOT_LOCATOR: Dict[str, str] = \
+    {STRATEGY_KEY: XPATH_STRATEGY, LOCATOR_KEY: "(//ul[@class='action-menu _active'])[1]"}
+GRID_ROWS_ROOT_LOCATOR: Dict[str, str] = \
+    {STRATEGY_KEY: XPATH_STRATEGY, LOCATOR_KEY: "//table[@data-role='grid']//tbody"}
+GRID_ACTION_XPATH_LOCATOR: str = "(./li/span)[1]"
+GRID_ROW_XPATH_LOCATOR: str = "./tr/td"
+GRID_ROW_CHECKBOX_LOCATOR: Dict[str, str] = \
+    {STRATEGY_KEY: XPATH_STRATEGY,
+     LOCATOR_KEY: "(//table[@data-role='grid']//tbody/tr/td/label/input[@data-action='select-row'])[{}]"}
 # Dashboard page
 DASHBOARD_RELOAD_DATA_BUTTON_LOCATOR: Dict[str, str] = \
     {STRATEGY_KEY: XPATH_STRATEGY, LOCATOR_KEY: "//button[@title=\"Reload Data\"]"}

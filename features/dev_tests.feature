@@ -118,6 +118,38 @@ Feature: As a mage2-behave developer I want to test the functionality of my code
         And I want to be able to reset the applied filters
 
     @backend
+    @backend.grid.actions
+    @fixture.splinter.browser.chrome.headless
+    Scenario: Admin can view the customers grid and perform actions
+        Given I am logged in the backend
+        When I am on the all customers grid
+        Then I want to be able to click the actions button
+        And I want to choose the action I want to perform
+        But if I have not selected a grid item
+        Then I should see a warning modal window
+
+    @backend
+    @backend.grid.rows
+    @fixture.splinter.browser.chrome.headless
+    Scenario: Admin can view the customers grid and perform actions
+        Given I am logged in the backend
+        When I am on the all customers grid
+        And I select the first row
+        And I choose the Delete action
+        Then I should see a confirmation modal window
+        And I want to cancel the action
+
+    @backend
+    @backend.grid.rows
+    @fixture.splinter.browser.chrome
+    Scenario: Admin can view the sales order grid and choose an action
+        Given I am logged in the backend
+        When I am on the sales orders grid
+        And I choose the Cancel action
+        But if I have not selected a grid item
+        Then I should see a warning modal window
+
+    @backend
     @backend.grid.filters
     @fixture.splinter.browser.chrome.headless
     Scenario: Admin can view the customers grid and click the filters button
