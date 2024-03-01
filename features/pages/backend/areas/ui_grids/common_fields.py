@@ -8,7 +8,7 @@ from stere.areas import Area
 from stere.fields import Button, Input
 
 
-class UiGridInterface(ABC):
+class UiGridFiltersInterface(ABC):
     @abstractmethod
     def get_root(self):
         pass

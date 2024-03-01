@@ -1,12 +1,12 @@
 from stere.areas import Area
 from stere.fields import Root
-from features.pages.backend.areas.ui_grids.common_fields import UiGridInterface, GridCommonFields
+from features.pages.backend.areas.ui_grids.common_fields import UiGridFiltersInterface, GridCommonFields
 from ..fields.grid_filters_fields import InputFilter, SelectFilter, DatepickerFilter
 from features.core_config.locators import STRATEGY_KEY, LOCATOR_KEY
 import features.core_config.backend.backend_locators as bl
 
 
-class SalesOrdersGridFilters(Area, UiGridInterface):
+class SalesOrdersGridFiltersFilters(Area, UiGridFiltersInterface):
     COMMON_FIELDS = 'common_fields'
     FILTERS_BUTTON = 'filters_button'
     FULLTEXT_SEARCH_INPUT = 'fulltext_search_input'
