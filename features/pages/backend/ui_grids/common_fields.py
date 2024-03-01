@@ -4,7 +4,6 @@ from features.pages.backend.fields.grid_fulltext_search_input import GridFulltex
 from features.pages.backend.fields.grid_fulltext_search_button import GridFulltextSearchButton
 from features.pages.backend.fields.grid_apply_filters_button import GridApplyFiltersButton
 from features.pages.backend.fields.grid_clear_all_filters_button import GridActiveFiltersClearAllButton
-from stere.fields import Button, Input
 
 
 class UiGridFiltersInterface(ABC):

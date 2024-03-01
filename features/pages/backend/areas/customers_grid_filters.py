@@ -1,6 +1,6 @@
 from stere.areas import Area
 from stere.fields import Root
-from features.pages.backend.areas.ui_grids.common_fields import UiGridFiltersInterface, GridCommonFields
+from features.pages.backend.ui_grids.common_fields import UiGridFiltersInterface, GridCommonFields
 from ..fields.grid_filters_fields import InputFilter, SelectFilter, DatepickerFilter
 from features.core_config.locators import STRATEGY_KEY, LOCATOR_KEY
 import features.core_config.backend.backend_locators as bl
