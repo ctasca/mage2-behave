@@ -1,13 +1,13 @@
 from stere.areas import Area
 from stere.fields import Root
-from features.pages.backend.ui_grids.common_fields import UiGridFiltersInterface, GridCommonFields
+from features.pages.backend.ui_grids.common_fields import UiGridFiltersInterface, GridCommonFiltersFields
 from ..fields.grid_filters_fields import InputFilter, SelectFilter, DatepickerFilter
 from features.core_config.locators import STRATEGY_KEY, LOCATOR_KEY
 import features.core_config.backend.backend_locators as bl
 
 
-class CustomersGridFiltersFilters(Area, UiGridFiltersInterface):
-    COMMON_FIELDS = 'common_fields'
+class CustomersGridFilters(Area, UiGridFiltersInterface):
+    COMMON_FILTER_FIELDS = 'common_filter_fields'
     FILTERS_BUTTON = 'filters_button'
     FULLTEXT_SEARCH_INPUT = 'fulltext_search_input'
     FULLTEXT_SEARCH_BUTTON = 'fulltext_search_button'
@@ -35,12 +35,12 @@ class CustomersGridFiltersFilters(Area, UiGridFiltersInterface):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.root = Root(bl.GRID_FILTERS_ROOT_LOCATOR[STRATEGY_KEY], bl.GRID_FILTERS_ROOT_LOCATOR[LOCATOR_KEY])
-        self.common_fields = GridCommonFields()
-        self.filters_button = self.common_fields.filters_button
-        self.apply_filters_button = self.common_fields.apply_filters_button
-        self.fulltext_search_input = self.common_fields.fulltext_search_input
-        self.fulltext_search_button = self.common_fields.fulltext_search_button
-        self.clear_all_filters_button = self.common_fields.clear_all_filters_button
+        self.common_filters_fields = GridCommonFiltersFields()
+        self.filters_button = self.common_filters_fields.filters_button
+        self.apply_filters_button = self.common_filters_fields.apply_filters_button
+        self.fulltext_search_input = self.common_filters_fields.fulltext_search_input
+        self.fulltext_search_button = self.common_filters_fields.fulltext_search_button
+        self.clear_all_filters_button = self.common_filters_fields.clear_all_filters_button
         self.from_id_input = InputFilter(bl.CUSTOMERS_FROM_ID_INPUT_FILTER_LOCATOR[STRATEGY_KEY],
                                          bl.CUSTOMERS_FROM_ID_INPUT_FILTER_LOCATOR[LOCATOR_KEY])
         self.to_id_input = InputFilter(bl.CUSTOMERS_TO_ID_INPUT_FILTER_LOCATOR[STRATEGY_KEY],
@@ -89,8 +89,8 @@ class CustomersGridFiltersFilters(Area, UiGridFiltersInterface):
         return self.root
 
     def fulltext_search(self, search_text: str):
-        self.common_fields.fulltext_search_input.fill(search_text)
-        self.common_fields.fulltext_search_button.click()
+        self.common_filters_fields.fulltext_search_input.fill(search_text)
+        self.common_filters_fields.fulltext_search_button.click()
 
     def start_filtering(self):
         self.filters_button.click()
@@ -99,7 +99,7 @@ class CustomersGridFiltersFilters(Area, UiGridFiltersInterface):
         return getattr(self, filter_name)
 
     def apply_filters(self):
-        self.common_fields.apply_filters_button.click()
+        self.common_filters_fields.apply_filters_button.click()
 
     def clear_all(self):
-        self.common_fields.clear_all_filters_button.click()
+        self.common_filters_fields.clear_all_filters_button.click()

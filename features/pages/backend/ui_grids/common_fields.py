@@ -4,6 +4,7 @@ from features.pages.backend.fields.grid_fulltext_search_input import GridFulltex
 from features.pages.backend.fields.grid_fulltext_search_button import GridFulltextSearchButton
 from features.pages.backend.fields.grid_apply_filters_button import GridApplyFiltersButton
 from features.pages.backend.fields.grid_clear_all_filters_button import GridActiveFiltersClearAllButton
+from features.pages.backend.fields.grid_actions_fields import GridActionsButton
 
 
 class UiGridFiltersInterface(ABC):
@@ -32,7 +33,7 @@ class UiGridFiltersInterface(ABC):
         pass
 
 
-class GridCommonFields:
+class GridCommonFiltersFields:
     def __init__(self):
         self.filters_button = GridFiltersButton()
         self.fulltext_search_input = GridFulltextSearchInput()
@@ -40,3 +41,7 @@ class GridCommonFields:
         self.apply_filters_button = GridApplyFiltersButton()
         self.clear_all_filters_button = GridActiveFiltersClearAllButton()
 
+
+class GridCommonActionsFields:
+    def __init__(self):
+        self.actions_button = GridActionsButton()
