@@ -51,6 +51,13 @@ def step_impl(context):
         page.admin_menu.submenu(CUSTOMERS_SUBMENU).all_customers.click()
 
 
+@when(u'I want to view all orders')
+def step_impl(context):
+    with Dashboard() as page:
+        page.admin_menu.sales.click()
+        page.admin_menu.submenu(SALES_SUBMENU).orders.click()
+
+
 @then(u'I should be viewing the customer grid')
 def step_impl(context):
     assert 'customer/' in context.browser.url
@@ -83,8 +90,29 @@ def step_impl(context):
         page.reload_data_button.click()
 
 
-@when("I am on the sales orders grid")
+@given("I am on the all customers grid")
 def step_impl(context):
-    with Dashboard() as page:
-        page.admin_menu.sales.click()
-        page.admin_menu.submenu(SALES_SUBMENU).orders.click()
+    open_login_page = 'Given I am on the admin login page'
+    fill_fields = 'When I enter my credentials'
+    signin = 'And I sign in'
+    view_all_customers_grid = 'When I want to view all my customers'
+    context.execute_steps(f'''
+               {open_login_page}
+               {fill_fields}
+               {signin}
+               {view_all_customers_grid}
+           ''')
+
+
+@given("I am on the sales orders grid")
+def step_impl(context):
+    open_login_page = 'Given I am on the admin login page'
+    fill_fields = 'When I enter my credentials'
+    signin = 'And I sign in'
+    view_sales_order_grid = 'When I want to view all orders'
+    context.execute_steps(f'''
+                   {open_login_page}
+                   {fill_fields}
+                   {signin}
+                   {view_sales_order_grid}
+               ''')

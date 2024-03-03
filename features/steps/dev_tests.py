@@ -232,7 +232,7 @@ def step_impl(context):
 @step("I select the first row")
 def step_impl(context):
     with CustomersGrid() as page:
-        page.grid_rows.click_row_checkbox(1)
+        page.grid_rows.click_row_checkbox(1, True)
 
 
 @step("I choose the Delete action")
@@ -260,3 +260,19 @@ def step_impl(context):
     with SalesOrdersGrid() as page:
         page.grid_actions.click_actions_button()
         page.grid_actions.click_action('Cancel')
+
+
+@step("I choose the Assign a Customer Group action")
+def step_impl(context):
+    with CustomersGrid() as page:
+        page.grid_actions.click_actions_button()
+        page.grid_actions.click_action('Assign a Customer Group')
+
+
+@then("I should see an assign customer to group confirmation dialog")
+def step_impl(context):
+    with CustomersGrid() as page:
+        assert page.grid_actions.submenu_actions_list.root.is_visible(10) is True
+        page.grid_actions.click_sub_action('General')
+        assert page.browser.is_text_present('Are you sure to assign selected customers to new group?')
+        page.modal.click_cancel_button()

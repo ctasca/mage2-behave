@@ -6,7 +6,7 @@ from features.pages.backend.fields.grid_fulltext_search_input import GridFulltex
 from features.pages.backend.fields.grid_fulltext_search_button import GridFulltextSearchButton
 from features.pages.backend.fields.grid_apply_filters_button import GridApplyFiltersButton
 from features.pages.backend.fields.grid_clear_all_filters_button import GridActiveFiltersClearAllButton
-from features.pages.backend.fields.grid_actions_fields import GridActionsButton, GridActionsList
+from features.pages.backend.fields.grid_actions_fields import GridActionsButton, GridActionsList, GridSubmenuActionsList
 from features.pages.backend.fields.grid_rows_fields import GridRowsFields
 
 
@@ -41,10 +41,14 @@ class UiGridActionsInterface(ABC):
     def click_action(self, action_name: str):
         pass
 
+    @abstractmethod
+    def click_sub_action(self, action_name: str):
+        pass
+
 
 class UiGridRowsInterface(ABC):
     @abstractmethod
-    def click_row_checkbox(self, row_index: int):
+    def click_row_checkbox(self, row_index: int, set_to: bool):
         pass
 
 
@@ -74,9 +78,11 @@ class GridCommonFiltersFields(UiGridFiltersInterface):
 
 
 class GridCommonActionsFields(UiGridActionsInterface):
+
     def __init__(self):
         self.actions_button = GridActionsButton()
         self.actions_list = GridActionsList()
+        self.submenu_actions_list = GridSubmenuActionsList()
 
     def click_actions_button(self):
         self.actions_button.click()
@@ -84,7 +90,14 @@ class GridCommonActionsFields(UiGridActionsInterface):
     def click_action(self, action_name: str):
         actions = self.actions_list.children()
         for action in actions:
-            if action.action.value_contains(action_name):
+            if action.action.text == action_name:
+                action.action.click()
+                break
+
+    def click_sub_action(self, action_name: str):
+        actions = self.submenu_actions_list.children()
+        for action in actions:
+            if action.action.text == action_name:
                 action.action.click()
                 break
 
@@ -93,7 +106,7 @@ class GridRows(UiGridRowsInterface):
     def __init__(self):
         self.rows = GridRowsFields()
 
-    def click_row_checkbox(self, row_index: int):
+    def click_row_checkbox(self, row_index: int, set_to: bool):
         checkbox = Checkbox(GRID_ROW_CHECKBOX_LOCATOR[STRATEGY_KEY],
                             GRID_ROW_CHECKBOX_LOCATOR[LOCATOR_KEY].format(row_index))
-        checkbox.set_to(True)
+        checkbox.set_to(set_to)

@@ -237,10 +237,12 @@ GRID_ACTIONS_BUTTON_LOCATOR: Dict[str, str] = {
     STRATEGY_KEY: XPATH_STRATEGY,
     LOCATOR_KEY: "(//button[@data-bind=\"attr: {title: $t('Select Items')}, click: toggleOpened\"])[1]"}
 GRID_ACTIONS_LIST_ROOT_LOCATOR: Dict[str, str] = \
-    {STRATEGY_KEY: XPATH_STRATEGY, LOCATOR_KEY: "(//ul[@class='action-menu _active'])[1]"}
+    {STRATEGY_KEY: XPATH_STRATEGY, LOCATOR_KEY: "(//ul[@class='action-menu _active'])[1]/li"}
+GRID_ACTION_XPATH_LOCATOR: str = "./span"
+GRID_ACTIONS_SUBMENU_ROOT_LOCATOR: Dict[str, str] = {STRATEGY_KEY: XPATH_STRATEGY, LOCATOR_KEY: '(//ul[@class="action-submenu _active"])[1]/li'}
+GRID_ACTIONS_SUBMENU_XPATH_LOCATOR: str = "./span"
 GRID_ROWS_ROOT_LOCATOR: Dict[str, str] = \
-    {STRATEGY_KEY: XPATH_STRATEGY, LOCATOR_KEY: "//table[@data-role='grid']//tbody"}
-GRID_ACTION_XPATH_LOCATOR: str = "(./li/span)[1]"
+    {STRATEGY_KEY: XPATH_STRATEGY, LOCATOR_KEY: "//table[@data-role='grid']//tbody//tr//td"}
 GRID_ROW_XPATH_LOCATOR: str = "./tr/td"
 GRID_ROW_CHECKBOX_LOCATOR: Dict[str, str] = \
     {STRATEGY_KEY: XPATH_STRATEGY,
