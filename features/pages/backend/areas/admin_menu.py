@@ -46,3 +46,6 @@ class AdminMenu(Area):
 
     def submenu(self, key: str):
         return self.submenus[key]
+
+    def get_link(self, link: str):
+        return getattr(self, link)

@@ -13,21 +13,21 @@ from features.core_config.backend.backend_locators import (SALES_SUBMENU, CATALO
 def step_impl(context, item):
     with Dashboard() as page:
         if item == 'Sales':
-            page.admin_menu.sales.click()
+            page.admin_menu.get_link('sales').click()
         if item == 'Catalog':
-            page.admin_menu.catalog.click()
+            page.admin_menu.get_link('catalog').click()
         if item == 'Customers':
-            page.admin_menu.customers.click()
+            page.admin_menu.get_link('customers').click()
         if item == 'Marketing':
-            page.admin_menu.marketing.click()
+            page.admin_menu.get_link('marketing').click()
         if item == 'Content':
-            page.admin_menu.content.click()
+            page.admin_menu.get_link('content').click()
         if item == 'Reports':
-            page.admin_menu.reports.click()
+            page.admin_menu.get_link('reports').click()
         if item == 'Stores':
-            page.admin_menu.stores.click()
+            page.admin_menu.get_link('stores').click()
         if item == 'System':
-            page.admin_menu.system.click()
+            page.admin_menu.get_link('system').click()
 
 
 @then(u'I should see the "{item}" submenu links')
