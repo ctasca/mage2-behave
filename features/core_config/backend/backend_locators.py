@@ -305,3 +305,5 @@ ORDERS_PURCHASED_GRAND_TOTAL_FROM_INPUT_FILTER_LOCATOR: Dict[str, str] = \
     {STRATEGY_KEY: XPATH_STRATEGY, LOCATOR_KEY: "//input[@name=\"grand_total[from]\"]"}
 ORDERS_PURCHASED_GRAND_TOTAL_TO_INPUT_FILTER_LOCATOR: Dict[str, str] = \
     {STRATEGY_KEY: XPATH_STRATEGY, LOCATOR_KEY: "//input[@name=\"grand_total[to]\"]"}
+ORDERS_PURCHASE_POINT_SELECT_FILTER_LOCATOR: Dict[str, str] = \
+    {STRATEGY_KEY: XPATH_STRATEGY, LOCATOR_KEY: "//select[@name=\"store_id\"]"}

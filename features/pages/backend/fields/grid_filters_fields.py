@@ -1,3 +1,7 @@
+import time
+from stere import Stere
+from typing import Optional, List
+from stere.fields.decorators import use_after, use_before
 from features.core_config.backend.backend_locators import (STRATEGY_KEY,
                                                            LOCATOR_KEY,
                                                            GRID_DATEPICKER_FILTER_MONTH_SELECT_LOCATOR,
@@ -55,3 +59,30 @@ class DatepickerFilter(Button):
 class SelectFilter(Dropdown):
     def __init__(self, strategy: str, locator: str, *args, **kwargs):
         super().__init__(strategy, locator, *args, **kwargs)
+
+    @use_after
+    @use_before
+    def select(self, value: str, retry_time: Optional[int] = None) -> None:
+        retry_time = retry_time or Stere.retry_time
+        end_time = time.time() + retry_time
+
+        found_options = []
+
+        while time.time() < end_time:
+            found_options = self._select(value)
+            if not len(found_options):
+                return
+
+        raise ValueError(
+            f'{value} was not found. Found values are: {found_options}')
+
+    def _select(self, value: str) -> List[str]:
+        found_options = []
+
+        for option in self.options:
+            found_options.append(option.html.strip())
+            if option.html.strip() == value:
+                option.click()
+                return []
+
+        return found_options

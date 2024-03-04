@@ -199,6 +199,8 @@ def step_impl(context):
         purchased_grand_total_from.fill(300)
         purchased_grand_total_to = filters.get_filter(filters.PURCHASED_GRAND_TOTAL_TO)
         purchased_grand_total_to.fill(400)
+        purchase_point = filters.get_filter(filters.PURCHASE_POINT)
+        purchase_point.select('Default Store View')
         filters.apply_filters()
 
 

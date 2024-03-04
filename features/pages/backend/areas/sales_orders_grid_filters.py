@@ -1,7 +1,7 @@
 from stere.areas import Area
 from stere.fields import Root
 from features.pages.backend.ui_grids.common_fields import UiGridFiltersInterface, GridCommonFiltersFields
-from ..fields.grid_filters_fields import InputFilter, DatepickerFilter
+from ..fields.grid_filters_fields import InputFilter, DatepickerFilter, SelectFilter
 from features.core_config.locators import STRATEGY_KEY, LOCATOR_KEY
 import features.core_config.backend.backend_locators as bl
 
@@ -19,6 +19,7 @@ class SalesOrdersGridFilters(Area, UiGridFiltersInterface):
     BASE_GRAND_TOTAL_TO = 'base_grand_total_to'
     PURCHASED_GRAND_TOTAL_FROM = 'purchased_grand_total_from'
     PURCHASED_GRAND_TOTAL_TO = 'purchased_grand_total_to'
+    PURCHASE_POINT = 'purchase_point'
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -49,6 +50,8 @@ class SalesOrdersGridFilters(Area, UiGridFiltersInterface):
         self.purchased_grand_total_to = InputFilter(
             bl.ORDERS_PURCHASED_GRAND_TOTAL_TO_INPUT_FILTER_LOCATOR[STRATEGY_KEY],
             bl.ORDERS_PURCHASED_GRAND_TOTAL_TO_INPUT_FILTER_LOCATOR[LOCATOR_KEY])
+        self.purchase_point = SelectFilter(bl.ORDERS_PURCHASE_POINT_SELECT_FILTER_LOCATOR[STRATEGY_KEY],
+                                           bl.ORDERS_PURCHASE_POINT_SELECT_FILTER_LOCATOR[LOCATOR_KEY])
 
     def get_root(self):
         return self.root

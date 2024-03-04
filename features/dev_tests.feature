@@ -110,7 +110,7 @@ Feature: As a mage2-behave developer I want to test the functionality of my code
     @backend
     @backend.grid.filters
     @fixture.splinter.browser.chrome.headless
-    Scenario: Admin can view the customers grid and click the filters button
+    Scenario: Admin can view the customers grid and apply filters
         Given I am on the all customers grid
         Then I want to be able to apply filters to customers for searching purposes
         And I want to be able to reset the applied filters
@@ -127,8 +127,8 @@ Feature: As a mage2-behave developer I want to test the functionality of my code
 
     @backend
     @backend.grid.rows
-    @fixture.splinter.browser.chrome
-    Scenario: Admin can view the customers grid, select rows checkboxes perform actions
+    @fixture.splinter.browser.chrome.headless
+    Scenario: Admin can view the customers grid, select rows checkboxes and perform actions
         Given I am on the all customers grid
         And I select the first row
         And I choose the Delete action
@@ -137,7 +137,7 @@ Feature: As a mage2-behave developer I want to test the functionality of my code
 
     @backend
     @backend.grid.actions.submenu
-    @fixture.splinter.browser.chrome
+    @fixture.splinter.browser.chrome.headless
     Scenario: Admin can view the customers grid and perform actions with a submenu
         Given I am on the all customers grid
         And I select the first row
@@ -156,15 +156,15 @@ Feature: As a mage2-behave developer I want to test the functionality of my code
 
     @backend
     @backend.grid.rows
-    @fixture.splinter.browser.chrome
-    Scenario: Admin can view the customers grid and perform actions
+    @fixture.splinter.browser.chrome.headless
+    Scenario: Admin can view the customers grid and select a row in the grid
         Given I am on the sales orders grid
         Then I want to select the second row
 
     @backend
     @backend.grid.filters
     @fixture.splinter.browser.chrome.headless
-    Scenario: Admin can view the customers grid and click the filters button
+    Scenario: Admin can view the sales orders grid and apply filters
        Given I am on the sales orders grid
         Then I want to be able to apply filters to orders for searching purposes
         And I want to be able to reset the applied filters
