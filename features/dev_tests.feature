@@ -57,7 +57,6 @@ Feature: As a mage2-behave developer I want to test the functionality of my code
         When I click the "Customers" menu item
         Then I should see the "Customers" submenu links
 
-        @wip
     @backend
     @fixture.splinter.browser.chrome.headless
     Scenario: Admin login and click the Marketing menu item
@@ -128,8 +127,8 @@ Feature: As a mage2-behave developer I want to test the functionality of my code
 
     @backend
     @backend.grid.rows
-    @fixture.splinter.browser.chrome.headless
-    Scenario: Admin can view the customers grid and perform actions
+    @fixture.splinter.browser.chrome
+    Scenario: Admin can view the customers grid, select rows checkboxes perform actions
         Given I am on the all customers grid
         And I select the first row
         And I choose the Delete action
@@ -153,6 +152,14 @@ Feature: As a mage2-behave developer I want to test the functionality of my code
         And I choose the Cancel action
         But if I have not selected a grid item
         Then I should see a warning modal window
+
+
+    @backend
+    @backend.grid.rows
+    @fixture.splinter.browser.chrome
+    Scenario: Admin can view the customers grid and perform actions
+        Given I am on the sales orders grid
+        Then I want to select the second row
 
     @backend
     @backend.grid.filters

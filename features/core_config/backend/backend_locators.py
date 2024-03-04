@@ -239,14 +239,15 @@ GRID_ACTIONS_BUTTON_LOCATOR: Dict[str, str] = {
 GRID_ACTIONS_LIST_ROOT_LOCATOR: Dict[str, str] = \
     {STRATEGY_KEY: XPATH_STRATEGY, LOCATOR_KEY: "(//ul[@class='action-menu _active'])[1]/li"}
 GRID_ACTION_XPATH_LOCATOR: str = "./span"
-GRID_ACTIONS_SUBMENU_ROOT_LOCATOR: Dict[str, str] = {STRATEGY_KEY: XPATH_STRATEGY, LOCATOR_KEY: '(//ul[@class="action-submenu _active"])[1]/li'}
+GRID_ACTIONS_SUBMENU_ROOT_LOCATOR: Dict[str, str] = \
+    {STRATEGY_KEY: XPATH_STRATEGY, LOCATOR_KEY: '(//ul[@class="action-submenu _active"])[1]/li'}
 GRID_ACTIONS_SUBMENU_XPATH_LOCATOR: str = "./span"
 GRID_ROWS_ROOT_LOCATOR: Dict[str, str] = \
-    {STRATEGY_KEY: XPATH_STRATEGY, LOCATOR_KEY: "//table[@data-role='grid']//tbody//tr//td"}
-GRID_ROW_XPATH_LOCATOR: str = "./tr/td"
-GRID_ROW_CHECKBOX_LOCATOR: Dict[str, str] = \
+    {STRATEGY_KEY: XPATH_STRATEGY, LOCATOR_KEY: "//main[@id='anchor-content']//table[@data-role='grid']/tbody/tr"}
+GRID_ROW_CHECKBOX_LOCATOR: str = "./td[1]/label/input[@data-action='select-row']"
+GRID_LOADING_MASK_LOCATOR: Dict[str, str] = \
     {STRATEGY_KEY: XPATH_STRATEGY,
-     LOCATOR_KEY: "(//table[@data-role='grid']//tbody/tr/td/label/input[@data-action='select-row'])[{}]"}
+     LOCATOR_KEY: "//main[@id='anchor-content']//div[@class='admin__data-grid-loading-mask']"}
 # Dashboard page
 DASHBOARD_RELOAD_DATA_BUTTON_LOCATOR: Dict[str, str] = \
     {STRATEGY_KEY: XPATH_STRATEGY, LOCATOR_KEY: "//button[@title=\"Reload Data\"]"}

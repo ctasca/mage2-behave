@@ -1,6 +1,6 @@
 from abc import ABC, abstractmethod
-from stere.fields import Checkbox
-from features.core_config.backend.backend_locators import STRATEGY_KEY, LOCATOR_KEY, GRID_ROW_CHECKBOX_LOCATOR
+from stere.fields import Field
+from features.core_config.backend.backend_locators import STRATEGY_KEY, LOCATOR_KEY, GRID_LOADING_MASK_LOCATOR
 from features.pages.backend.fields.grid_filters_button import GridFiltersButton
 from features.pages.backend.fields.grid_fulltext_search_input import GridFulltextSearchInput
 from features.pages.backend.fields.grid_fulltext_search_button import GridFulltextSearchButton
@@ -105,8 +105,11 @@ class GridCommonActionsFields(UiGridActionsInterface):
 class GridRows(UiGridRowsInterface):
     def __init__(self):
         self.rows = GridRowsFields()
+        self.spinner = Field(GRID_LOADING_MASK_LOCATOR[STRATEGY_KEY], GRID_LOADING_MASK_LOCATOR[LOCATOR_KEY])
+
+    def wait_for_spinner(self):
+        assert self.spinner.is_not_visible(20) is True
 
     def click_row_checkbox(self, row_index: int, set_to: bool):
-        checkbox = Checkbox(GRID_ROW_CHECKBOX_LOCATOR[STRATEGY_KEY],
-                            GRID_ROW_CHECKBOX_LOCATOR[LOCATOR_KEY].format(row_index))
-        checkbox.set_to(set_to)
+        checkboxes = self.rows.areas
+        checkboxes[row_index].checkbox.set_to(set_to)

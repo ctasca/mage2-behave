@@ -1,5 +1,3 @@
-import time
-
 from behave import *
 from features.pages.backend.dashboard import Dashboard
 from features.pages.backend.customers_grid import CustomersGrid
@@ -229,9 +227,10 @@ def step_impl(context):
         page.modal.click_ok_button()
 
 
-@step("I select the first row")
+@given("I select the first row")
 def step_impl(context):
     with CustomersGrid() as page:
+        page.grid_rows.wait_for_spinner()
         page.grid_rows.click_row_checkbox(1, True)
 
 
@@ -276,3 +275,10 @@ def step_impl(context):
         page.grid_actions.click_sub_action('General')
         assert page.browser.is_text_present('Are you sure to assign selected customers to new group?')
         page.modal.click_cancel_button()
+
+
+@then("I want to select the second row")
+def step_impl(context):
+    with SalesOrdersGrid() as page:
+        page.grid_rows.wait_for_spinner()
+        page.grid_rows.click_row_checkbox(2, True)
