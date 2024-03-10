@@ -70,8 +70,7 @@ def warden_maria_db_connect(context):
             (ssh_host, ssh_port),
             ssh_username=ssh_user,
             ssh_pkey=pkey,
-            remote_bind_address=(remote_db_host, int(context.db_port)),
-            set_keepalive=100000
+            remote_bind_address=(remote_db_host, int(context.db_port))
         )
         server.start()
         conn = mariadb.connect(
@@ -84,10 +83,15 @@ def warden_maria_db_connect(context):
             read_timeout=int(context.db_read_timeout),
             write_timeout=int(context.db_write_timeout)
         )
+        # todo move in before scenario fixture
         if context.use_test_db:
             conn.cursor().execute(f'USE {context.db_test_name}')
         context.conn = conn
         yield context.conn
+        # -- CLEANUP-FIXTURE PART:
+        context.conn.cursor().close()
+        context.conn.close()
+        server.stop()
     except mariadb.Error as e:
         print(f"Error connecting to MariaDB Platform: {e}")
         server.stop()
