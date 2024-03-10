@@ -1,2 +1,6 @@
 [Docker]
 php_fpm_service =
+warden_tunnel_ssh_key =
+warden_tunnel_ssh_host =
+warden_tunnel_ssh_user =
+warden_tunnel_ssh_port =

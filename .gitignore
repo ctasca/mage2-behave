@@ -6,6 +6,7 @@
 /features/core_config/core_config_backend.ini
 /features/core_config/dummy_customer.ini
 /features/core_config/docker_config.ini
+/features/core_config/db_config.ini
 /.ipynb_checkpoints/
 /*.ipynb
 /screenshots/*

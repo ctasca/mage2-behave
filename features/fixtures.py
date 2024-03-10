@@ -206,6 +206,16 @@ def _set_integration_environment(context):
     context.backend = config_parser.get(SECTIONS.get('integration'), 'INTEGRATION_BACKEND_URL')
     context.admin_username = config_parser.get(SECTIONS.get('integration'), 'INTEGRATION_ADMIN_USERNAME')
     context.admin_password = config('integration_admin_password')
+    context.db_host = config_parser.get(SECTIONS.get('integration'), 'INTEGRATION_DB_HOST')
+    context.db_port = config_parser.get(SECTIONS.get('integration'), 'INTEGRATION_DB_PORT')
+    context.db_user = config_parser.get(SECTIONS.get('integration'), 'INTEGRATION_DB_USER')
+    context.db_connection_timeout = config_parser.get(SECTIONS.get('integration'), 'INTEGRATION_DB_CONNECTION_TIMEOUT')
+    context.db_read_timeout = config_parser.get(SECTIONS.get('integration'), 'INTEGRATION_DB_READ_TIMEOUT')
+    context.db_write_timeout = config_parser.get(SECTIONS.get('integration'), 'INTEGRATION_DB_WRITE_TIMEOUT')
+    context.db_remote_bind_address_host = config_parser.get(SECTIONS.get('integration'),
+                                                            'INTEGRATION_DB_REMOTE_BIND_ADDRESS_HOST')
+    context.db_remote_host_port = config_parser.get(SECTIONS.get('integration'), 'INTEGRATION_DB_REMOTE_HOST_PORT')
+    context.db_password = config('integration_db_password')
 
 
 def _set_test_environment(context):
@@ -214,6 +224,16 @@ def _set_test_environment(context):
     context.backend = config_parser.get(SECTIONS.get('test'), 'TEST_BACKEND_URL')
     context.admin_username = config_parser.get(SECTIONS.get('test'), 'TEST_ADMIN_USERNAME')
     context.admin_password = config('test_admin_password')
+    context.db_host = config_parser.get(SECTIONS.get('test'), 'TEST_DB_HOST')
+    context.db_port = config_parser.get(SECTIONS.get('test'), 'TEST_DB_PORT')
+    context.db_user = config_parser.get(SECTIONS.get('test'), 'TEST_DB_USER')
+    context.db_connection_timeout = config_parser.get(SECTIONS.get('test'), 'TEST_DB_CONNECTION_TIMEOUT')
+    context.db_read_timeout = config_parser.get(SECTIONS.get('test'), 'TEST_DB_READ_TIMEOUT')
+    context.db_write_timeout = config_parser.get(SECTIONS.get('test'), 'TEST_DB_WRITE_TIMEOUT')
+    context.db_remote_bind_address_host = config_parser.get(SECTIONS.get('test'),
+                                                            'TEST_DB_REMOTE_BIND_ADDRESS_HOST')
+    context.db_remote_host_port = config_parser.get(SECTIONS.get('test'), 'TEST_DB_REMOTE_HOST_PORT')
+    context.db_password = config('test_db_password')
 
 
 def _set_staging_environment(context):
@@ -222,6 +242,16 @@ def _set_staging_environment(context):
     context.backend = config_parser.get(SECTIONS.get('stage'), 'STAGING_BACKEND_URL')
     context.admin_username = config_parser.get(SECTIONS.get('stage'), 'STAGING_ADMIN_USERNAME')
     context.admin_password = config('staging_admin_password')
+    context.db_host = config_parser.get(SECTIONS.get('stage'), 'STAGING_DB_HOST')
+    context.db_port = config_parser.get(SECTIONS.get('stage'), 'STAGING_DB_PORT')
+    context.db_user = config_parser.get(SECTIONS.get('stage'), 'STAGING_DB_USER')
+    context.db_connection_timeout = config_parser.get(SECTIONS.get('stage'), 'STAGING_DB_CONNECTION_TIMEOUT')
+    context.db_read_timeout = config_parser.get(SECTIONS.get('stage'), 'STAGING_DB_READ_TIMEOUT')
+    context.db_write_timeout = config_parser.get(SECTIONS.get('stage'), 'STAGING_DB_WRITE_TIMEOUT')
+    context.db_remote_bind_address_host = config_parser.get(SECTIONS.get('stage'),
+                                                            'STAGING_DB_REMOTE_BIND_ADDRESS_HOST')
+    context.db_remote_host_port = config_parser.get(SECTIONS.get('stage'), 'STAGING_DB_REMOTE_HOST_PORT')
+    context.db_password = config('staging_db_password')
 
 
 def _set_pre_production_environment(context):
@@ -230,11 +260,34 @@ def _set_pre_production_environment(context):
     context.backend = config_parser.get(SECTIONS.get('pre_prod'), 'PRE_PRODUCTION_BACKEND_URL')
     context.admin_username = config_parser.get(SECTIONS.get('pre_prod'), 'PRE_PRODUCTION_ADMIN_USERNAME')
     context.admin_password = config('pre_production_admin_password')
+    context.db_host = config_parser.get(SECTIONS.get('pre_prod'), 'PRE_PRODUCTION_DB_HOST')
+    context.db_port = config_parser.get(SECTIONS.get('pre_prod'), 'PRE_PRODUCTION_DB_PORT')
+    context.db_user = config_parser.get(SECTIONS.get('pre_prod'), 'PRE_PRODUCTION_DB_USER')
+    context.db_connection_timeout = config_parser.get(SECTIONS.get('pre_prod'), 'PRE_PRODUCTION_DB_CONNECTION_TIMEOUT')
+    context.db_read_timeout = config_parser.get(SECTIONS.get('pre_prod'), 'PRE_PRODUCTION_DB_READ_TIMEOUT')
+    context.db_write_timeout = config_parser.get(SECTIONS.get('pre_prod'), 'PRE_PRODUCTION_DB_WRITE_TIMEOUT')
+    context.db_remote_bind_address_host = config_parser.get(SECTIONS.get('pre_prod'),
+                                                            'PRE_PRODUCTION_DB_REMOTE_BIND_ADDRESS_HOST')
+    context.db_remote_host_port = config_parser.get(SECTIONS.get('pre_prod'), 'PRE_PRODUCTION_DB_REMOTE_HOST_PORT')
+    context.db_password = config('pre_production_db_password')
 
 
 def _set_production_environment(context):
+    """
+    WARNING: DO NOT CONFIGURE PRODUCTION ENVIRONMENT FOR BEHAVE
+    """
     context.baseurl = config_parser.get(SECTIONS.get('prod'), 'PRODUCTION_ENV_BASEURL')
     context.secure_baseurl = config_parser.get(SECTIONS.get('prod'), 'PRODUCTION_ENV_SECURE_BASEURL')
     context.backend = config_parser.get(SECTIONS.get('prod'), 'PRODUCTION_BACKEND_URL')
     context.admin_username = config_parser.get(SECTIONS.get('prod'), 'PRODUCTION_ADMIN_USERNAME')
     context.admin_password = config('production_admin_password')
+    context.db_host = config_parser.get(SECTIONS.get('prod'), 'PRODUCTION_DB_HOST')
+    context.db_port = config_parser.get(SECTIONS.get('prod'), 'PRODUCTION_DB_PORT')
+    context.db_user = config_parser.get(SECTIONS.get('prod'), 'PRODUCTION_DB_USER')
+    context.db_connection_timeout = config_parser.get(SECTIONS.get('prod'), 'PRODUCTION_DB_CONNECTION_TIMEOUT')
+    context.db_read_timeout = config_parser.get(SECTIONS.get('prod'), 'PRODUCTION_DB_READ_TIMEOUT')
+    context.db_write_timeout = config_parser.get(SECTIONS.get('prod'), 'PRODUCTION_DB_WRITE_TIMEOUT')
+    context.db_remote_bind_address_host = config_parser.get(SECTIONS.get('prod'),
+                                                            'PRODUCTION_DB_REMOTE_BIND_ADDRESS_HOST')
+    context.db_remote_host_port = config_parser.get(SECTIONS.get('prod'), 'PRODUCTION_DB_REMOTE_HOST_PORT')
+    context.db_password = config('production_db_password')
