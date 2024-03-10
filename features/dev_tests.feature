@@ -1,3 +1,5 @@
+@fixture.recreate.development.test.db
+@fixture.use.development.test.db
 @fixture.warden.maria.db.connect
 @fixture.integration.admin.token
 @fixture.before.cleanup.screenshots
@@ -236,3 +238,9 @@ Feature: As a mage2-behave developer I want to test the functionality of my code
     Scenario: I can connect to warden MariaDB
         Given I am successfully connected to the Magento MariaDB database
         Then I want to be able to execute a select query
+
+    @db
+    Scenario: I can connect to warden MariaDB test database
+        Given I am successfully connected to the Magento MariaDB database
+        Then I want to be able to execute an update query against the test database
+        And the environment database data must not have been modified

@@ -45,3 +45,5 @@ def context_development_environment(context, config):
     context.warden_tunnel_ssh_host = config_parser.get(SECTIONS.get('docker'), 'WARDEN_TUNNEL_SSH_HOST')
     context.warden_tunnel_ssh_user = config_parser.get(SECTIONS.get('docker'), 'WARDEN_TUNNEL_SSH_USER')
     context.warden_tunnel_ssh_port = config_parser.get(SECTIONS.get('docker'), 'WARDEN_TUNNEL_SSH_PORT')
+    context.db_test_name = config_parser.get(SECTIONS.get('dev'), 'DEVELOPMENT_DB_TEST_NAME')
+    context.use_test_db = False

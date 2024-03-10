@@ -1,6 +1,5 @@
 import os
 import json
-import sys
 import mariadb
 import requests
 import colorama
@@ -14,7 +13,7 @@ from stere import Stere
 from webdriver_manager.chrome import ChromeDriverManager
 from sshtunnel import SSHTunnelForwarder
 from core_config.bundle import config_parser, SECTIONS, context_development_environment
-from utils import screenshots, docker_env
+from utils import screenshots, docker_env, create_tests_database
 # noinspection PyPackageRequirements
 from decouple import config
 
@@ -71,7 +70,8 @@ def warden_maria_db_connect(context):
             (ssh_host, ssh_port),
             ssh_username=ssh_user,
             ssh_pkey=pkey,
-            remote_bind_address=(remote_db_host, int(context.db_port))
+            remote_bind_address=(remote_db_host, int(context.db_port)),
+            set_keepalive=100000
         )
         server.start()
         conn = mariadb.connect(
@@ -84,12 +84,25 @@ def warden_maria_db_connect(context):
             read_timeout=int(context.db_read_timeout),
             write_timeout=int(context.db_write_timeout)
         )
+        if context.use_test_db:
+            conn.cursor().execute(f'USE {context.db_test_name}')
         context.conn = conn
         yield context.conn
     except mariadb.Error as e:
         print(f"Error connecting to MariaDB Platform: {e}")
         server.stop()
-        sys.exit(1)
+
+
+# noinspection PyUnusedLocal
+@fixture
+def recreate_development_test_db(context):
+    create_tests_database.execute()
+
+
+# noinspection PyUnusedLocal
+@fixture
+def use_development_test_db(context):
+    context.use_test_db = True
 
 
 # noinspection PyUnusedLocal

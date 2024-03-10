@@ -11,3 +11,5 @@
 /*.ipynb
 /screenshots/*
 !/screenshots/.gitkeep
+/dumps/*
+!/dumps/.gitkeep
