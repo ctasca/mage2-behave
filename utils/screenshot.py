@@ -16,4 +16,6 @@ def take(browser: Browser, filename: str, wait_time: int = 3) -> None:
 def cleanup() -> None:
     files = os.listdir(screenshot_directory)
     for file in files:
+        if file == '.gitkeep':
+            continue
         os.remove(os.path.join(screenshot_directory, file))
