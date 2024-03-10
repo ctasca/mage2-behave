@@ -233,6 +233,6 @@ Feature: As a mage2-behave developer I want to test the functionality of my code
         Given I have flushed the magento cache
 
     @db
-    Scenario: I can connect to warden maria db
-        Given I am successfully connected to the Magento Mariadb database
+    Scenario: I can connect to warden MariaDB
+        Given I am successfully connected to the Magento MariaDB database
         Then I want to be able to execute a select query

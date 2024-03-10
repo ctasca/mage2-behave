@@ -303,7 +303,7 @@ def step_impl(context):
         page.grid_rows.click_row_checkbox(2, True)
 
 
-@given("I am successfully connected to the Magento Mariadb database")
+@given("I am successfully connected to the Magento MariaDB database")
 def step_impl(context):
     assert context.conn is not None
 
