@@ -32,10 +32,3 @@ pre_production_admin_firstname =
 pre_production_admin_lastname =
 pre_production_admin_email =
 pre_production_backend_url =
-
-[Production]
-production_admin_username =
-production_admin_firstname =
-production_admin_lastname =
-production_admin_email =
-production_backend_url =

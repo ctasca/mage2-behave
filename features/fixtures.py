@@ -274,20 +274,7 @@ def _set_pre_production_environment(context):
 
 def _set_production_environment(context):
     """
-    WARNING: DO NOT CONFIGURE PRODUCTION ENVIRONMENT FOR BEHAVE
+    NOTE: IN PRODUCTION ENVIRONMENT ONLY THE MAGENTO BASE URL AND SECURE BASE URL CAN BE SET
     """
     context.baseurl = config_parser.get(SECTIONS.get('prod'), 'PRODUCTION_ENV_BASEURL')
     context.secure_baseurl = config_parser.get(SECTIONS.get('prod'), 'PRODUCTION_ENV_SECURE_BASEURL')
-    context.backend = config_parser.get(SECTIONS.get('prod'), 'PRODUCTION_BACKEND_URL')
-    context.admin_username = config_parser.get(SECTIONS.get('prod'), 'PRODUCTION_ADMIN_USERNAME')
-    context.admin_password = config('production_admin_password')
-    context.db_host = config_parser.get(SECTIONS.get('prod'), 'PRODUCTION_DB_HOST')
-    context.db_port = config_parser.get(SECTIONS.get('prod'), 'PRODUCTION_DB_PORT')
-    context.db_user = config_parser.get(SECTIONS.get('prod'), 'PRODUCTION_DB_USER')
-    context.db_connection_timeout = config_parser.get(SECTIONS.get('prod'), 'PRODUCTION_DB_CONNECTION_TIMEOUT')
-    context.db_read_timeout = config_parser.get(SECTIONS.get('prod'), 'PRODUCTION_DB_READ_TIMEOUT')
-    context.db_write_timeout = config_parser.get(SECTIONS.get('prod'), 'PRODUCTION_DB_WRITE_TIMEOUT')
-    context.db_remote_bind_address_host = config_parser.get(SECTIONS.get('prod'),
-                                                            'PRODUCTION_DB_REMOTE_BIND_ADDRESS_HOST')
-    context.db_remote_host_port = config_parser.get(SECTIONS.get('prod'), 'PRODUCTION_DB_REMOTE_HOST_PORT')
-    context.db_password = config('production_db_password')

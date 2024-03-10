@@ -53,13 +53,3 @@ pre_production_db_write_timeout =
 pre_production_db_remote_bind_address_host =
 pre_production_db_remote_host_port =
 
-[Production]
-production_db_host =
-production_db_port =
-production_db_user =
-production_db_name =
-production_db_connection_timeout =
-production_db_read_timeout =
-production_db_write_timeout =
-production_db_remote_bind_address_host =
-production_db_remote_host_port =
