@@ -2,9 +2,9 @@ from behave import *
 from features.pages.backend.dashboard import Dashboard
 from features.pages.backend.customers_grid import CustomersGrid
 from features.pages.backend.sales_orders_grid import SalesOrdersGrid
-from features.core_config.backend.backend_locators import (SALES_SUBMENU, CATALOG_SUBMENU, CUSTOMERS_SUBMENU,
-                                                           MARKETING_SUBMENU, CONTENT_SUBMENU, REPORTS_SUBMENU,
-                                                           STORES_SUBMENU, SYSTEM_SUBMENU)
+from features.core_config.backend.locators.admin_submenus import (SALES_SUBMENU, CATALOG_SUBMENU, CUSTOMERS_SUBMENU,
+                                                                  MARKETING_SUBMENU, CONTENT_SUBMENU, REPORTS_SUBMENU,
+                                                                  STORES_SUBMENU, SYSTEM_SUBMENU)
 
 
 @when(u'I click the "{item}" menu item')

@@ -2,7 +2,7 @@
 from behave import *
 from features.pages.backend.login import Login
 from features.pages.backend.dashboard import Dashboard
-from features.core_config.backend.backend_locators import (SALES_SUBMENU, CUSTOMERS_SUBMENU)
+from features.core_config.backend.locators.admin_submenus import (SALES_SUBMENU, CUSTOMERS_SUBMENU)
 
 
 @given(u'I am on the admin login page')

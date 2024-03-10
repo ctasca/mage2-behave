@@ -1,7 +1,6 @@
-from features.core_config.locators import STRATEGY_KEY, LOCATOR_KEY
-from features.core_config.backend.backend_locators import (ADMIN_LOGIN_FORM_USERNAME_LOCATOR,
-                                                           ADMIN_LOGIN_FORM_PASSWORD_LOCATOR,
-                                                           ADMIN_LOGIN_FORM_SIGNIN_BUTTON_LOCATOR)
+from features.core_config.strategies import STRATEGY_KEY, LOCATOR_KEY
+from features.core_config.backend.locators.admin_login import ADMIN_LOGIN_FORM_USERNAME_LOCATOR, \
+    ADMIN_LOGIN_FORM_PASSWORD_LOCATOR, ADMIN_LOGIN_FORM_SIGNIN_BUTTON_LOCATOR
 from stere.fields import Input, Button
 
 

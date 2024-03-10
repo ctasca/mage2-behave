@@ -1,8 +1,8 @@
-from features.core_config.backend.backend_locators import (STRATEGY_KEY, LOCATOR_KEY, XPATH_STRATEGY,
-                                                           GRID_ACTIONS_BUTTON_LOCATOR, GRID_ACTIONS_LIST_ROOT_LOCATOR,
-                                                           GRID_ACTION_XPATH_LOCATOR,
-                                                           GRID_ACTIONS_SUBMENU_ROOT_LOCATOR,
-                                                           GRID_ACTIONS_SUBMENU_XPATH_LOCATOR)
+from features.core_config.backend.locators.grids import (STRATEGY_KEY, LOCATOR_KEY, XPATH_STRATEGY,
+                                                         GRID_ACTIONS_BUTTON_LOCATOR, GRID_ACTIONS_LIST_ROOT_LOCATOR,
+                                                         GRID_ACTION_XPATH_LOCATOR,
+                                                         GRID_ACTIONS_SUBMENU_ROOT_LOCATOR,
+                                                         GRID_ACTIONS_SUBMENU_XPATH_LOCATOR)
 from stere.fields import Button, Root, Field
 from stere.areas import RepeatingArea
 

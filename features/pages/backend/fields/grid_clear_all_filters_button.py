@@ -1,5 +1,4 @@
-from features.core_config.backend.backend_locators import GRID_CLEAR_ALL_FILTERS_BUTTON_LOCATOR
-from features.core_config.locators import STRATEGY_KEY, LOCATOR_KEY
+from features.core_config.backend.locators.grids import STRATEGY_KEY, LOCATOR_KEY, GRID_CLEAR_ALL_FILTERS_BUTTON_LOCATOR
 from stere.fields import Button
 
 

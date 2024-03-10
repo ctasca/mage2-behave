@@ -1,6 +1,7 @@
 from abc import ABC, abstractmethod
 from stere.fields import Field
-from features.core_config.backend.backend_locators import STRATEGY_KEY, LOCATOR_KEY, GRID_LOADING_MASK_LOCATOR
+from features.core_config.strategies import STRATEGY_KEY, LOCATOR_KEY
+from features.core_config.backend.locators.grids import GRID_LOADING_MASK_LOCATOR
 from features.pages.backend.fields.grid_filters_button import GridFiltersButton
 from features.pages.backend.fields.grid_fulltext_search_input import GridFulltextSearchInput
 from features.pages.backend.fields.grid_fulltext_search_button import GridFulltextSearchButton

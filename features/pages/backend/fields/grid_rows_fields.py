@@ -1,7 +1,7 @@
 from stere.areas import RepeatingArea
 from stere.fields import Root, Checkbox
-from features.core_config.backend.backend_locators import (STRATEGY_KEY, LOCATOR_KEY, XPATH_STRATEGY,
-                                                           GRID_ROWS_ROOT_LOCATOR, GRID_ROW_CHECKBOX_LOCATOR)
+from features.core_config.backend.locators.grids import (STRATEGY_KEY, LOCATOR_KEY, XPATH_STRATEGY,
+                                                         GRID_ROWS_ROOT_LOCATOR, GRID_ROW_CHECKBOX_LOCATOR)
 
 
 class GridRowsFields(RepeatingArea):

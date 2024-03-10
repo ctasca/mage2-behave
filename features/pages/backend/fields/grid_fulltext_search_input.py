@@ -1,5 +1,5 @@
-from features.core_config.locators import STRATEGY_KEY, LOCATOR_KEY
-from features.core_config.backend.backend_locators import GRID_FULLTEXT_INPUT_LOCATOR
+from features.core_config.strategies import STRATEGY_KEY, LOCATOR_KEY
+from features.core_config.backend.locators.grids import GRID_FULLTEXT_INPUT_LOCATOR
 from stere.fields import Input
 
 

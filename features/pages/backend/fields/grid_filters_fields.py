@@ -2,14 +2,14 @@ import time
 from stere import Stere
 from typing import Optional, List
 from stere.fields.decorators import use_after, use_before
-from features.core_config.backend.backend_locators import (STRATEGY_KEY,
-                                                           LOCATOR_KEY,
-                                                           GRID_DATEPICKER_FILTER_MONTH_SELECT_LOCATOR,
-                                                           GRID_DATEPICKER_FILTER_YEAR_SELECT_LOCATOR,
-                                                           GRID_DATEPICKER_FILTER_DAY_LINK_LOCATOR,
-                                                           GRID_DATEPICKER_GO_TO_TODAY_BUTTON_LOCATOR,
-                                                           GRID_DATEPICKER_HIDE_BUTTON_LOCATOR,
-                                                           GRID_DATEPICKER_TODAY_DAY_LINK_LOCATOR)
+from features.core_config.backend.locators.grids import (STRATEGY_KEY,
+                                                         LOCATOR_KEY,
+                                                         GRID_DATEPICKER_FILTER_MONTH_SELECT_LOCATOR,
+                                                         GRID_DATEPICKER_FILTER_YEAR_SELECT_LOCATOR,
+                                                         GRID_DATEPICKER_FILTER_DAY_LINK_LOCATOR,
+                                                         GRID_DATEPICKER_GO_TO_TODAY_BUTTON_LOCATOR,
+                                                         GRID_DATEPICKER_HIDE_BUTTON_LOCATOR,
+                                                         GRID_DATEPICKER_TODAY_DAY_LINK_LOCATOR)
 from stere.fields import Input, Button, Dropdown, Link
 
 
