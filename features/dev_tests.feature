@@ -1,3 +1,4 @@
+@fixture.warden.maria.db.connect
 @fixture.integration.admin.token
 @fixture.before.cleanup.screenshots
 Feature: As a mage2-behave developer I want to test the functionality of my code So That I can assure all is properly working
@@ -230,3 +231,8 @@ Feature: As a mage2-behave developer I want to test the functionality of my code
     @bin.magento
     Scenario: Configured docker php-fpm service container executes bin/magento commands
         Given I have flushed the magento cache
+
+    @db
+    Scenario: I can connect to warden maria db
+        Given I am successfully connected to the Magento Mariadb database
+        Then I want to be able to execute a select query

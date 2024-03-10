@@ -1,16 +1,22 @@
+import os
 import json
+import sys
+import mariadb
 import requests
 import colorama
+import paramiko
+from os.path import expanduser
 from behave import *
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 from splinter import Browser, Config
 from stere import Stere
 from webdriver_manager.chrome import ChromeDriverManager
+from sshtunnel import SSHTunnelForwarder
+from core_config.bundle import config_parser, SECTIONS, context_development_environment
+from utils import screenshots, docker_env
 # noinspection PyPackageRequirements
 from decouple import config
-from core_config.bundle import config_parser, SECTIONS, context_development_environment
-from utils.screenshot import cleanup
 
 # Install Chrome web driver by default
 driver = ChromeDriverManager().install()
@@ -52,10 +58,47 @@ def splinter_browser_chrome_headless(context):
 
 
 @fixture
+def warden_maria_db_connect(context):
+    server = None
+    try:
+        home = expanduser("~")
+        pkey = paramiko.RSAKey.from_private_key_file(os.path.join(home, context.warden_tunnel_ssh_key))
+        ssh_host = context.warden_tunnel_ssh_host
+        ssh_user = context.warden_tunnel_ssh_user
+        ssh_port = int(context.db_remote_host_port)
+        remote_db_host = docker_env.container_name_search(context.db_remote_bind_address_host)
+        server = SSHTunnelForwarder(
+            (ssh_host, ssh_port),
+            ssh_username=ssh_user,
+            ssh_pkey=pkey,
+            remote_bind_address=(remote_db_host, int(context.db_port))
+        )
+        server.start()
+        conn = mariadb.connect(
+            user=context.db_user,
+            password=context.db_password,
+            host=context.db_host,
+            port=server.local_bind_port,
+            database=context.db_name,
+            connect_timeout=int(context.db_connection_timeout),
+            read_timeout=int(context.db_read_timeout),
+            write_timeout=int(context.db_write_timeout)
+        )
+        context.conn = conn
+        yield context.conn
+    except mariadb.Error as e:
+        print(f"Error connecting to MariaDB Platform: {e}")
+        server.stop()
+        sys.exit(1)
+
+
+# noinspection PyUnusedLocal
+@fixture
 def before_cleanup_screenshots(context):
     _clean_screenshots()
 
 
+# noinspection PyUnusedLocal
 @fixture
 def after_cleanup_screenshots(context):
     _clean_screenshots()
@@ -136,6 +179,7 @@ def dummy_customer_delete(context):
         raise Exception('Could not delete customer with ID {}'.format(context.dummy_customer_id))
 
 
+# noinspection PyUnusedLocal
 @fixture
 def skip(context):
     pass
@@ -193,7 +237,7 @@ def _init_context_browser(context, browser_config: Config, custom_size=None) -> 
 
 def _clean_screenshots() -> None:
     """ Clean up the screenshots directory """
-    cleanup()
+    screenshots.cleanup()
 
 
 def _set_development_environment(context):

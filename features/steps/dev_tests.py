@@ -1,5 +1,4 @@
-import time
-
+import mariadb
 from behave import *
 from features.core_config.backend.locators.admin_submenus import *
 from features.pages.backend.dashboard import Dashboard
@@ -302,3 +301,20 @@ def step_impl(context):
     with SalesOrdersGrid() as page:
         page.grid_rows.wait_for_spinner()
         page.grid_rows.click_row_checkbox(2, True)
+
+
+@given("I am successfully connected to the Magento Mariadb database")
+def step_impl(context):
+    assert context.conn is not None
+
+
+@then("I want to be able to execute a select query")
+def step_impl(context):
+    try:
+        cur = context.conn.cursor()
+        cur.execute("SELECT ccd.value FROM core_config_data ccd WHERE path = ?", ('catalog/search/engine',))
+        search_engine = cur.fetchone()[0]
+        assert search_engine == 'opensearch'
+    except mariadb.Error as e:
+        print(f"Error during MariaDB query: {e}")
+

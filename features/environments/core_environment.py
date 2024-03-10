@@ -10,6 +10,8 @@ def core_before_all(context):
 
 
 def core_before_feature(context, feature):
+    if "fixture.warden.maria.db.connect" in feature.tags:
+        use_fixture(warden_maria_db_connect, context)
     _skip(context, feature, 'feature')
     _cleanup_screenshots(context, feature.tags, 'before')
     _set_environment(context, feature)

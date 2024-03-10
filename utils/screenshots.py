@@ -8,9 +8,9 @@ parent_directory = os.path.dirname(current_directory)
 screenshot_directory = os.path.join(parent_directory, "screenshots")
 
 
-def take(browser: Browser, filename: str, wait_time: int = 3) -> None:
-    time.sleep(wait_time)
-    browser.screenshot("{}/{}".format(screenshot_directory, filename))
+def take(browser: Browser, filename: str, implicit_wait: int = 0) -> None:
+    time.sleep(implicit_wait)
+    browser.screenshot(os.path.join(screenshot_directory, filename))
 
 
 def cleanup() -> None:

@@ -4,6 +4,7 @@ selenium
 splinter>=0.21.0
 waiting
 mariadb
+paramiko
 webdriver-manager
 sshtunnel
 stere>=0.31.0

@@ -21,6 +21,17 @@ def container_id_search(search: str) -> str:
     raise Exception("No {} container match".format(search))
 
 
+def container_name_search(search: str) -> str:
+    """ Performs a search to find the container name from the environment """
+    pattern = re.compile(rf".*{search}(?!-debug).*")
+    docker_client = docker_client_from_env()
+    containers = docker_client.containers.list()
+    for container in containers:
+        if pattern.match(container.name):
+            return container.name
+    raise Exception("No {} container match".format(search))
+
+
 def docker_bin_magento(command: str):
     """ Runs a bin/magento command in php-fpm service container """
     magento_php_fom_service = config_parser.get(SECTIONS.get('docker'), 'PHP_FPM_SERVICE')
