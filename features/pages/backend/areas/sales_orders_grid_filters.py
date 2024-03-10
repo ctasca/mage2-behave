@@ -2,7 +2,7 @@ from features.core_config.backend.locators.grids import *
 from features.core_config.backend.locators.orders_filters import *
 from stere.areas import Area
 from stere.fields import Root
-from features.pages.backend.ui_grids.common_fields import UiGridFiltersInterface, GridCommonFiltersFields
+from features.pages.backend.ui_grids.common_fields import GridCommonFiltersFields
 from ..fields.grid_filters_fields import InputFilter, DatepickerFilter, SelectFilter
 
 
@@ -20,6 +20,11 @@ class SalesOrdersGridFilters(Area, GridCommonFiltersFields):
     PURCHASED_GRAND_TOTAL_FROM = 'purchased_grand_total_from'
     PURCHASED_GRAND_TOTAL_TO = 'purchased_grand_total_to'
     PURCHASE_POINT = 'purchase_point'
+    INCREMENT_ID = 'increment_id'
+    BILL_TO_NAME = 'bill_to_name'
+    SHIP_TO_NAME = 'ship_to_name'
+    STATUS = 'status'
+    BRAINTREE_TRANSACTION_SOURCE = 'braintree_transaction_source'
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -52,6 +57,18 @@ class SalesOrdersGridFilters(Area, GridCommonFiltersFields):
             ORDERS_PURCHASED_GRAND_TOTAL_TO_INPUT_FILTER_LOCATOR[LOCATOR_KEY])
         self.purchase_point = SelectFilter(ORDERS_PURCHASE_POINT_SELECT_FILTER_LOCATOR[STRATEGY_KEY],
                                            ORDERS_PURCHASE_POINT_SELECT_FILTER_LOCATOR[LOCATOR_KEY])
+        self.increment_id = InputFilter(ORDERS_INCREMENT_ID_INPUT_FILTER_LOCATOR[STRATEGY_KEY],
+                                        ORDERS_INCREMENT_ID_INPUT_FILTER_LOCATOR[LOCATOR_KEY])
+        self.bill_to_name = InputFilter(ORDERS_BILL_TO_NAME_INPUT_FILTER_LOCATOR[STRATEGY_KEY],
+                                        ORDERS_BILL_TO_NAME_INPUT_FILTER_LOCATOR[LOCATOR_KEY])
+        self.ship_to_name = InputFilter(ORDERS_SHIP_TO_NAME_INPUT_FILTER_LOCATOR[STRATEGY_KEY],
+                                        ORDERS_SHIP_TO_NAME_INPUT_FILTER_LOCATOR[LOCATOR_KEY])
+        self.status = SelectFilter(ORDERS_STATUS_SELECT_FILTER_LOCATOR[STRATEGY_KEY],
+                                   ORDERS_STATUS_SELECT_FILTER_LOCATOR[LOCATOR_KEY])
+        self.braintree_transaction_source = InputFilter(
+            ORDERS_BRAINTREE_TRANSACTION_SOURCE_INPUT_FILTER_LOCATOR[STRATEGY_KEY],
+            ORDERS_BRAINTREE_TRANSACTION_SOURCE_INPUT_FILTER_LOCATOR[LOCATOR_KEY]
+        )
 
     def get_root(self):
         return self.root

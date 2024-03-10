@@ -1,10 +1,10 @@
+import time
+
 from behave import *
+from features.core_config.backend.locators.admin_submenus import *
 from features.pages.backend.dashboard import Dashboard
 from features.pages.backend.customers_grid import CustomersGrid
 from features.pages.backend.sales_orders_grid import SalesOrdersGrid
-from features.core_config.backend.locators.admin_submenus import (SALES_SUBMENU, CATALOG_SUBMENU, CUSTOMERS_SUBMENU,
-                                                                  MARKETING_SUBMENU, CONTENT_SUBMENU, REPORTS_SUBMENU,
-                                                                  STORES_SUBMENU, SYSTEM_SUBMENU)
 
 
 @when(u'I click the "{item}" menu item')
@@ -167,7 +167,7 @@ def step_impl(context):
         filters.get_filter(filters.NAME_FILTER).fill('Test')
         created_at_from_datepicker = filters.get_filter(filters.CREATED_AT_FROM_DATAPICKER)
         created_at_from_datepicker.click()
-        created_at_from_datepicker.select_month('May')
+        created_at_from_datepicker.select_month('Jan')
         created_at_from_datepicker.select_year('2000')
         created_at_from_datepicker.click_day('31')
         created_at_to_datepicker = filters.get_filter(filters.CREATED_AT_TO_DATAPICKER)
@@ -209,6 +209,16 @@ def step_impl(context):
         purchased_grand_total_to.fill(400)
         purchase_point = filters.get_filter(filters.PURCHASE_POINT)
         purchase_point.select('Default Store View')
+        increment_id = filters.get_filter(filters.INCREMENT_ID)
+        increment_id.fill('45577676')
+        bill_to_name = filters.get_filter(filters.BILL_TO_NAME)
+        bill_to_name.fill('Test')
+        ship_to_name = filters.get_filter(filters.SHIP_TO_NAME)
+        ship_to_name.fill('Test')
+        status = filters.get_filter(filters.STATUS)
+        status.select('Canceled')
+        braintree_transaction_source = filters.get_filter(filters.BRAINTREE_TRANSACTION_SOURCE)
+        braintree_transaction_source.fill('PayPal')
         filters.apply_filters()
 
 

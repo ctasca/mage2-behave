@@ -172,7 +172,7 @@ Feature: As a mage2-behave developer I want to test the functionality of my code
         Then I want to select the second sales orders grid row
 
     @backend
-    @backend.grid.filters
+    @backend.orders.grid.filters
     @fixture.splinter.browser.chrome.headless
     Scenario: Admin can view the sales orders grid and apply filters
        Given I am on the sales orders grid
