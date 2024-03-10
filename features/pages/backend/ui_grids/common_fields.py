@@ -1,3 +1,4 @@
+import time
 from abc import ABC, abstractmethod
 from stere.fields import Field
 from features.core_config.strategies import STRATEGY_KEY, LOCATOR_KEY
@@ -25,11 +26,11 @@ class UiGridFiltersInterface(ABC):
         pass
 
     @abstractmethod
-    def apply_filters(self):
+    def apply_filters(self, implicit_wait: int = 0):
         pass
 
     @abstractmethod
-    def clear_all(self):
+    def clear_all(self, implicit_wait: int = 0):
         pass
 
 
@@ -71,11 +72,13 @@ class GridCommonFiltersFields(UiGridFiltersInterface):
     def get_filter(self, filter_name: str):
         return getattr(self, filter_name)
 
-    def apply_filters(self):
+    def apply_filters(self, implicit_wait: int = 0):
         self.apply_filters_button.click()
+        time.sleep(implicit_wait)
 
-    def clear_all(self):
+    def clear_all(self, implicit_wait: int = 0):
         self.clear_all_filters_button.click()
+        time.sleep(implicit_wait)
 
 
 class GridCommonActionsFields(UiGridActionsInterface):

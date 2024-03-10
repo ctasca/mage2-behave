@@ -1,4 +1,5 @@
 @fixture.integration.admin.token
+@fixture.before.cleanup.screenshots
 Feature: As a mage2-behave developer I want to test the functionality of my code So That I can assure all is properly working
 
     @skip
@@ -36,6 +37,7 @@ Feature: As a mage2-behave developer I want to test the functionality of my code
         And I sign in
         Then I should see a dashboard header
 
+        @ss
     @backend
     @fixture.splinter.browser.chrome.headless
     Scenario: Admin login and click the Sales menu item
@@ -107,20 +109,20 @@ Feature: As a mage2-behave developer I want to test the functionality of my code
         When I want to change store scope
         Then I should be able to select the store I want to switch to
 
-    @backend
+    @backend-1
     @backend.grid.filters
     @fixture.splinter.browser.chrome.headless
     Scenario: Admin can view the customers grid and apply filters
         Given I am on the all customers grid
         Then I want to be able to apply filters to customers for searching purposes
-        And I want to be able to reset the applied filters
+        And I want to be able to reset the customers grid applied filters
 
     @backend
     @backend.grid.actions
     @fixture.splinter.browser.chrome.headless
     Scenario: Admin can view the customers grid and perform actions
         Given I am on the all customers grid
-        Then I want to be able to click the actions button
+        Then I want to be able to click the customers actions button
         And I want to choose the action I want to perform
         But if I have not selected a grid item
         Then I should see a warning modal window
@@ -130,8 +132,8 @@ Feature: As a mage2-behave developer I want to test the functionality of my code
     @fixture.splinter.browser.chrome.headless
     Scenario: Admin can view the customers grid, select rows checkboxes and perform actions
         Given I am on the all customers grid
-        And I select the first row
-        And I choose the Delete action
+        And I select the first customers grid row
+        And I choose the customers Delete action
         Then I should see a confirmation modal window
         And I want to cancel the action
 
@@ -140,9 +142,17 @@ Feature: As a mage2-behave developer I want to test the functionality of my code
     @fixture.splinter.browser.chrome.headless
     Scenario: Admin can view the customers grid and perform actions with a submenu
         Given I am on the all customers grid
-        And I select the first row
+        And I select the first customers grid row
         And I choose the Assign a Customer Group action
         Then I should see an assign customer to group confirmation dialog
+
+    @backend
+    @backend.grid.search.fulltext
+    @fixture.splinter.browser.chrome.headless
+    Scenario: Admin can view the customers grid and use the search fulltext input
+        Given I am on the all customers grid
+        Then I want to be able to use the search fulltext input to filter the grid
+        And I want to be able to reset the customers grid applied filters
 
     @backend
     @backend.grid.rows
@@ -157,9 +167,9 @@ Feature: As a mage2-behave developer I want to test the functionality of my code
     @backend
     @backend.grid.rows
     @fixture.splinter.browser.chrome.headless
-    Scenario: Admin can view the customers grid and select a row in the grid
+    Scenario: Admin can view the sales orders grid and select a row in the grid
         Given I am on the sales orders grid
-        Then I want to select the second row
+        Then I want to select the second sales orders grid row
 
     @backend
     @backend.grid.filters
@@ -167,15 +177,7 @@ Feature: As a mage2-behave developer I want to test the functionality of my code
     Scenario: Admin can view the sales orders grid and apply filters
        Given I am on the sales orders grid
         Then I want to be able to apply filters to orders for searching purposes
-        And I want to be able to reset the applied filters
-
-    @backend
-    @backend.grid.search.fulltext
-    @fixture.splinter.browser.chrome.headless
-    Scenario: Admin can view the customers grid and use the search fulltext input
-        Given I am on the all customers grid
-        Then I want to be able to use the search fulltext input to filter the grid
-        And I want to be able to reset the applied filters
+        And I want to be able to reset the sales orders grid applied filters
 
     @backend
     @backend.dashboard

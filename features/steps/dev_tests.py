@@ -135,23 +135,31 @@ def step_impl(context):
 @then("I want to be able to use the search fulltext input to filter the grid")
 def step_impl(context):
     with CustomersGrid() as page:
-        filters = page.customers_grid_filters
+        filters = page.grid_filters
         filters.fulltext_search('text')
         assert page.browser.is_text_present("We couldn't find any records.") is True
 
 
-@then("I want to be able to reset the applied filters")
+@then("I want to be able to reset the customers grid applied filters")
 def step_impl(context):
     with CustomersGrid() as page:
-        filters = page.customers_grid_filters
-        filters.clear_all()
+        filters = page.grid_filters
+        filters.clear_all(1)
+        assert filters.get_root().is_not_visible(10) is True
+
+
+@then("I want to be able to reset the sales orders grid applied filters")
+def step_impl(context):
+    with SalesOrdersGrid() as page:
+        filters = page.grid_filters
+        filters.clear_all(1)
         assert filters.get_root().is_not_visible(10) is True
 
 
 @then(u'I want to be able to apply filters to customers for searching purposes')
 def step_impl(context):
     with CustomersGrid() as page:
-        filters = page.customers_grid_filters
+        filters = page.grid_filters
         filters.start_filtering()
         filters.get_filter(filters.FROM_ID_FILTER).fill(10)
         filters.get_filter(filters.TO_ID_FILTER).fill(20)
@@ -181,7 +189,7 @@ def step_impl(context):
 @then("I want to be able to apply filters to orders for searching purposes")
 def step_impl(context):
     with SalesOrdersGrid() as page:
-        filters = page.orders_grid_filters
+        filters = page.grid_filters
         filters.start_filtering()
         created_at_from_datepicker = filters.get_filter(filters.CREATED_AT_FROM_DATAPICKER)
         created_at_from_datepicker.click()
@@ -204,7 +212,7 @@ def step_impl(context):
         filters.apply_filters()
 
 
-@then("I want to be able to click the actions button")
+@then("I want to be able to click the customers actions button")
 def step_impl(context):
     with CustomersGrid() as page:
         page.grid_actions.click_actions_button()
@@ -229,14 +237,14 @@ def step_impl(context):
         page.modal.click_ok_button()
 
 
-@given("I select the first row")
+@given("I select the first customers grid row")
 def step_impl(context):
     with CustomersGrid() as page:
         page.grid_rows.wait_for_spinner()
         page.grid_rows.click_row_checkbox(1, True)
 
 
-@step("I choose the Delete action")
+@step("I choose the customers Delete action")
 def step_impl(context):
     with CustomersGrid() as page:
         page.grid_actions.click_actions_button()
@@ -279,7 +287,7 @@ def step_impl(context):
         page.modal.click_cancel_button()
 
 
-@then("I want to select the second row")
+@then("I want to select the second sales orders grid row")
 def step_impl(context):
     with SalesOrdersGrid() as page:
         page.grid_rows.wait_for_spinner()

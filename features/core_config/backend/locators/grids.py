@@ -15,9 +15,9 @@ GRID_APPLY_FILTERS_BUTTON_LOCATOR: Dict[str, str] = \
     {STRATEGY_KEY: XPATH_STRATEGY, LOCATOR_KEY: "//button[@data-action='grid-filter-apply']"}
 GRID_FILTERS_ROOT_LOCATOR: Dict[str, str] = \
     {STRATEGY_KEY: XPATH_STRATEGY, LOCATOR_KEY: '//div[@data-part="filter-form"]'}
-GRID_DATEPICKER_BUTTON_LOCATOR: Dict[str, str] = \
-    {STRATEGY_KEY: XPATH_STRATEGY,
-     LOCATOR_KEY: "//input[@name='{}']//following-sibling::button[contains(@class, 'ui-datepicker-trigger')]"}
+GRID_DATEPICKER_BUTTON_LOCATOR: Dict[str, str] = {STRATEGY_KEY: XPATH_STRATEGY,
+                                                  LOCATOR_KEY: "//input[@name='{}']//following-sibling::button["
+                                                               "contains(@class, 'ui-datepicker-trigger')]"}
 GRID_DATEPICKER_FILTER_MONTH_SELECT_LOCATOR: Dict[str, str] = \
     {STRATEGY_KEY: XPATH_STRATEGY, LOCATOR_KEY: "//select[@class='ui-datepicker-month']"}
 GRID_DATEPICKER_FILTER_YEAR_SELECT_LOCATOR: Dict[str, str] = \

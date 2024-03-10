@@ -8,3 +8,5 @@
 /features/core_config/docker_config.ini
 /.ipynb_checkpoints/
 /*.ipynb
+/screenshots/*
+!/screenshots/.gitkeep

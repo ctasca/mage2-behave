@@ -9,7 +9,7 @@ class SalesOrdersGrid(Page):
     def __init__(self) -> None:
         super().__init__()
         self.admin_menu = AdminMenu()
-        self.orders_grid_filters = SalesOrdersGridFilters()
+        self.grid_filters = SalesOrdersGridFilters()
         self.grid_actions = GridCommonActionsFields()
         self.grid_rows = GridRows()
         self.modal = Modal()

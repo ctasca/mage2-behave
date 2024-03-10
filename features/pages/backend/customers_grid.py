@@ -9,7 +9,7 @@ class CustomersGrid(Page):
     def __init__(self) -> None:
         super().__init__()
         self.admin_menu = AdminMenu()
-        self.customers_grid_filters = CustomersGridFilters()
+        self.grid_filters = CustomersGridFilters()
         self.grid_actions = GridCommonActionsFields()
         self.grid_rows = GridRows()
         self.modal = Modal()

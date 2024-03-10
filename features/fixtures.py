@@ -10,6 +10,7 @@ from webdriver_manager.chrome import ChromeDriverManager
 # noinspection PyPackageRequirements
 from decouple import config
 from core_config.bundle import config_parser, SECTIONS, context_development_environment
+from utils.screenshot import cleanup
 
 # Install Chrome web driver by default
 driver = ChromeDriverManager().install()
@@ -48,6 +49,16 @@ def splinter_browser_chrome_headless(context):
     yield context.browser
     # -- CLEANUP-FIXTURE PART:
     context.browser.quit()
+
+
+@fixture
+def before_cleanup_screenshots(context):
+    _clean_screenshots()
+
+
+@fixture
+def after_cleanup_screenshots(context):
+    _clean_screenshots()
 
 
 @fixture
@@ -178,6 +189,11 @@ def _init_context_browser(context, browser_config: Config, custom_size=None) -> 
     Stere.browser = browser
     Stere.url_navigator = 'visit'
     context.browser = browser
+
+
+def _clean_screenshots() -> None:
+    """ Clean up the screenshots directory """
+    cleanup()
 
 
 def _set_development_environment(context):

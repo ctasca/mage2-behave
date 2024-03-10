@@ -11,6 +11,7 @@ def core_before_all(context):
 
 def core_before_feature(context, feature):
     _skip(context, feature, 'feature')
+    _cleanup_screenshots(context, feature.tags, 'before')
     _set_environment(context, feature)
     _integration_admin_token(context, feature.tags)
     _dummy_customer_create(context, feature)
@@ -20,6 +21,7 @@ def core_before_feature(context, feature):
 
 def core_before_scenario(context, scenario):
     _skip(context, scenario, 'scenario')
+    _cleanup_screenshots(context, scenario.tags, 'before')
     if "fixture.splinter.browser.chrome" in scenario.tags and not ('skip' in scenario.tags):
         use_fixture(splinter_browser_chrome, context)
 
@@ -43,14 +45,24 @@ def core_before_scenario(context, scenario):
 
 def core_after_scenario(context, scenario):
     _dummy_customer_delete(context, scenario)
+    _cleanup_screenshots(context, scenario.tags, 'after')
 
 
 def core_after_feature(context, feature):
     _dummy_customer_delete(context, feature)
+    _cleanup_screenshots(context, feature.tags, 'after')
 
 
 def _regex_fixture_tag_matches(hook, fixture_tag: str) -> list:
     return re.findall(rf"(\b{fixture_tag}\b)+(\b[\w*-?+]+\b)+", '|'.join(hook.tags))
+
+
+def _cleanup_screenshots(context, tags: list, hook: str) -> None:
+    if "fixture.{}.cleanup.screenshots".format(hook) in tags:
+        if hook == 'before':
+            use_fixture(before_cleanup_screenshots, context)
+        elif hook == 'after':
+            use_fixture(after_cleanup_screenshots, context)
 
 
 def _set_environment(context, hook) -> None:

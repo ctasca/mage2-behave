@@ -6,7 +6,7 @@ from features.pages.backend.ui_grids.common_fields import UiGridFiltersInterface
 from ..fields.grid_filters_fields import InputFilter, DatepickerFilter, SelectFilter
 
 
-class SalesOrdersGridFilters(Area, UiGridFiltersInterface):
+class SalesOrdersGridFilters(Area, GridCommonFiltersFields):
     COMMON_FILTER_FIELDS = 'common_filter_fields'
     FILTERS_BUTTON = 'filters_button'
     FULLTEXT_SEARCH_INPUT = 'fulltext_search_input'
@@ -55,19 +55,3 @@ class SalesOrdersGridFilters(Area, UiGridFiltersInterface):
 
     def get_root(self):
         return self.root
-
-    def fulltext_search(self, search_text: str):
-        self.common_filters_fields.fulltext_search_input.fill(search_text)
-        self.common_filters_fields.fulltext_search_button.click()
-
-    def start_filtering(self):
-        self.filters_button.click()
-
-    def get_filter(self, filter_name: str):
-        return getattr(self, filter_name)
-
-    def apply_filters(self):
-        self.common_filters_fields.apply_filters_button.click()
-
-    def clear_all(self):
-        self.common_filters_fields.clear_all_filters_button.click()
