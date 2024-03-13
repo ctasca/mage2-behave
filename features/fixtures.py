@@ -13,7 +13,7 @@ from stere import Stere
 from webdriver_manager.chrome import ChromeDriverManager
 from sshtunnel import SSHTunnelForwarder
 from core_config.bundle import config_parser, SECTIONS, context_development_environment
-from utils import screenshots, docker_env, create_tests_database
+from utils import screenshots, docker_env
 # noinspection PyPackageRequirements
 from decouple import config
 
@@ -58,6 +58,9 @@ def splinter_browser_chrome_headless(context):
 
 @fixture
 def warden_maria_db_connect(context):
+    """
+    Connection is made to configured test database name via root user and password
+    """
     server = None
     try:
         home = expanduser("~")
@@ -70,43 +73,28 @@ def warden_maria_db_connect(context):
             (ssh_host, ssh_port),
             ssh_username=ssh_user,
             ssh_pkey=pkey,
-            remote_bind_address=(remote_db_host, int(context.db_port))
+            remote_bind_address=(remote_db_host, int(context.db_port)),
+            set_keepalive=100000
         )
         server.start()
         conn = mariadb.connect(
-            user=context.db_user,
-            password=context.db_password,
+            user=context.db_root_user,
+            password=context.db_root_password,
             host=context.db_host,
             port=server.local_bind_port,
-            database=context.db_name,
+            database=context.db_test_name,
             connect_timeout=int(context.db_connection_timeout),
             read_timeout=int(context.db_read_timeout),
             write_timeout=int(context.db_write_timeout)
         )
-        # todo move in before scenario fixture
-        if context.use_test_db:
-            conn.cursor().execute(f'USE {context.db_test_name}')
+        conn.autocommit = True
         context.conn = conn
         yield context.conn
-        # -- CLEANUP-FIXTURE PART:
+    except mariadb.Error as e:
+        print(f"Error connecting to MariaDB Platform: {e}")
         context.conn.cursor().close()
         context.conn.close()
         server.stop()
-    except mariadb.Error as e:
-        print(f"Error connecting to MariaDB Platform: {e}")
-        server.stop()
-
-
-# noinspection PyUnusedLocal
-@fixture
-def recreate_development_test_db(context):
-    create_tests_database.execute()
-
-
-# noinspection PyUnusedLocal
-@fixture
-def use_development_test_db(context):
-    context.use_test_db = True
 
 
 # noinspection PyUnusedLocal
@@ -270,6 +258,7 @@ def _set_integration_environment(context):
     context.db_host = config_parser.get(SECTIONS.get('integration'), 'INTEGRATION_DB_HOST')
     context.db_port = config_parser.get(SECTIONS.get('integration'), 'INTEGRATION_DB_PORT')
     context.db_user = config_parser.get(SECTIONS.get('integration'), 'INTEGRATION_DB_USER')
+    context.db_root_user = config_parser.get(SECTIONS.get('integration'), 'INTEGRATION_DB_ROOT_USER')
     context.db_connection_timeout = config_parser.get(SECTIONS.get('integration'), 'INTEGRATION_DB_CONNECTION_TIMEOUT')
     context.db_read_timeout = config_parser.get(SECTIONS.get('integration'), 'INTEGRATION_DB_READ_TIMEOUT')
     context.db_write_timeout = config_parser.get(SECTIONS.get('integration'), 'INTEGRATION_DB_WRITE_TIMEOUT')
@@ -277,6 +266,7 @@ def _set_integration_environment(context):
                                                             'INTEGRATION_DB_REMOTE_BIND_ADDRESS_HOST')
     context.db_remote_host_port = config_parser.get(SECTIONS.get('integration'), 'INTEGRATION_DB_REMOTE_HOST_PORT')
     context.db_password = config('integration_db_password')
+    context.db_root_password = config('integration_db_root_password')
 
 
 def _set_test_environment(context):
@@ -288,6 +278,7 @@ def _set_test_environment(context):
     context.db_host = config_parser.get(SECTIONS.get('test'), 'TEST_DB_HOST')
     context.db_port = config_parser.get(SECTIONS.get('test'), 'TEST_DB_PORT')
     context.db_user = config_parser.get(SECTIONS.get('test'), 'TEST_DB_USER')
+    context.db_root_user = config_parser.get(SECTIONS.get('test'), 'TEST_DB_ROOT_USER')
     context.db_connection_timeout = config_parser.get(SECTIONS.get('test'), 'TEST_DB_CONNECTION_TIMEOUT')
     context.db_read_timeout = config_parser.get(SECTIONS.get('test'), 'TEST_DB_READ_TIMEOUT')
     context.db_write_timeout = config_parser.get(SECTIONS.get('test'), 'TEST_DB_WRITE_TIMEOUT')
@@ -295,6 +286,7 @@ def _set_test_environment(context):
                                                             'TEST_DB_REMOTE_BIND_ADDRESS_HOST')
     context.db_remote_host_port = config_parser.get(SECTIONS.get('test'), 'TEST_DB_REMOTE_HOST_PORT')
     context.db_password = config('test_db_password')
+    context.db_root_password = config('test_db_root_password')
 
 
 def _set_staging_environment(context):
@@ -306,6 +298,7 @@ def _set_staging_environment(context):
     context.db_host = config_parser.get(SECTIONS.get('stage'), 'STAGING_DB_HOST')
     context.db_port = config_parser.get(SECTIONS.get('stage'), 'STAGING_DB_PORT')
     context.db_user = config_parser.get(SECTIONS.get('stage'), 'STAGING_DB_USER')
+    context.db_root_user = config_parser.get(SECTIONS.get('stage'), 'STAGING_DB_ROOT_USER')
     context.db_connection_timeout = config_parser.get(SECTIONS.get('stage'), 'STAGING_DB_CONNECTION_TIMEOUT')
     context.db_read_timeout = config_parser.get(SECTIONS.get('stage'), 'STAGING_DB_READ_TIMEOUT')
     context.db_write_timeout = config_parser.get(SECTIONS.get('stage'), 'STAGING_DB_WRITE_TIMEOUT')
@@ -313,6 +306,7 @@ def _set_staging_environment(context):
                                                             'STAGING_DB_REMOTE_BIND_ADDRESS_HOST')
     context.db_remote_host_port = config_parser.get(SECTIONS.get('stage'), 'STAGING_DB_REMOTE_HOST_PORT')
     context.db_password = config('staging_db_password')
+    context.db_root_password = config('staging_db_root_password')
 
 
 def _set_pre_production_environment(context):
@@ -323,7 +317,8 @@ def _set_pre_production_environment(context):
     context.admin_password = config('pre_production_admin_password')
     context.db_host = config_parser.get(SECTIONS.get('pre_prod'), 'PRE_PRODUCTION_DB_HOST')
     context.db_port = config_parser.get(SECTIONS.get('pre_prod'), 'PRE_PRODUCTION_DB_PORT')
-    context.db_user = config_parser.get(SECTIONS.get('pre_prod'), 'PRE_PRODUCTION_DB_USER')
+    context.db_root_user = config_parser.get(SECTIONS.get('pre_prod'), 'PRE_PRODUCTION_DB_USER')
+    context.db_root_user = config_parser.get(SECTIONS.get('pre_prod'), 'PRE_PRODUCTION_DB_ROOT_USER')
     context.db_connection_timeout = config_parser.get(SECTIONS.get('pre_prod'), 'PRE_PRODUCTION_DB_CONNECTION_TIMEOUT')
     context.db_read_timeout = config_parser.get(SECTIONS.get('pre_prod'), 'PRE_PRODUCTION_DB_READ_TIMEOUT')
     context.db_write_timeout = config_parser.get(SECTIONS.get('pre_prod'), 'PRE_PRODUCTION_DB_WRITE_TIMEOUT')
@@ -331,6 +326,7 @@ def _set_pre_production_environment(context):
                                                             'PRE_PRODUCTION_DB_REMOTE_BIND_ADDRESS_HOST')
     context.db_remote_host_port = config_parser.get(SECTIONS.get('pre_prod'), 'PRE_PRODUCTION_DB_REMOTE_HOST_PORT')
     context.db_password = config('pre_production_db_password')
+    context.db_root_password = config('pre_production_db_root_password')
 
 
 def _set_production_environment(context):

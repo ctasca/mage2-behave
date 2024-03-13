@@ -10,8 +10,8 @@ from decouple import config
 container_id = container_id_search(config_parser.get(SECTIONS.get('docker'), 'DB_SERVICE'))
 
 db_name = config_parser.get(SECTIONS.get('dev'), 'DEVELOPMENT_DB_NAME')
-db_user = config_parser.get(SECTIONS.get('dev'), 'DEVELOPMENT_DB_USER')
-db_password = config('development_db_password')
+db_root_user = config_parser.get(SECTIONS.get('dev'), 'DEVELOPMENT_DB_ROOT_USER')
+db_root_password = config('development_db_root_password')
 now = datetime.now()
 date_time_str = now.strftime("%Y-%m-%d_%H-%M-%S")
 dump_file_name = f'dump_{date_time_str}.sql'
@@ -22,7 +22,7 @@ dump_abs_path = os.path.join(dumps_dir, dump_file_name)
 
 def _dump_database():
     dump_command = (f"docker exec {container_id} "
-                    f"mysqldump -u {db_user} -p{db_password} {db_name} > '/tmp/{dump_file_name}'")
+                    f"mysqldump -u {db_root_user} -p{db_root_password} {db_name} > '/tmp/{dump_file_name}'")
     subprocess.run(dump_command, shell=True)
 
 
@@ -34,16 +34,16 @@ def _copy_dump_to_project():
 
 
 def _create_database_and_import_dump(new_db_name):
-    drop_db_command = (f"docker exec {container_id} mysql -u{db_user} -p{db_password} -e "
+    drop_db_command = (f"docker exec {container_id} mysql -u{db_root_user} -p{db_root_password} -e "
                        f"'DROP DATABASE IF EXISTS {new_db_name};'")
     subprocess.run(drop_db_command, shell=True)
     # Command to create a new database
-    create_db_command = (f"docker exec {container_id} mysql -u{db_user} -p{db_password} -e "
+    create_db_command = (f"docker exec {container_id} mysql -u{db_root_user} -p{db_root_password} -e "
                          f"'CREATE DATABASE {new_db_name};'")
     subprocess.run(create_db_command, shell=True)
 
     # Command to import dump into the newly created database
-    import_dump_command = (f"docker exec -i {container_id} mysql -u{db_user} -p{db_password} {new_db_name} "
+    import_dump_command = (f"docker exec -i {container_id} mysql -u{db_root_user} -p{db_root_password} {new_db_name} "
                            f"< {dump_abs_path}")
     subprocess.run(import_dump_command, shell=True)
 
@@ -51,7 +51,13 @@ def _create_database_and_import_dump(new_db_name):
     subprocess.run(rm_command, shell=True)
 
 
-def execute():
+def tear_up():
     _dump_database()
     _copy_dump_to_project()
     _create_database_and_import_dump(tests_db_name)
+
+
+def tear_down():
+    drop_db_command = (f"docker exec {container_id} mysql -u{db_root_user} -p{db_root_password} -e "
+                       f"'DROP DATABASE IF EXISTS {tests_db_name};'")
+    subprocess.run(drop_db_command, shell=True)

@@ -33,6 +33,7 @@ def context_development_environment(context, config):
     context.db_host = config_parser.get(SECTIONS.get('dev'), 'DEVELOPMENT_DB_HOST')
     context.db_port = config_parser.get(SECTIONS.get('dev'), 'DEVELOPMENT_DB_PORT')
     context.db_user = config_parser.get(SECTIONS.get('dev'), 'DEVELOPMENT_DB_USER')
+    context.db_root_user = config_parser.get(SECTIONS.get('dev'), 'DEVELOPMENT_DB_ROOT_USER')
     context.db_name = config_parser.get(SECTIONS.get('dev'), 'DEVELOPMENT_DB_NAME')
     context.db_connection_timeout = config_parser.get(SECTIONS.get('dev'), 'DEVELOPMENT_DB_CONNECTION_TIMEOUT')
     context.db_read_timeout = config_parser.get(SECTIONS.get('dev'), 'DEVELOPMENT_DB_READ_TIMEOUT')
@@ -41,9 +42,9 @@ def context_development_environment(context, config):
                                                             'DEVELOPMENT_DB_REMOTE_BIND_ADDRESS_HOST')
     context.db_remote_host_port = config_parser.get(SECTIONS.get('dev'), 'DEVELOPMENT_DB_REMOTE_HOST_PORT')
     context.db_password = config('development_db_password')
+    context.db_root_password = config('development_db_root_password')
     context.warden_tunnel_ssh_key = config_parser.get(SECTIONS.get('docker'), 'WARDEN_TUNNEL_SSH_KEY')
     context.warden_tunnel_ssh_host = config_parser.get(SECTIONS.get('docker'), 'WARDEN_TUNNEL_SSH_HOST')
     context.warden_tunnel_ssh_user = config_parser.get(SECTIONS.get('docker'), 'WARDEN_TUNNEL_SSH_USER')
     context.warden_tunnel_ssh_port = config_parser.get(SECTIONS.get('docker'), 'WARDEN_TUNNEL_SSH_PORT')
     context.db_test_name = config_parser.get(SECTIONS.get('dev'), 'DEVELOPMENT_DB_TEST_NAME')
-    context.use_test_db = False

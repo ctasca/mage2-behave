@@ -11,3 +11,4 @@ stere>=0.31.0
 colorama
 python-decouple>=3.8
 docker
+urllib3<2.0.0

@@ -1,7 +1,3 @@
-@fixture.recreate.development.test.db
-@fixture.use.development.test.db
-@fixture.warden.maria.db.connect
-@fixture.integration.admin.token
 @fixture.before.cleanup.screenshots
 Feature: As a mage2-behave developer I want to test the functionality of my code So That I can assure all is properly working
 
@@ -40,7 +36,7 @@ Feature: As a mage2-behave developer I want to test the functionality of my code
         And I sign in
         Then I should see a dashboard header
 
-        @ss
+    @ss
     @backend
     @fixture.splinter.browser.chrome.headless
     Scenario: Admin login and click the Sales menu item
@@ -204,6 +200,7 @@ Feature: As a mage2-behave developer I want to test the functionality of my code
         Then I want to be able to choose and view the store statistics tabs
 
     @api
+    @fixture.integration.admin.token
     Scenario: Create an amin user integration bearer token
         Given I have made an integration admin token request
         Then I expect a successful response
@@ -233,14 +230,3 @@ Feature: As a mage2-behave developer I want to test the functionality of my code
     @bin.magento
     Scenario: Configured docker php-fpm service container executes bin/magento commands
         Given I have flushed the magento cache
-
-    @db
-    Scenario: I can connect to warden MariaDB
-        Given I am successfully connected to the Magento MariaDB database
-        Then I want to be able to execute a select query
-
-    @db
-    Scenario: I can connect to warden MariaDB test database
-        Given I am successfully connected to the Magento MariaDB database
-        Then I want to be able to execute an update query against the test database
-        And the environment database data must not have been modified

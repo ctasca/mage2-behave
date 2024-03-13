@@ -10,10 +10,6 @@ def core_before_all(context):
 
 
 def core_before_feature(context, feature):
-    if "fixture.recreate.development.test.db" in feature.tags:
-        use_fixture(recreate_development_test_db, context)
-    if "fixture.use.development.test.db" in feature.tags:
-        use_fixture(use_development_test_db, context)
     if "fixture.warden.maria.db.connect" in feature.tags:
         use_fixture(warden_maria_db_connect, context)
     _skip(context, feature, 'feature')

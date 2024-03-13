@@ -49,3 +49,8 @@ class AdminMenu(Area):
 
     def get_link(self, link: str):
         return getattr(self, link)
+
+    def click_link(self, link: str, implicit_wait: int = 10):
+        link = self.get_link(link)
+        link.is_clickable(implicit_wait)
+        link.click()

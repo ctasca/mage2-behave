@@ -1,4 +1,3 @@
-import mariadb
 from behave import *
 from features.core_config.backend.locators.admin_submenus import *
 from features.pages.backend.dashboard import Dashboard
@@ -9,22 +8,23 @@ from features.pages.backend.sales_orders_grid import SalesOrdersGrid
 @when(u'I click the "{item}" menu item')
 def step_impl(context, item):
     with Dashboard() as page:
+        admin_menu = page.admin_menu
         if item == 'Sales':
-            page.admin_menu.get_link('sales').click()
+            admin_menu.click_link('sales')
         if item == 'Catalog':
-            page.admin_menu.get_link('catalog').click()
+            admin_menu.click_link('catalog')
         if item == 'Customers':
-            page.admin_menu.get_link('customers').click()
+            admin_menu.click_link('customers')
         if item == 'Marketing':
-            page.admin_menu.get_link('marketing').click()
+            admin_menu.click_link('marketing')
         if item == 'Content':
-            page.admin_menu.get_link('content').click()
+            admin_menu.click_link('content')
         if item == 'Reports':
-            page.admin_menu.get_link('reports').click()
+            admin_menu.click_link('reports')
         if item == 'Stores':
-            page.admin_menu.get_link('stores').click()
+            admin_menu.click_link('stores')
         if item == 'System':
-            page.admin_menu.get_link('system').click()
+            admin_menu.click_link('system')
 
 
 @then(u'I should see the "{item}" submenu links')
@@ -301,38 +301,3 @@ def step_impl(context):
     with SalesOrdersGrid() as page:
         page.grid_rows.wait_for_spinner()
         page.grid_rows.click_row_checkbox(2, True)
-
-
-@given("I am successfully connected to the Magento MariaDB database")
-def step_impl(context):
-    assert context.conn is not None
-
-
-@then("I want to be able to execute a select query")
-def step_impl(context):
-    cur = context.conn.cursor()
-    cur.execute("SELECT ccd.value FROM core_config_data ccd WHERE path = ?", ('catalog/search/engine',))
-    search_engine = cur.fetchone()[0]
-    assert search_engine == 'opensearch'
-
-
-@then("I want to be able to execute an update query against the test database")
-def step_impl(context):
-    try:
-        cur = context.conn.cursor()
-        cur.execute("UPDATE core_config_data ccd SET ccd.value = 'dummy' WHERE ccd.path = 'catalog/search/engine'")
-        context.conn.commit()
-        cur.execute("SELECT ccd.value FROM core_config_data ccd WHERE path = ?", ('catalog/search/engine', ))
-        search_engine = cur.fetchone()[0]
-        assert search_engine == 'dummy'
-    except mariadb.Error:
-        context.conn.rollback()
-
-
-@step("the environment database data must not have been modified")
-def step_impl(context):
-    cur = context.conn.cursor()
-    cur.execute('USE magento')
-    cur.execute("SELECT ccd.value FROM core_config_data ccd WHERE path = ?", ('catalog/search/engine',))
-    search_engine = cur.fetchone()[0]
-    assert search_engine == 'opensearch'
