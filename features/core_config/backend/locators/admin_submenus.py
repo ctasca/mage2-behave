@@ -2,7 +2,6 @@ from typing import Dict
 
 from features.core_config.strategies import STRATEGY_KEY, CSS_STRATEGY, LOCATOR_KEY
 
-SALES_SUBMENU: str = 'sales'
 SALES_SUBMENU_ORDERS_LINK_LOCATOR: Dict[str, str] = {STRATEGY_KEY: CSS_STRATEGY, LOCATOR_KEY: ".item-sales-order"}
 SALES_SUBMENU_INVOICES_LINK_LOCATOR: Dict[str, str] = {STRATEGY_KEY: CSS_STRATEGY, LOCATOR_KEY: ".item-sales-order"}
 SALES_SUBMENU_SHIPMENTS_LINK_LOCATOR: Dict[str, str] = {STRATEGY_KEY: CSS_STRATEGY, LOCATOR_KEY: ".item-sales-shipment"}
@@ -14,12 +13,10 @@ SALES_SUBMENU_TRANSACTIONS_LINK_LOCATOR: Dict[str, str] = \
     {STRATEGY_KEY: CSS_STRATEGY, LOCATOR_KEY: ".item-sales-transactions"}
 SALES_SUBMENU_VIRTUAL_TERMINAL_LINK_LOCATOR: Dict[str, str] = \
     {STRATEGY_KEY: CSS_STRATEGY, LOCATOR_KEY: ".item-virtual-terminal"}
-CATALOG_SUBMENU: str = 'catalog'
 CATALOG_SUBMENU_PRODUCTS_LINK_LOCATOR: Dict[str, str] = \
     {STRATEGY_KEY: CSS_STRATEGY, LOCATOR_KEY: ".item-catalog-products"}
 CATALOG_SUBMENU_CATEGORIES_LINK_LOCATOR: Dict[str, str] = \
     {STRATEGY_KEY: CSS_STRATEGY, LOCATOR_KEY: ".item-catalog-categories"}
-CUSTOMERS_SUBMENU: str = 'customers'
 CUSTOMERS_SUBMENU_ALL_CUSTOMERS_LINK_LOCATOR: Dict[str, str] = \
     {STRATEGY_KEY: CSS_STRATEGY, LOCATOR_KEY: ".item-customer-manage"}
 CUSTOMERS_SUBMENU_ONLINE_LINK_LOCATOR: Dict[str, str] = \
@@ -28,7 +25,6 @@ CUSTOMERS_SUBMENU_AS_CUSTOMER_LOG_LINK_LOCATOR: Dict[str, str] = \
     {STRATEGY_KEY: CSS_STRATEGY, LOCATOR_KEY: ".item-login-log"}
 CUSTOMERS_SUBMENU_GROUPS_LINK_LOCATOR: Dict[str, str] = \
     {STRATEGY_KEY: CSS_STRATEGY, LOCATOR_KEY: ".item-customer-group"}
-MARKETING_SUBMENU: str = 'marketing'
 MARKETING_SUBMENU_CATALOG_PRICE_RULE_LINK_LOCATOR: Dict[str, str] = \
     {STRATEGY_KEY: CSS_STRATEGY, LOCATOR_KEY: ".item-promo-catalog"}
 MARKETING_SUBMENU_CART_PRICE_RULES_LINK_LOCATOR: Dict[str, str] = \
@@ -53,7 +49,6 @@ MARKETING_SUBMENU_ALL_REVIEWS_LINK_LOCATOR: Dict[str, str] = \
     {STRATEGY_KEY: CSS_STRATEGY, LOCATOR_KEY: ".item-catalog-reviews-ratings-reviews-all"}
 MARKETING_SUBMENU_PENDING_REVIEWS_LINK_LOCATOR: Dict[str, str] = \
     {STRATEGY_KEY: CSS_STRATEGY, LOCATOR_KEY: ".item-catalog-reviews-ratings-pending"}
-CONTENT_SUBMENU: str = 'content'
 CONTENT_SUBMENU_PAGES_LINK_LOCATOR: Dict[str, str] = {STRATEGY_KEY: CSS_STRATEGY, LOCATOR_KEY: ".item-cms-page"}
 CONTENT_SUBMENU_BLOCKS_LINK_LOCATOR: Dict[str, str] = {STRATEGY_KEY: CSS_STRATEGY, LOCATOR_KEY: ".item-cms-block"}
 CONTENT_SUBMENU_WIDGETS_LINK_LOCATOR: Dict[str, str] = \
@@ -67,7 +62,6 @@ CONTENT_SUBMENU_DESIGN_THEMES_LINK_LOCATOR: Dict[str, str] = \
     {STRATEGY_KEY: CSS_STRATEGY, LOCATOR_KEY: ".item-system-design-theme"}
 CONTENT_SUBMENU_DESIGN_SCHEDULE_LINK_LOCATOR: Dict[str, str] = \
     {STRATEGY_KEY: CSS_STRATEGY, LOCATOR_KEY: ".item-system-design-schedule"}
-REPORTS_SUBMENU: str = 'reports'
 REPORTS_SUBMENU_PRODUCTS_IN_CART_LINK_LOCATOR: Dict[str, str] = \
     {STRATEGY_KEY: CSS_STRATEGY, LOCATOR_KEY: ".item-report-shopcart-product"}
 REPORTS_SUBMENU_SEARCH_TERMS_LINK_LOCATOR: Dict[str, str] = \
@@ -118,7 +112,6 @@ REPORTS_SUBMENU_ADVANCED_REPORTING_LINK_LOCATOR: Dict[str, str] = \
     {STRATEGY_KEY: CSS_STRATEGY, LOCATOR_KEY: ".item-report-products-sold"}
 REPORTS_SUBMENU_BI_ESSENTIALS_LINK_LOCATOR: Dict[str, str] = \
     {STRATEGY_KEY: CSS_STRATEGY, LOCATOR_KEY: ".item-bi-essentials"}
-STORES_SUBMENU: str = 'stores'
 STORES_SUBMENU_ALL_STORES_LINK_LOCATOR: Dict[str, str] = {STRATEGY_KEY: CSS_STRATEGY, LOCATOR_KEY: ".item-system-store"}
 STORES_SUBMENU_CONFIGURATION_LINK_LOCATOR: Dict[str, str] = \
     {STRATEGY_KEY: CSS_STRATEGY, LOCATOR_KEY: ".item-system-config"}
@@ -142,7 +135,6 @@ STORES_SUBMENU_ATTRIBUTE_SET_LINK_LOCATOR: Dict[str, str] = \
     {STRATEGY_KEY: CSS_STRATEGY, LOCATOR_KEY: ".item-catalog-attributes-sets"}
 STORES_SUBMENU_RATING_LINK_LOCATOR: Dict[str, str] = \
     {STRATEGY_KEY: CSS_STRATEGY, LOCATOR_KEY: ".item-catalog-reviews-ratings-ratings"}
-SYSTEM_SUBMENU: str = 'system'
 SYSTEM_SUBMENU_IMPORT_LINK_LOCATOR: Dict[str, str] = \
     {STRATEGY_KEY: CSS_STRATEGY, LOCATOR_KEY: ".item-system-convert-import"}
 SYSTEM_SUBMENU_EXPORT_LINK_LOCATOR: Dict[str, str] = \

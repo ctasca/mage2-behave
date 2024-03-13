@@ -1,5 +1,4 @@
 from behave import *
-from features.core_config.backend.locators.admin_submenus import *
 from features.pages.backend.dashboard import Dashboard
 from features.pages.backend.customers_grid import CustomersGrid
 from features.pages.backend.sales_orders_grid import SalesOrdersGrid
@@ -10,56 +9,57 @@ def step_impl(context, item):
     with Dashboard() as page:
         admin_menu = page.admin_menu
         if item == 'Sales':
-            admin_menu.click_link('sales')
+            admin_menu.click_link(admin_menu.SALES)
         if item == 'Catalog':
-            admin_menu.click_link('catalog')
+            admin_menu.click_link(admin_menu.CATALOG)
         if item == 'Customers':
-            admin_menu.click_link('customers')
+            admin_menu.click_link(admin_menu.CUSTOMERS)
         if item == 'Marketing':
-            admin_menu.click_link('marketing')
+            admin_menu.click_link(admin_menu.MARKETING)
         if item == 'Content':
-            admin_menu.click_link('content')
+            admin_menu.click_link(admin_menu.CONTENT)
         if item == 'Reports':
-            admin_menu.click_link('reports')
+            admin_menu.click_link(admin_menu.REPORTS)
         if item == 'Stores':
-            admin_menu.click_link('stores')
+            admin_menu.click_link(admin_menu.STORES)
         if item == 'System':
-            admin_menu.click_link('system')
+            admin_menu.click_link(admin_menu.SYSTEM)
 
 
 @then(u'I should see the "{item}" submenu links')
 def step_impl(context, item):
     with Dashboard() as page:
+        menu = page.admin_menu
         if item == "Sales":
-            sales_submenu_links = page.admin_menu.submenu(SALES_SUBMENU).links()
+            sales_submenu_links = menu.submenu(menu.SALES).links()
             assert all(link.is_visible(10) for link in sales_submenu_links)
 
         if item == 'Catalog':
-            catalog_submenu_links = page.admin_menu.submenu(CATALOG_SUBMENU).links()
+            catalog_submenu_links = menu.submenu(menu.CATALOG).links()
             assert all(link.is_visible(10) for link in catalog_submenu_links)
 
         if item == 'Customers':
-            customer_submenu_links = page.admin_menu.submenu(CUSTOMERS_SUBMENU).links()
+            customer_submenu_links = menu.submenu(menu.CUSTOMERS).links()
             assert all(link.is_visible(10) for link in customer_submenu_links)
 
         if item == 'Marketing':
-            marketing_submenus_links = page.admin_menu.submenu(MARKETING_SUBMENU).links()
+            marketing_submenus_links = menu.submenu(menu.MARKETING).links()
             assert all(link.is_visible(10) for link in marketing_submenus_links)
 
         if item == 'Content':
-            content_submenus_links = page.admin_menu.submenu(CONTENT_SUBMENU).links()
+            content_submenus_links = menu.submenu(menu.CONTENT).links()
             assert all(link.is_visible(10) for link in content_submenus_links)
 
         if item == 'Reports':
-            report_submenus_links = page.admin_menu.submenu(REPORTS_SUBMENU).links()
+            report_submenus_links = menu.submenu(menu.REPORTS).links()
             assert all(link.is_visible(10) for link in report_submenus_links)
 
         if item == 'Stores':
-            stores_submenus_links = page.admin_menu.submenu(STORES_SUBMENU).links()
+            stores_submenus_links = menu.submenu(menu.STORES).links()
             assert all(link.is_visible(10) for link in stores_submenus_links)
 
         if item == 'System':
-            system_submenus_links = page.admin_menu.submenu(SYSTEM_SUBMENU).links()
+            system_submenus_links = menu.submenu(menu.SYSTEM).links()
             assert all(link.is_visible(10) for link in system_submenus_links)
 
 
@@ -77,8 +77,8 @@ def step_impl(context):
 @then("I want to be able to choose and view the diagram tabs")
 def step_impl(context):
     with Dashboard() as page:
-        assert page.dashboard_diagram.orders_tab.is_visible(10) is True
-        assert page.dashboard_diagram.amounts_tab.is_visible(10) is True
+        assert page.dashboard_diagram.orders_tab.is_clickable(10) is True
+        assert page.dashboard_diagram.amounts_tab.is_clickable(10) is True
         page.dashboard_diagram.orders_tab.click()
         page.dashboard_diagram.amounts_tab.click()
 
@@ -86,10 +86,10 @@ def step_impl(context):
 @then("I want to be able to choose and view the store statistics tabs")
 def step_impl(context):
     with Dashboard() as page:
-        assert page.dashboard_store_stats.bestsellers_tab.is_visible(10) is True
-        assert page.dashboard_store_stats.most_viewed_products_tab.is_visible(10) is True
-        assert page.dashboard_store_stats.new_customers_tab.is_visible(10) is True
-        assert page.dashboard_store_stats.customers_tab.is_visible(10) is True
+        assert page.dashboard_store_stats.bestsellers_tab.is_clickable(10) is True
+        assert page.dashboard_store_stats.most_viewed_products_tab.is_clickable(10) is True
+        assert page.dashboard_store_stats.new_customers_tab.is_clickable(10) is True
+        assert page.dashboard_store_stats.customers_tab.is_clickable(10) is True
         page.dashboard_store_stats.bestsellers_tab.click()
         page.dashboard_store_stats.most_viewed_products_tab.click()
         page.dashboard_store_stats.new_customers_tab.click()

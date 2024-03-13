@@ -9,7 +9,9 @@ class Modal(Area):
         self.cancel_button = ModalCancelButton()
 
     def click_ok_button(self):
+        self.ok_button.is_clickable(10)
         self.ok_button.click()
 
     def click_cancel_button(self):
+        self.cancel_button.is_clickable(10)
         self.cancel_button.click()

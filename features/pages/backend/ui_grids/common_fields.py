@@ -64,19 +64,23 @@ class GridCommonFiltersFields(UiGridFiltersInterface):
 
     def fulltext_search(self, search_text: str):
         self.fulltext_search_input.fill(search_text)
+        self.fulltext_search_button.is_clickable(10)
         self.fulltext_search_button.click()
 
     def start_filtering(self):
+        self.filters_button.is_clickable(10)
         self.filters_button.click()
 
     def get_filter(self, filter_name: str):
         return getattr(self, filter_name)
 
     def apply_filters(self, implicit_wait: int = 0):
+        self.apply_filters_button.is_clickable(10)
         self.apply_filters_button.click()
         time.sleep(implicit_wait)
 
     def clear_all(self, implicit_wait: int = 0):
+        self.clear_all_filters_button.is_clickable(10)
         self.clear_all_filters_button.click()
         time.sleep(implicit_wait)
 
@@ -89,12 +93,14 @@ class GridCommonActionsFields(UiGridActionsInterface):
         self.submenu_actions_list = GridSubmenuActionsList()
 
     def click_actions_button(self):
+        self.actions_button.is_clickable(10)
         self.actions_button.click()
 
     def click_action(self, action_name: str):
         actions = self.actions_list.children()
         for action in actions:
             if action.action.text == action_name:
+                action.action.is_clickable(10)
                 action.action.click()
                 break
 
@@ -102,6 +108,7 @@ class GridCommonActionsFields(UiGridActionsInterface):
         actions = self.submenu_actions_list.children()
         for action in actions:
             if action.action.text == action_name:
+                action.action.is_clickable(10)
                 action.action.click()
                 break
 

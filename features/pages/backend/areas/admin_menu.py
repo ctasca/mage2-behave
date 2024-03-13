@@ -13,6 +13,16 @@ from .admin_menu_submenus.system_submenu import SystemSubmenu
 
 
 class AdminMenu(Area):
+    DASHBOARD = 'dashboard'
+    SALES = 'sales'
+    CATALOG = 'catalog'
+    CUSTOMERS = 'customers'
+    MARKETING = 'marketing'
+    CONTENT = 'content'
+    REPORTS = 'reports'
+    STORES = 'stores'
+    SYSTEM = 'system'
+
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.dashboard = Link(ADMIN_MENU_DASHBOARD_LINK_LOCATOR[STRATEGY_KEY],
@@ -34,14 +44,14 @@ class AdminMenu(Area):
         self.system = Link(ADMIN_MENU_SYSTEM_LINK_LOCATOR[STRATEGY_KEY],
                            ADMIN_MENU_SYSTEM_LINK_LOCATOR[LOCATOR_KEY])
         self.submenus = {
-            SALES_SUBMENU: SalesSubmenu(),
-            CATALOG_SUBMENU: CatalogSubmenu(),
-            CUSTOMERS_SUBMENU: CustomersSubmenu(),
-            MARKETING_SUBMENU: MarketingSubmenu(),
-            CONTENT_SUBMENU: ContentSubmenu(),
-            REPORTS_SUBMENU: ReportsSubmenu(),
-            STORES_SUBMENU: StoresSubmenu(),
-            SYSTEM_SUBMENU: SystemSubmenu()
+            self.SALES: SalesSubmenu(),
+            self.CATALOG: CatalogSubmenu(),
+            self.CUSTOMERS: CustomersSubmenu(),
+            self.MARKETING: MarketingSubmenu(),
+            self.CONTENT: ContentSubmenu(),
+            self.REPORTS: ReportsSubmenu(),
+            self.STORES: StoresSubmenu(),
+            self.SYSTEM: SystemSubmenu()
         }
 
     def submenu(self, key: str):

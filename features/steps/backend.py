@@ -2,7 +2,6 @@
 from behave import *
 from features.pages.backend.login import Login
 from features.pages.backend.dashboard import Dashboard
-from features.core_config.backend.locators.admin_submenus import (SALES_SUBMENU, CUSTOMERS_SUBMENU)
 
 
 @given(u'I am on the admin login page')
@@ -47,15 +46,17 @@ def step_impl(context):
 @when(u'I want to view all my customers')
 def step_impl(context):
     with Dashboard() as page:
-        page.admin_menu.customers.click()
-        page.admin_menu.submenu(CUSTOMERS_SUBMENU).all_customers.click()
+        menu = page.admin_menu
+        menu.click_link(menu.CUSTOMERS)
+        menu.submenu(menu.CUSTOMERS).all_customers.click()
 
 
 @when(u'I want to view all orders')
 def step_impl(context):
     with Dashboard() as page:
-        page.admin_menu.sales.click()
-        page.admin_menu.submenu(SALES_SUBMENU).orders.click()
+        menu = page.admin_menu
+        menu.click_link(menu.SALES)
+        menu.submenu(menu.SALES).orders.click()
 
 
 @then(u'I should be viewing the customer grid')
