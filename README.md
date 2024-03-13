@@ -47,6 +47,18 @@ While PHP has served as a strong language for web development over the years, Py
 
 Remember, the decision between Python and PHP depends on the requirements of the project, and each has its strengths. However, for mage2-behave, Python's strengths align more closely with the project's goals and needs.
 
+## Testing Overview 
+
+During the execution of our tests, it is vital to ensure that the integrity of our production data remains uncompromised. For this, we have put in place a system wherein the tests are performed on a separate, duplicate database. 
+
+### Protecting Original Database 
+
+`mage2-behave` is configured to protect the data integrity of the original database. Prior to the execution of tests, a copy of our main database is made, and all tests interact exclusively with this copy. This practice ensures that our main database stays unaltered, and no unexpected data manipulation occurs.
+
+By executing tests on a copy of the database, we ensure both the reliability of our tests and the safety of our data. During testing, the modified database configuration (pointing to the test database) is active, ensuring all database interactions occur on the separate testing database, not on the main one.
+
+This method ensures that our production database remains guarded against unintended alterations while testing, providing us with a safe and effective testing approach.
+
 ## Setting Up a Virtual Python Environment for the mage2-behave Project
 
 1. **Installing the `virtualenv` package**
