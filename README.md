@@ -49,15 +49,20 @@ Remember, the decision between Python and PHP depends on the requirements of the
 
 ## Testing Overview 
 
-During the execution of our tests, it is vital to ensure that the integrity of our production data remains uncompromised. For this, we have put in place a system wherein the tests are performed on a separate, duplicate database. 
+During the execution of behave, it is vital to ensure that the integrity of an environment data remains uncompromised. For this, we have put in place a system wherein the tests are performed on a separate, duplicate database. 
 
 ### Protecting Original Database 
 
-`mage2-behave` is configured to protect the data integrity of the original database. Prior to the execution of tests, a copy of our main database is made, and all tests interact exclusively with this copy. This practice ensures that our main database stays unaltered, and no unexpected data manipulation occurs.
+`mage2-behave` is configured to protect the data integrity of the original database. Prior to the execution of tests, a copy of the environment main Magento 2 database is made, and all tests interact exclusively with this copy. This practice ensures that our main database stays unaltered, and no unexpected data manipulation occurs.
 
 By executing tests on a copy of the database, we ensure both the reliability of our tests and the safety of our data. During testing, the modified database configuration (pointing to the test database) is active, ensuring all database interactions occur on the separate testing database, not on the main one.
 
-This method ensures that our production database remains guarded against unintended alterations while testing, providing us with a safe and effective testing approach.
+This method ensures that environment database remains guarded against unintended alterations while testing, providing us with a safe and effective testing approach.
+
+#### IMPORTANT:
+By default `mage2-behave` performs duplication of database and configuration in Magento 2 only in development environment.
+If it is required to integrate behave in CI/CD pipelines, it is beyond the scope of this project due to the multitude of possible environments to consider, and will be needed to integrate tear-up and tear-down of the database as well as the configuration in behave `before_all` and `after_all` environment hooks.
+You can however take as a good starting point what has been done for a development environment in this project.
 
 ## Setting Up a Virtual Python Environment for the mage2-behave Project
 

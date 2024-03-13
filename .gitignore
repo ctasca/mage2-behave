@@ -7,6 +7,8 @@
 /features/core_config/dummy_customer.ini
 /features/core_config/docker_config.ini
 /features/core_config/db_config.ini
+/features/dev_tests.feature
+/features/mariadb.feature
 /.ipynb_checkpoints/
 /*.ipynb
 /screenshots/*
