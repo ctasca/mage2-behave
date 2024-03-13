@@ -1,10 +1,11 @@
 from environments.core_environment import *
 import utils.database_manager as db_manager
-from utils.behave_m2_env import copy_and_modify_env_db_data, reset_env_db_data
+from utils.behave_m2_env import verify_env, copy_and_modify_env_db_data, reset_env_db_data
 from utils.docker_env import docker_bin_magento
 
 
 def before_all(context):
+    verify_env()
     core_before_all(context)
     db_manager.tear_up()
     copy_and_modify_env_db_data(context)
