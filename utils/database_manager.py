@@ -33,7 +33,16 @@ def _copy_dump_to_project():
     subprocess.run(rm_command, shell=True)
 
 
-def _create_database_and_import_dump(new_db_name):
+def _test_db_exists(new_db_name):
+    test_db_exists = (f"docker exec {container_id} mysql -u{db_root_user} -p{db_root_password} -e "
+                      f"\"SELECT SCHEMA_NAME FROM INFORMATION_SCHEMA.SCHEMATA WHERE SCHEMA_NAME = \'{new_db_name}\';\"")
+    return subprocess.check_output(test_db_exists, shell=True)
+
+
+def _create_database_and_import_dump(context, new_db_name):
+    if _test_db_exists(new_db_name):
+        return
+
     drop_db_command = (f"docker exec {container_id} mysql -u{db_root_user} -p{db_root_password} -e "
                        f"'DROP DATABASE IF EXISTS {new_db_name};'")
     subprocess.run(drop_db_command, shell=True)
@@ -51,13 +60,15 @@ def _create_database_and_import_dump(new_db_name):
     subprocess.run(rm_command, shell=True)
 
 
-def tear_up():
-    _dump_database()
-    _copy_dump_to_project()
-    _create_database_and_import_dump(tests_db_name)
+def tear_up(context):
+    if not _test_db_exists(tests_db_name):
+        _dump_database()
+        _copy_dump_to_project()
+        _create_database_and_import_dump(context, tests_db_name)
 
 
-def tear_down():
-    drop_db_command = (f"docker exec {container_id} mysql -u{db_root_user} -p{db_root_password} -e "
-                       f"'DROP DATABASE IF EXISTS {tests_db_name};'")
-    subprocess.run(drop_db_command, shell=True)
+def tear_down(context):
+    if not context.keep_test_db:
+        drop_db_command = (f"docker exec {container_id} mysql -u{db_root_user} -p{db_root_password} -e "
+                           f"'DROP DATABASE IF EXISTS {tests_db_name};'")
+        subprocess.run(drop_db_command, shell=True)

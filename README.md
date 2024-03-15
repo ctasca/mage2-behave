@@ -59,6 +59,15 @@ By executing tests on a copy of the database, we ensure both the reliability of 
 
 This method ensures that environment database remains guarded against unintended alterations while testing, providing us with a safe and effective testing approach.
 
+During development, it might not be ideal to generate a test DB at each `behave` run. To skip dropping the db, thus reusing the test DB already generated simply run the `behave` command with the `-D keep-test-db=true` option:
+
+```shell
+behave -D keep-test-db=true ... [OTHER OPTIONS]
+```
+
+#### Keep in mind that if you do this, you may have to revert changes in the test DB to avoid failure of some tests that expects certain data.
+#### You can achieve this via `fixtures`.
+
 #### IMPORTANT:
 By default `mage2-behave` performs duplication of database and configuration in Magento 2 only in development environment.
 If it is required to integrate behave in CI/CD pipelines, it is beyond the scope of this project due to the multitude of possible environments to consider, and will be needed to integrate tear-up and tear-down of the database as well as the configuration in behave `before_all` and `after_all` environment hooks.
