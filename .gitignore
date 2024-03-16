@@ -15,3 +15,5 @@
 !/screenshots/.gitkeep
 /dumps/*
 !/dumps/.gitkeep
+/bck/*
+!/bck/.gitkeep
