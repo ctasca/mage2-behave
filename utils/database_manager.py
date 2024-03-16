@@ -33,26 +33,23 @@ def _copy_dump_to_project():
     subprocess.run(rm_command, shell=True)
 
 
-def _test_db_exists(new_db_name):
+def _test_db_exists(tests_db):
     test_db_exists = (f"docker exec {container_id} mysql -u{db_root_user} -p{db_root_password} -e "
-                      f"\"SELECT SCHEMA_NAME FROM INFORMATION_SCHEMA.SCHEMATA WHERE SCHEMA_NAME = \'{new_db_name}\';\"")
+                      f"\"SELECT SCHEMA_NAME FROM INFORMATION_SCHEMA.SCHEMATA WHERE SCHEMA_NAME = \'{tests_db}\';\"")
     return subprocess.check_output(test_db_exists, shell=True)
 
 
-def _create_database_and_import_dump(context, new_db_name):
-    if _test_db_exists(new_db_name):
-        return
-
+def _create_database_and_import_dump(tests_db):
     drop_db_command = (f"docker exec {container_id} mysql -u{db_root_user} -p{db_root_password} -e "
-                       f"'DROP DATABASE IF EXISTS {new_db_name};'")
+                       f"'DROP DATABASE IF EXISTS {tests_db};'")
     subprocess.run(drop_db_command, shell=True)
     # Command to create a new database
     create_db_command = (f"docker exec {container_id} mysql -u{db_root_user} -p{db_root_password} -e "
-                         f"'CREATE DATABASE {new_db_name};'")
+                         f"'CREATE DATABASE {tests_db};'")
     subprocess.run(create_db_command, shell=True)
 
     # Command to import dump into the newly created database
-    import_dump_command = (f"docker exec -i {container_id} mysql -u{db_root_user} -p{db_root_password} {new_db_name} "
+    import_dump_command = (f"docker exec -i {container_id} mysql -u{db_root_user} -p{db_root_password} {tests_db} "
                            f"< {dump_abs_path}")
     subprocess.run(import_dump_command, shell=True)
 
@@ -60,15 +57,14 @@ def _create_database_and_import_dump(context, new_db_name):
     subprocess.run(rm_command, shell=True)
 
 
-def tear_up(context):
+def tear_up():
     if not _test_db_exists(tests_db_name):
         _dump_database()
         _copy_dump_to_project()
-        _create_database_and_import_dump(context, tests_db_name)
+        _create_database_and_import_dump(tests_db_name)
 
 
-def tear_down(context):
-    if not context.keep_test_db:
-        drop_db_command = (f"docker exec {container_id} mysql -u{db_root_user} -p{db_root_password} -e "
-                           f"'DROP DATABASE IF EXISTS {tests_db_name};'")
-        subprocess.run(drop_db_command, shell=True)
+def tear_down():
+    drop_db_command = (f"docker exec {container_id} mysql -u{db_root_user} -p{db_root_password} -e "
+                       f"'DROP DATABASE IF EXISTS {tests_db_name};'")
+    subprocess.run(drop_db_command, shell=True)

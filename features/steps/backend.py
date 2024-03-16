@@ -59,6 +59,14 @@ def step_impl(context):
         menu.submenu(menu.SALES).orders.click()
 
 
+@when(u'I want to view the system configuration')
+def step_impl(context):
+    with Dashboard() as page:
+        menu = page.admin_menu
+        menu.click_link(menu.STORES)
+        menu.submenu(menu.STORES).configuration.click()
+
+
 @then(u'I should be viewing the customer grid')
 def step_impl(context):
     assert 'customer/' in context.browser.url
@@ -117,3 +125,17 @@ def step_impl(context):
                    {signin}
                    {view_sales_order_grid}
                ''')
+
+
+@given("I am on the system configuration page")
+def step_impl(context):
+    open_login_page = 'Given I am on the admin login page'
+    fill_fields = 'When I enter my credentials'
+    signin = 'And I sign in'
+    view_system_configuration = 'When I want to view the system configuration'
+    context.execute_steps(f'''
+                       {open_login_page}
+                       {fill_fields}
+                       {signin}
+                       {view_system_configuration}
+                   ''')

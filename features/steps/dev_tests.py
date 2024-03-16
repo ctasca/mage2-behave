@@ -2,6 +2,7 @@ from behave import *
 from features.pages.backend.dashboard import Dashboard
 from features.pages.backend.customers_grid import CustomersGrid
 from features.pages.backend.sales_orders_grid import SalesOrdersGrid
+from features.pages.backend.system_configuration import SystemConfiguration
 
 
 @when(u'I click the "{item}" menu item')
@@ -301,3 +302,9 @@ def step_impl(context):
     with SalesOrdersGrid() as page:
         page.grid_rows.wait_for_spinner()
         page.grid_rows.click_row_checkbox(2, True)
+
+
+@then("I want to be able to choose a section tab")
+def step_impl(context):
+    with SystemConfiguration() as page:
+        page.tabs.general.click()
