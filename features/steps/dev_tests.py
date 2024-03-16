@@ -307,4 +307,6 @@ def step_impl(context):
 @then("I want to be able to choose a section tab")
 def step_impl(context):
     with SystemConfiguration() as page:
-        page.tabs.general.click()
+        tabs = page.tabs
+        tabs.click_tab(tabs.GENERAL)
+        tabs.click_tab(tabs.CATALOG)
