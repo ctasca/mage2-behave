@@ -3,6 +3,7 @@ from features.pages.backend.dashboard import Dashboard
 from features.pages.backend.customers_grid import CustomersGrid
 from features.pages.backend.sales_orders_grid import SalesOrdersGrid
 from features.pages.backend.system_configuration import SystemConfiguration
+import utils.screenshots as sc
 
 
 @when(u'I click the "{item}" menu item')
@@ -310,3 +311,18 @@ def step_impl(context):
         tabs = page.tabs
         tabs.click_tab(tabs.GENERAL)
         tabs.click_tab(tabs.CATALOG)
+        tabs.click_tab(tabs.SECURITY)
+        tabs.click_tab(tabs.CUSTOMERS)
+        tabs.click_tab(tabs.SALES)
+        tabs.click_tab(tabs.SERVICES)
+        tabs.click_tab(tabs.ADVANCED)
+
+
+@step("click a section tab link")
+def step_impl(context):
+    with SystemConfiguration() as page:
+        context.browser.reload()
+        tabs = page.tabs
+        tabs.click_tab(tabs.GENERAL)
+        general_tab = tabs.get_tab(tabs.GENERAL)
+        general_tab.click_tab_link('Currency Setup')

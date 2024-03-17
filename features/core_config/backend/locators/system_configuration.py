@@ -5,3 +5,5 @@ from features.core_config.strategies import STRATEGY_KEY, XPATH_STRATEGY, ID_STR
 TABS_ROOT_LOCATOR: Dict[str, str] = {STRATEGY_KEY: ID_STRATEGY, LOCATOR_KEY: 'system_config_tabs'}
 TAB_LOCATOR_FORMAT: Dict[str, str] = \
     {STRATEGY_KEY: XPATH_STRATEGY, LOCATOR_KEY: "//div[@id='system_config_tabs']//strong[text()='{}']"}
+TAB_LINK_LOCATOR_FORMAT: Dict[str, str] = \
+    {STRATEGY_KEY: XPATH_STRATEGY, LOCATOR_KEY: "//a[@class='admin__page-nav-link item-nav']//span[text()='{}']"}
