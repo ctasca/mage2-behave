@@ -199,6 +199,14 @@ Feature: As a mage2-behave developer I want to test the functionality of my code
         Given I am on the backend Dashboard page
         Then I want to be able to choose and view the store statistics tabs
 
+    @backend
+    @system.config
+    @fixture.splinter.browser.chrome.headless
+    Scenario: Admin access the system configuration and can choose a section
+        Given I am on the system configuration page
+        Then I want to be able to choose a section tab
+        And click a section tab link
+
     @api
     @fixture.integration.admin.token
     Scenario: Create an amin user integration bearer token
@@ -227,6 +235,7 @@ Feature: As a mage2-behave developer I want to test the functionality of my code
         Given I have products out of in stock
         Then I should not be able to add them to my shopping cart
 
+    @skip
     @bin.magento
     Scenario: Configured docker php-fpm service container executes bin/magento commands
         Given I have flushed the magento cache

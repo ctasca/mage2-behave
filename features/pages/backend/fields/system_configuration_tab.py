@@ -15,7 +15,10 @@ class SystemConfigurationTab(Field):
         link = self.get_tab_link(link_text)
         try:
             assert link.is_clickable(10) and link.is_visible(10)
-            link.click()
+            is_active = link.find_by_xpath('../..').has_class('_active')
+            # do not click if already active
+            if not is_active:
+                link.click()
         except (WebDriverException, ElementClickInterceptedException, AssertionError):
             raise Exception("Could not click tab link with text '{}'".format(link_text))
 

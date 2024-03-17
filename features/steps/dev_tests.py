@@ -326,3 +326,5 @@ def step_impl(context):
         tabs.click_tab(tabs.GENERAL)
         general_tab = tabs.get_tab(tabs.GENERAL)
         general_tab.click_tab_link('Currency Setup')
+        # test it does not click the link it is already active
+        general_tab.click_tab_link('Currency Setup')
