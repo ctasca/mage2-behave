@@ -1,3 +1,5 @@
+import time
+
 from behave import *
 from features.pages.backend.dashboard import Dashboard
 from features.pages.backend.customers_grid import CustomersGrid
@@ -350,3 +352,11 @@ def step_impl(context):
         if page.modal is not None:
             page.modal.click_ok_button()
             ss.take(context, 'modal_click', 3)
+
+
+@then("I want to be able to save the configuration")
+def step_impl(context):
+    with SystemConfiguration() as page:
+        page.save_button.click()
+        assert context.browser.is_text_present('You saved the configuration')
+        ss.take(context, 'save_button', 3)

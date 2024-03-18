@@ -212,6 +212,14 @@ Feature: As a mage2-behave developer I want to test the functionality of my code
     @system.config
     @fixture.take.screenshots
     @fixture.splinter.browser.chrome.headless
+    Scenario: Admin access the system configuration and perform save action
+        Given I am on the system configuration page
+        Then I want to be able to save the configuration
+
+    @backend
+    @system.config
+    @fixture.take.screenshots
+    @fixture.splinter.browser.chrome.headless
     Scenario: Admin access the system configuration and can switch store scope
         Given I am on the system configuration page
         When I want to change store scope
