@@ -62,7 +62,7 @@ def _regex_fixture_tag_matches(hook, fixture_tag: str) -> list:
 
 def _take_screenshots(context, tags: list) -> None:
     if "fixture.take.screenshots" in tags:
-        context.take_screenshots = True
+        use_fixture(take_screenshots, context)
 
 
 def _cleanup_screenshots(context, tags: list, hook: str) -> None:

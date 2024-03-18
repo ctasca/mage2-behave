@@ -16,6 +16,7 @@ from core_config.bundle import config_parser, SECTIONS, context_development_envi
 from utils import screenshots, docker_env
 # noinspection PyPackageRequirements
 from decouple import config
+from mariadb.connections import Connection
 
 # Install Chrome web driver by default
 driver = ChromeDriverManager().install()
@@ -57,6 +58,21 @@ def splinter_browser_chrome_headless(context):
 
 
 @fixture
+def maria_db_connect(context):
+    """
+    Connection is made to configured test database name via root user and password
+    """
+    try:
+        conn = _maria_db_connection(context, int(context.db_port))
+        context.conn = conn
+        yield context.conn
+    except mariadb.Error as e:
+        print(f"Error connecting to MariaDB Platform: {e}")
+        context.conn.cursor().close()
+        context.conn.close()
+
+
+@fixture
 def warden_maria_db_connect(context):
     """
     Connection is made to configured test database name via root user and password
@@ -77,17 +93,7 @@ def warden_maria_db_connect(context):
             set_keepalive=100000
         )
         server.start()
-        conn = mariadb.connect(
-            user=context.db_root_user,
-            password=context.db_root_password,
-            host=context.db_host,
-            port=server.local_bind_port,
-            database=context.db_test_name,
-            connect_timeout=int(context.db_connection_timeout),
-            read_timeout=int(context.db_read_timeout),
-            write_timeout=int(context.db_write_timeout)
-        )
-        conn.autocommit = True
+        conn = _maria_db_connection(context, int(server.local_bind_port))
         context.conn = conn
         yield context.conn
     except mariadb.Error as e:
@@ -95,6 +101,11 @@ def warden_maria_db_connect(context):
         context.conn.cursor().close()
         context.conn.close()
         server.stop()
+
+
+@fixture
+def take_screenshots(context):
+    context.take_screenshots = True
 
 
 # noinspection PyUnusedLocal
@@ -243,6 +254,19 @@ def _init_context_browser(context, browser_config: Config, custom_size=None) -> 
 def _clean_screenshots() -> None:
     """ Clean up the screenshots directory """
     screenshots.cleanup()
+
+
+def _maria_db_connection(context, db_port: int) -> Connection:
+    return mariadb.connect(
+        user=context.db_root_user,
+        password=context.db_root_password,
+        host=context.db_host,
+        port=db_port,
+        database=context.db_test_name,
+        connect_timeout=int(context.db_connection_timeout),
+        read_timeout=int(context.db_read_timeout),
+        write_timeout=int(context.db_write_timeout)
+    )
 
 
 def _set_development_environment(context):
