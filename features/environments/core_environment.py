@@ -10,6 +10,7 @@ def core_before_all(context):
 
 
 def core_before_feature(context, feature):
+    _take_screenshots(context, feature.tags)
     if "fixture.warden.maria.db.connect" in feature.tags:
         use_fixture(warden_maria_db_connect, context)
     _skip(context, feature, 'feature')
@@ -22,6 +23,7 @@ def core_before_feature(context, feature):
 
 
 def core_before_scenario(context, scenario):
+    _take_screenshots(context, scenario.tags)
     _skip(context, scenario, 'scenario')
     _cleanup_screenshots(context, scenario.tags, 'before')
     if "fixture.splinter.browser.chrome" in scenario.tags and not ('skip' in scenario.tags):
@@ -56,6 +58,11 @@ def core_after_feature(context, feature):
 
 def _regex_fixture_tag_matches(hook, fixture_tag: str) -> list:
     return re.findall(rf"(\b{fixture_tag}\b)+(\b[\w*-?+]+\b)+", '|'.join(hook.tags))
+
+
+def _take_screenshots(context, tags: list) -> None:
+    if "fixture.take.screenshots" in tags:
+        context.take_screenshots = True
 
 
 def _cleanup_screenshots(context, tags: list, hook: str) -> None:

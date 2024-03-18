@@ -40,3 +40,4 @@ def _environment_bootstrap(context):
     if not context.keep_cache:
         docker_bin_magento('cache:flush')
     use_fixture(warden_maria_db_connect, context)
+    context.take_screenshots = False

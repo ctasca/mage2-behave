@@ -74,7 +74,7 @@ def step_impl(context):
 def step_impl(context):
     with context.page_object as page:
         page.store_switcher.switch_to_store('Default Store View')
-        ss.take(context.browser, 'store_scope', 4)
+        ss.take(context, 'store_scope', 4)
 
 
 @then("I want to be able to choose and view the diagram tabs")
@@ -349,4 +349,4 @@ def step_impl(context):
     with context.page_object as page:
         if page.modal is not None:
             page.modal.click_ok_button()
-            ss.take(context.browser, 'modal_click', 3)
+            ss.take(context, 'modal_click', 3)
