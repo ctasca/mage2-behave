@@ -1,6 +1,6 @@
 # mage2-behave
 
-### Introduction
+## Introduction
 
 **mage2-behave** is a project that leverages Python for Behavior-Driven Development (BDD) development in Magento 2 projects. The project uses various Python packages to achieve its objectives, with some of the notable ones being `selenium`, `behave`, `splinter`, `stere`,`maria-db`, `docker` and `webdriver-manager` among others.
 
@@ -13,7 +13,7 @@ Whether you're a seasoned developer or an individual in the earlier stages of th
 To get started, make sure you've Python 3.8 or greater installed on your machine alongside the necessary Python packages listed in the requirements file.
 
 
-### Benefits of Using BDD in a Magento 2 Project
+## Benefits of Using BDD in a Magento 2 Project
 
 Behavior-Driven Development (BDD) is a powerful approach that aligns software development with business expectations. Utilizing BDD in a Magento 2 project using Python brings numerous benefits:
 
@@ -29,7 +29,7 @@ Behavior-Driven Development (BDD) is a powerful approach that aligns software de
 
 In essence, utilizing BDD in a Magento 2 project using Python facilitates effective communication, ensures optimal focus on delivering user value, enhances requirement clarity, aids in early bug detection, and promotes seamless integration with Agile and continuous delivery practices.
 
-### Why using Python Instead of PHP for BDD in Magento 2?
+## Why using Python Instead of PHP for BDD in Magento 2?
 
 While PHP has served as a strong language for web development over the years, Python offers certain advantages that make it a preferred choice for projects like mage2-behave. Here's why:
 
@@ -46,6 +46,30 @@ While PHP has served as a strong language for web development over the years, Py
 6. **Independent of PHP version used by Magento 2**: Tests written in Python will be easily more portable to other Magento 2 projects without the need to refactor code due to a different PHP version used by Magento 2.
 
 Remember, the decision between Python and PHP depends on the requirements of the project, and each has its strengths. However, for mage2-behave, Python's strengths align more closely with the project's goals and needs.
+
+## Behavior-Driven Development (BDD) Life Cycle
+
+Behavior-Driven Development (BDD) follows a set of practices that encourage collaboration between developers, QA and non-technical business participants in a software project.
+
+The BDD process can be outlined in the following steps:
+
+1. **Requirements Identification:** Business Analysts, Product owners or subject-matter experts collaborate with the technical team to identify and comprehend the requirements.
+
+2. **Defining Acceptance Criteria:** Each identified requirement is then elaborated in detail. The team defines the expected behavior of the system. This step is a crucial component of BDD as it ensures that everyone within the team has a clear understanding of the feature and what is considered to be its correct behavior.
+
+3. **Automated Test Case Generation:** Using the established acceptance criteria, BDD practitioners use a domain-specific language (DSL) to create readable and understandable test cases. Languages like Gherkin are often used due to their ability to create structured yet easy-to-understand test cases.
+
+4. **Test Case Review:** The test cases are reviewed by the whole team, including developers, test engineers, business analysts, and stakeholders. The goal of this stage is to ensure that the team understands the behavior of the system.
+
+5. **Test Execution:** The test cases are executed and the system behavior is validated against expected results.
+
+6. **Coding:** Developers begin coding the solution, following the agreed upon acceptance criteria.
+
+7. **Refactoring:** The code is continuously refactored for improvements while maintaining its behavior.
+
+8. **Feedback and Maintenance:** Test results provide immediate feedback, allowing teams to address issues. This feedback loop is inherent to the BDD process. Maintenance and further development cycles can then follow.
+
+By defining behavior in terms of user stories and plain-language test cases, BDD ensures that all team members understand and contribute to the product’s development.
 
 ## Testing Overview 
 
