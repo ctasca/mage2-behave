@@ -37,7 +37,6 @@ def core_before_scenario(context, scenario):
                    not ('skip' in scenario.tags)):
         for data in matches:
             use_fixture(splinter_browser_chrome_screen_size, context, data[1])
-
     _set_environment(context, scenario)
     _integration_admin_token(context, scenario.tags)
     _dummy_customer_create(context, scenario)

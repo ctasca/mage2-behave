@@ -3,7 +3,7 @@ from features.pages.backend.dashboard import Dashboard
 from features.pages.backend.customers_grid import CustomersGrid
 from features.pages.backend.sales_orders_grid import SalesOrdersGrid
 from features.pages.backend.system_configuration import SystemConfiguration
-import utils.screenshots as sc
+import utils.screenshots as ss
 
 
 @when(u'I click the "{item}" menu item')
@@ -326,5 +326,18 @@ def step_impl(context):
         tabs.click_tab(tabs.GENERAL)
         general_tab = tabs.get_tab(tabs.GENERAL)
         general_tab.click_tab_link('Currency Setup')
-        # test it does not click the link it is already active
+        # test it does not click the link if it is already active
         general_tab.click_tab_link('Currency Setup')
+
+
+@step("click a section tab group link")
+def step_impl(context):
+    with SystemConfiguration() as page:
+        tabs = page.tabs
+        general_tab = tabs.get_tab(tabs.GENERAL)
+        currency_options_group_link = general_tab.click_tab_group_link('Currency Options')
+        assert currency_options_group_link.has_class('open')
+        currency_converter_api_link = general_tab.click_tab_group_link('Currency Converter API')
+        assert currency_converter_api_link.has_class('open')
+        # test it does not click the group link if it is already open
+        general_tab.click_tab_group_link('Currency Converter API')

@@ -11,7 +11,12 @@ class SystemConfigurationTab(Field):
     def get_tab_link(link_text: str) -> Link:
         return Link(TAB_LINK_LOCATOR_FORMAT[STRATEGY_KEY], TAB_LINK_LOCATOR_FORMAT[LOCATOR_KEY].format(link_text))
 
-    def click_tab_link(self, link_text: str) -> None:
+    @staticmethod
+    def get_tab_group_link(link_text: str) -> Link:
+        return Link(TAB_GROUP_LINK_LOCATOR_FORMAT[STRATEGY_KEY],
+                    TAB_GROUP_LINK_LOCATOR_FORMAT[LOCATOR_KEY].format(link_text))
+
+    def click_tab_link(self, link_text: str) -> Link:
         link = self.get_tab_link(link_text)
         try:
             assert link.is_clickable(10) and link.is_visible(10)
@@ -19,6 +24,20 @@ class SystemConfigurationTab(Field):
             # do not click if already active
             if not is_active:
                 link.click()
+            return link
         except (WebDriverException, ElementClickInterceptedException, AssertionError):
             raise Exception("Could not click tab link with text '{}'".format(link_text))
+
+    def click_tab_group_link(self, link_text: str) -> Link:
+        link = self.get_tab_group_link(link_text)
+        try:
+            assert link.is_clickable(10) and link.is_visible(10)
+            is_open = link.has_class('open')
+            # do not click if tag group is already open
+            if not is_open:
+                link.click()
+            return link
+        except (WebDriverException, ElementClickInterceptedException, AssertionError):
+            raise Exception("Could not click tab group link with text '{}'".format(link_text))
+
 

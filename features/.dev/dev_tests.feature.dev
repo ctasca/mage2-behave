@@ -206,6 +206,7 @@ Feature: As a mage2-behave developer I want to test the functionality of my code
         Given I am on the system configuration page
         Then I want to be able to choose a section tab
         And click a section tab link
+        And click a section tab group link
 
     @api
     @fixture.integration.admin.token
