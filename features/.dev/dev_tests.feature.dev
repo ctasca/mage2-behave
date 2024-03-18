@@ -208,6 +208,15 @@ Feature: As a mage2-behave developer I want to test the functionality of my code
         And click a section tab link
         And click a section tab group link
 
+    @backend
+    @system.config
+    @fixture.splinter.browser.chrome.headless
+    Scenario: Admin access the system configuration and can switch store scope
+        Given I am on the system configuration page
+        When I want to change store scope
+        Then I should be able to select the store I want to switch to
+        And confirm to switch store
+
     @api
     @fixture.integration.admin.token
     Scenario: Create an amin user integration bearer token

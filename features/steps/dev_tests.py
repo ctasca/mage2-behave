@@ -72,8 +72,9 @@ def step_impl(context):
 
 @then("I should be able to select the store I want to switch to")
 def step_impl(context):
-    with Dashboard() as page:
+    with context.page_object as page:
         page.store_switcher.switch_to_store('Default Store View')
+        ss.take(context.browser, 'store_scope', 4)
 
 
 @then("I want to be able to choose and view the diagram tabs")
@@ -341,3 +342,11 @@ def step_impl(context):
         assert currency_converter_api_link.has_class('open')
         # test it does not click the group link if it is already open
         general_tab.click_tab_group_link('Currency Converter API')
+
+
+@step("confirm to switch store")
+def step_impl(context):
+    with context.page_object as page:
+        if page.modal is not None:
+            page.modal.click_ok_button()
+            ss.take(context.browser, 'modal_click', 3)

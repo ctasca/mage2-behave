@@ -1,7 +1,9 @@
-
 from behave import *
 from features.pages.backend.login import Login
 from features.pages.backend.dashboard import Dashboard
+from features.pages.backend.customers_grid import CustomersGrid
+from features.pages.backend.sales_orders_grid import SalesOrdersGrid
+from features.pages.backend.system_configuration import SystemConfiguration
 
 
 @given(u'I am on the admin login page')
@@ -41,6 +43,7 @@ def step_impl(context):
         {fill_fields}
         {signin}
     ''')
+    context.page_object = Dashboard()
 
 
 @when(u'I want to view all my customers')
@@ -78,6 +81,7 @@ def step_impl(context):
     context.execute_steps(f'''
         {view_all_customers_grid}
     ''')
+    context.page_object = CustomersGrid()
 
 
 @given("I am on the backend Dashboard page")
@@ -90,6 +94,7 @@ def step_impl(context):
             {fill_fields}
             {signin}
         ''')
+    context.page_object = Dashboard()
 
 
 @then("I want to be able to reload data")
@@ -111,6 +116,7 @@ def step_impl(context):
                {signin}
                {view_all_customers_grid}
            ''')
+    context.page_object = CustomersGrid()
 
 
 @given("I am on the sales orders grid")
@@ -125,6 +131,7 @@ def step_impl(context):
                    {signin}
                    {view_sales_order_grid}
                ''')
+    context.page_object = SalesOrdersGrid()
 
 
 @given("I am on the system configuration page")
@@ -139,3 +146,4 @@ def step_impl(context):
                        {signin}
                        {view_system_configuration}
                    ''')
+    context.page_object = SystemConfiguration()
