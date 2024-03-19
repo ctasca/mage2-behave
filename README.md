@@ -71,6 +71,129 @@ The BDD process can be outlined in the following steps:
 
 By defining behavior in terms of user stories and plain-language test cases, BDD ensures that all team members understand and contribute to the product’s development.
 
+## Writing Feature Files in Gherkin
+
+Gherkin provides a structured way to write software behavior scenarios in a human-readable language. Here's an approach to writing effective feature files in Gherkin:
+
+### 1. Feature
+Start by defining the feature. This provides an overview of the functionality that you'll be defining in the scenarios. It's a brief explanation of the feature in the system.
+
+Example:
+
+~~~gherkin
+Feature: Login functionality for a social networking site
+~~~
+
+#### 1.1  Using ```As a... I want ... So That``` 
+
+Example:
+
+~~~gherkin
+Feature: Login functionality for a social networking site
+  As a user,
+  I want to be able to log in,
+  So That I can access member-only content
+~~~
+
+### 2. User Story:
+Link the feature to a user story to provide context. This is usually a short statement from the user's perspective, describing some piece of functionality.
+
+### 3. Scenarios:
+Scenarios are the core of the feature. Each scenario should represent one flow of the feature. Start with the keyword "Scenario", followed by a short description.
+
+Example:
+
+~~~gherkin
+Scenario: Successful login of the user
+~~~
+
+#### 3.1 ```Given```:
+This step is used to set up the test case's scenario. This could involve setting certain conditions or preparing data.
+
+Example:
+
+~~~gherkin
+Given the user is on the Login Page
+~~~
+
+#### 3.2 ```When```:
+This step is used to describe an action - it's often where the user interaction happens.
+
+Example:
+
+~~~gherkin
+When the user enters valid credentials
+~~~
+
+#### 3.3 ```Then```:
+This step is used to describe the outcome or result of the "When" step.
+
+Example:
+
+~~~gherkin
+Then the user should be able to successfully login
+~~~
+
+#### 3.4 ```And``` & ```But```:
+
+Example:
+
+~~~gherkin
+ Scenario: Validating login fields
+  Given I am on the login page
+  When I fill in the username field
+  And I leave the password field empty
+  Then I should see a message that the password is required
+  But I should not be logged in
+~~~
+
+### Scenario Outline:
+
+Scenario Outlines in Gherkin allow us to more concisely express these scenarios through the use of placeholders, which are filled with the values from an Examples table.
+
+Here's an example of a scenario outline:
+
+~~~gherkin
+Scenario Outline: Testing login with multiple sets of data
+  Given the user is on the Login Page
+  When the user enters Username "<username>" and Password "<password>"
+  Then "<outcome>" should be displayed
+
+  Examples:
+  | username | password | outcome                      |
+  | John     | secret   | Login Successful             |
+  | Invalid  | secret   | Login Failed. Invalid username |
+~~~
+
+In the `Scenario Outline`, `<username>`, `<password>`, and `<outcome>` are variables. For each row in the `Examples` table, these variables are substituted, and the scenario is executed.
+
+### Background in Gherkin:
+
+The `Background` keyword in Gherkin is used to group several `Given` steps that are common to all the scenarios in the feature file. It helps to reduce the duplication of the `Given` steps.
+
+Here's an example:
+
+~~~gherkin
+Feature: Blog
+  Background: 
+    Given I am logged in as a Writer
+    And I am on the create article page
+  
+  Scenario: Successful article creation
+    When I fill in the title field
+    And I fill in the body field
+    And I submit the form
+    Then I should see that the article was successfully created
+
+  Scenario: Unsuccessful article creation with blank fields
+    When I leave the title field blank
+    And I leave the body field blank
+    And I submit the form
+    Then I should see error messages about the blank fields
+~~~
+
+In the example above, the `Background` comprises steps that apply to all scenarios in the feature. This helps to keep your feature file DRY (Don't Repeat Yourself).
+
 ## Testing Overview 
 
 During the execution of behave, it is vital to ensure that the integrity of an environment data remains uncompromised. For this, we have put in place a system wherein the tests are performed on a separate, duplicate database. 
