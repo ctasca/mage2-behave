@@ -546,4 +546,8 @@ Enhance your testing with this feature to get a precise view of the application 
 
 Here is the screenshot generated after the save configuration button has been clicked:
 
-![Alternative text](./images/save_button8ahrc23a.png "Optional title")
+![Alternative text](./images/save_button8ahrc23a.png "System Configuration Save")
+
+Here another example of a screenshot taken during Magento backend store scope switch:
+
+![Alternative text](./images/store_scopebr55jpqf.png "Backend Store Scope Switch")
