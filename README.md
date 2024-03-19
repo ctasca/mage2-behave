@@ -463,3 +463,79 @@ from utils import docker_env as denv
 def step_impl(context):
     denv.docker_bin_magento('ca:fl')
 ```
+## Using the `utils/screenshots` to Take Screenshots in Behave Steps
+
+The `utils/screenshots` functionality provides the ability to capture screenshots during Behave steps execution. To utilize this feature, follow the below steps:
+
+### Enabling Screenshot Capture
+
+1. Tag your feature or scenario with `@fixture.take.screenshots` in your Behave feature file. This enables the screenshot capturing process during the execution.
+
+Proceed with executing your Behave tests usually. The screenshot capturing process is automatically initiated during the execution of the particular feature or scenario tagged with `@fixture.take.screenshots`.
+
+#### Note:
+The screenshots directory within mage2-behave directory is automatically cleared before every execution of the `behave` command.
+
+Here is an example of how to include the screenshots util in your steps definition files:
+
+```gherkin
+    @backend
+    @system.config
+    @fixture.take.screenshots
+    @fixture.splinter.browser.chrome.headless
+    Scenario: Admin access the system configuration and perform save action
+        Given I am on the system configuration page
+        Then I want to be able to save the configuration
+```
+
+```python
+from behave import *
+from features.pages.backend.system_configuration import SystemConfiguration
+import utils.screenshots as ss
+
+@given("I am on the system configuration page")
+def step_impl(context):
+    open_login_page = 'Given I am on the admin login page'
+    fill_fields = 'When I enter my credentials'
+    signin = 'And I sign in'
+    view_system_configuration = 'When I want to view the system configuration'
+    context.execute_steps(f'''
+                       {open_login_page}
+                       {fill_fields}
+                       {signin}
+                       {view_system_configuration}
+                   ''')
+    context.page_object = SystemConfiguration()
+
+@then("I want to be able to save the configuration")
+def step_impl(context):
+    with SystemConfiguration() as page:
+        page.save_button.click()
+        assert context.browser.is_text_present('You saved the configuration')
+        ss.take(context, 'save_button', 3)
+```
+
+The `take` function expects at least two parameters, the `context` and the name of the screenshot file (without any file extension).
+A third optional parameters set an `implicit wait` in seconds before taking the screenshot.
+
+```python
+import os
+import time
+
+current_file_path = os.path.abspath(__file__)
+current_directory = os.path.dirname(current_file_path)
+parent_directory = os.path.dirname(current_directory)
+screenshot_directory = os.path.join(parent_directory, "screenshots")
+
+
+def take(context, filename: str, implicit_wait: int = 0) -> None:
+    if context.take_screenshots:
+        time.sleep(implicit_wait)
+        context.browser.screenshot(os.path.join(screenshot_directory, filename))
+```
+
+### Viewing Captured Screenshots
+
+Once the tests are completed, you can browse through the screenshots captured during the test run in the ```mage2-behave/screenshots``` directory.
+
+Enhance your testing with this feature to get a precise view of the application behavior during various test steps, especially when using a headless browser.
