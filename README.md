@@ -474,7 +474,11 @@ The `utils/screenshots` functionality provides the ability to capture screenshot
 Proceed with executing your Behave tests usually. The screenshot capturing process is automatically initiated during the execution of the particular feature or scenario tagged with `@fixture.take.screenshots`.
 
 #### Note:
-The screenshots directory within mage2-behave directory is automatically cleared before every execution of the `behave` command.
+The screenshots directory within mage2-behave directory is automatically cleared before every execution of the `behave` command when the feature file is tagged with:
+
+```gherkin 
+@fixture.before.cleanup.screenshots
+```
 
 Here is an example of how to include the screenshots util in your steps definition files:
 
@@ -539,3 +543,7 @@ def take(context, filename: str, implicit_wait: int = 0) -> None:
 Once the tests are completed, you can browse through the screenshots captured during the test run in the ```mage2-behave/screenshots``` directory.
 
 Enhance your testing with this feature to get a precise view of the application behavior during various test steps, especially when using a headless browser.
+
+Here is the screenshot generated after the save configuration button has been clicked:
+
+![Alternative text](./images/save_button8ahrc23a.png "Optional title")
