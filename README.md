@@ -37,13 +37,9 @@ While PHP has served as a strong language for web development over the years, Py
 
 2. **Extensive Libraries:** Python is known for its vast selection of libraries, many of which simplify tasks that would be more complex in PHP, e.g. setting up the environment for BDD development.
 
-3. **Versatility:** Python is highly versatile and is not just limited to web development. It can be used to develop a variety of applications, from web and desktop applications to network servers and machine learning algorithms.
+3. **Strong Community**: Python has a vibrant community that contributes to a rich ecosystem of libraries and frameworks. This means you are likely to find help or an existing solution to your problem faster than in PHP.
 
-4. **Strong Community**: Python has a vibrant community that contributes to a rich ecosystem of libraries and frameworks. This means you are likely to find help or an existing solution to your problem faster than in PHP.
-
-5. **Integration Feature**: Python can be easily integrated with languages like C, C++, and Java, making it a powerful tool for web application development.
-
-6. **Independent of PHP version used by Magento 2**: Tests written in Python will be easily more portable to other Magento 2 projects without the need to refactor code due to a different PHP version used by Magento 2.
+4. **Irrespective of the PHP version utilized by Magento 2**: Tests written in Python will be easily more portable to other Magento 2 projects without the need to refactor code due to a different PHP version used by Magento 2.
 
 Remember, the decision between Python and PHP depends on the requirements of the project, and each has its strengths. However, for mage2-behave, Python's strengths align more closely with the project's goals and needs.
 
