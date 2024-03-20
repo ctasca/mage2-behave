@@ -208,8 +208,32 @@ During development, it might not be ideal to generate a test DB at each `behave`
 behave -D keep-test-db=true ... [OTHER OPTIONS]
 ```
 
+By default, when a database dump is made is then deleted.
+If you want to recreate the database but want to avoid creating a new database dump:
+
+```shell
+ behave -D keep-db-dump=true ... [OTHER OPTIONS]
+```
+
 #### Keep in mind that if you do this, you may have to revert changes in the test DB to avoid failure of some tests that expects certain data.
-#### You can achieve this via `fixtures`.
+
+You can achieve this via `fixtures`.
+
+##### If you want to perform queries on the original database in your steps implementations you can easily switch database:
+
+Example:
+
+```python
+from behave import *
+
+@step("the environment database data must not have been modified")
+def step_impl(context):
+    cur = context.conn.cursor()
+    cur.execute('USE {}'.format(context.db_name))
+    cur.execute("SELECT ccd.value FROM core_config_data ccd WHERE path = ?", ('catalog/search/engine',))
+    search_engine = cur.fetchone()[0]
+    assert search_engine == 'opensearch'
+```
 
 #### IMPORTANT:
 By default `mage2-behave` performs duplication of database and configuration in Magento 2 only in development environment.

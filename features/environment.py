@@ -31,11 +31,12 @@ def after_all(context):
 
 
 def _environment_bootstrap(context):
-    context.keep_test_db = bool(context.config.userdata.get('keep-test-db'))
-    context.keep_cache = bool(context.config.userdata.get('keep-cache'))
+    context.keep_test_db = True if bool(context.config.userdata.get('keep-test-db')) is True else False
+    context.keep_cache = True if bool(context.config.userdata.get('keep-cache')) is True else False
+    context.keep_last_db_dump = True if bool(context.config.userdata.get('keep-db-dump')) is True else False
     verify_env()
     core_before_all(context)
-    db_manager.tear_up()
+    db_manager.tear_up(context.keep_last_db_dump)
     copy_and_modify_env_db_data(context)
     if not context.keep_cache:
         docker_bin_magento('cache:flush')
