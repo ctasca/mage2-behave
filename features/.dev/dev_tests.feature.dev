@@ -162,7 +162,6 @@ Feature: As a mage2-behave developer I want to test the functionality of my code
         But if I have not selected a grid item
         Then I should see a warning modal window
 
-
     @backend
     @backend.grid.rows
     @fixture.splinter.browser.chrome.headless
@@ -177,6 +176,25 @@ Feature: As a mage2-behave developer I want to test the functionality of my code
        Given I am on the sales orders grid
         Then I want to be able to apply filters to orders for searching purposes
         And I want to be able to reset the sales orders grid applied filters
+
+    @backend
+    @backend.products.grid.filters
+    @fixture.take.screenshots
+    @fixture.splinter.browser.chrome.headless
+    Scenario: Admin can view the products grid and apply filters
+       Given I am on the products grid
+        Then I want to be able to apply filters to products for searching purposes
+        And I want to be able to reset the products grid applied filters
+
+
+    @backend
+    @backend.products.grid.asset.filter
+    @fixture.take.screenshots
+    @fixture.splinter.browser.chrome.headless
+    Scenario: Admin can view the products grid and apply the asset filter
+       Given I am on the products grid
+        Then I want to be able to apply the asset filter to products
+        And I want to be able to reset the products grid applied filters
 
     @backend
     @backend.dashboard

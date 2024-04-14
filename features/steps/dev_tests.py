@@ -3,6 +3,7 @@ import time
 from behave import *
 from features.pages.backend.dashboard import Dashboard
 from features.pages.backend.customers_grid import CustomersGrid
+from features.pages.backend.products_grid import ProductsGrid
 from features.pages.backend.sales_orders_grid import SalesOrdersGrid
 from features.pages.backend.system_configuration import SystemConfiguration
 import utils.screenshots as ss
@@ -360,3 +361,60 @@ def step_impl(context):
         page.save_button.click()
         assert context.browser.is_text_present('You saved the configuration')
         ss.take(context, 'save_button', 3)
+
+
+@then("I want to be able to apply filters to products for searching purposes")
+def step_impl(context):
+    with ProductsGrid() as page:
+        filters = page.grid_filters
+        filters.start_filtering()
+        filters.get_filter(filters.FROM_ID_FILTER).fill(2)
+        filters.get_filter(filters.TO_ID_FILTER).fill(10)
+        filters.get_filter(filters.FROM_PRICE_FILTER).fill(50)
+        filters.get_filter(filters.TO_PRICE_FILTER).fill(100)
+        filters.get_filter(filters.FROM_QUANTITY_FILTER).fill(5)
+        filters.get_filter(filters.TO_QUANTITY_FILTER).fill(20)
+        updated_at_from_datepicker = filters.get_filter(filters.UPDATED_AT_FROM_DATEPICKER_FILTER)
+        updated_at_from_datepicker.click()
+        updated_at_from_datepicker.select_month('Jan')
+        updated_at_from_datepicker.select_year('2000')
+        updated_at_from_datepicker.click_day('31')
+        updated_at_to_datepicker = filters.get_filter(filters.UPDATED_AT_TO_DATEPICKER_FILTER)
+        updated_at_to_datepicker.click()
+        updated_at_to_datepicker.select_month('Mar')
+        updated_at_to_datepicker.select_year('2020')
+        updated_at_from_datepicker.click_day('15')
+        filters.get_filter(filters.STORE_VIEW_FILTER).select('Default Store View')
+        filters.get_filter(filters.NAME_FILTER).fill('Test Product')
+        filters.get_filter(filters.TYPE_FILTER).select('Simple Product')
+        filters.get_filter(filters.ATTRIBUTE_SET_FILTER).select('Bag')
+        filters.get_filter(filters.SKU_FILTER).fill('123456')
+        filters.get_filter(filters.VISIBILITY_FILTER).select('Catalog, Search')
+        filters.get_filter(filters.STATUS_FILTER).select('Enabled')
+        ss.take(context, 'product_filters', 2)
+        filters.apply_filters()
+
+
+@step("I want to be able to reset the products grid applied filters")
+def step_impl(context):
+    with ProductsGrid() as page:
+        filters = page.grid_filters
+        filters.clear_all(2)
+        assert filters.get_root().is_not_visible(10) is True
+
+
+@then("I want to be able to apply the asset filter to products")
+def step_impl(context):
+    with ProductsGrid() as page:
+        filters = page.grid_filters
+        filters.start_filtering()
+        asset_filter = filters.get_filter(filters.ASSET_FILTER)
+        asset_filter.search_asset('163130')
+        asset_filter.assert_options_quantity(1)
+        asset_filter.click_option_by_partial_text('163130')
+        ss.take(context, 'asset_filter', 2)
+        asset_filter.done()
+        filters.apply_filters()
+        # need to sleep before taking screenshot
+        time.sleep(2)
+        ss.take(context, 'asset_filter_applied')
