@@ -1,7 +1,9 @@
 import configparser
 import os
 
-SECTIONS: dict[str, str] = {
+from typing import Dict
+
+SECTIONS: Dict[str, str] = {
     "dev": "Development",
     "integration": "Integration",
     "test": "Test",

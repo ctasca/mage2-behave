@@ -146,7 +146,7 @@ def integration_admin_token(context):
     integration_admin_token_path = config_parser.get(SECTIONS.get('api'), 'ADMIN_INTEGRATION_TOKEN_REST_PATH')
     headers = {"Content-Type": "application/json"}
     response = requests.post("{}{}".format(context.baseurl, integration_admin_token_path), headers=headers,
-                             data=json.dumps(payload))
+                             data=json.dumps(payload), verify=False)
     context.admin_token = response.json()
     yield context.admin_token
 
@@ -176,7 +176,8 @@ def dummy_customer_create(context):
     }
     headers = {"Content-Type": "application/json", "Authorization": "Bearer {}".format(context.admin_token)}
     customers_rest_path = config_parser.get(SECTIONS.get('api'), 'CUSTOMERS_REST_PATH')
-    response = requests.post(f"{context.baseurl}{customers_rest_path}", headers=headers, data=json.dumps(payload))
+    response = requests.post(f"{context.baseurl}{customers_rest_path}", headers=headers, data=json.dumps(payload),
+                             verify=False)
     if response.status_code != 200:
         raise Exception('Could not create dummy customer')
     response_json = response.json()
@@ -189,7 +190,7 @@ def dummy_customer_delete(context):
     headers = {"Content-Type": "application/json", "Authorization": "Bearer {}".format(context.admin_token)}
     response = requests.delete(
         "{}{}{}".format(context.baseurl, config_parser.get(SECTIONS.get('api'), 'CUSTOMERS_REST_PATH'),
-                        context.dummy_customer_id), headers=headers)
+                        context.dummy_customer_id), headers=headers, verify=False)
 
     if response.status_code != 200:
         raise Exception('Could not delete customer with ID {}'.format(context.dummy_customer_id))
@@ -229,7 +230,7 @@ def _set_product_is_in_stock_request(context, data, is_in_stock: str):
             }
         }
         headers = {'Authorization': 'Bearer {} '.format(context.admin_token), "Content-Type": "application/json"}
-        response = requests.put(endpoint, headers=headers, data=json.dumps(payload))
+        response = requests.put(endpoint, headers=headers, data=json.dumps(payload), verify=False)
         if response.status_code != 200:
             raise Exception('Could not update product stock status')
 
