@@ -17,3 +17,4 @@
 !/dumps/.gitkeep
 /bck/*
 !/bck/.gitkeep
+/features/core_config/core_config_test_products.ini

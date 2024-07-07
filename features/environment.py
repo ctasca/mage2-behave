@@ -27,18 +27,24 @@ def after_scenario(context, scenario):
 def after_all(context):
     if not context.keep_test_db:
         db_manager.tear_down()
-    reset_env_db_data()
+    if not context.use_env_db:
+        reset_env_db_data()
 
 
 def _environment_bootstrap(context):
     context.keep_test_db = True if bool(context.config.userdata.get('keep-test-db')) is True else False
     context.keep_cache = True if bool(context.config.userdata.get('keep-cache')) is True else False
     context.keep_last_db_dump = True if bool(context.config.userdata.get('keep-db-dump')) is True else False
+    context.use_env_db = True if bool(context.config.userdata.get('use-env-db')) is True else False
+    context.setup_upgrade = True if bool(context.config.userdata.get('setup-upgrade')) is True else False
     verify_env()
     core_before_all(context)
-    db_manager.tear_up(context.keep_last_db_dump)
-    copy_and_modify_env_db_data(context)
+    if not context.use_env_db:
+        db_manager.tear_up(context.keep_last_db_dump)
+        copy_and_modify_env_db_data(context)
     if not context.keep_cache:
         docker_bin_magento('cache:flush')
+    if context.setup_upgrade:
+        docker_bin_magento('setup:upgrade')
     use_fixture(warden_maria_db_connect, context)
     context.take_screenshots = False

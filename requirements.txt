@@ -12,3 +12,5 @@ colorama
 python-decouple>=3.8
 docker
 urllib3<2.0.0
+responses
+requests-mock

@@ -6,6 +6,7 @@ from features.pages.backend.customers_grid import CustomersGrid
 from features.pages.backend.products_grid import ProductsGrid
 from features.pages.backend.sales_orders_grid import SalesOrdersGrid
 from features.pages.backend.system_configuration import SystemConfiguration
+from features.pages.backend.category import CategoryPage
 import utils.screenshots as ss
 
 
@@ -418,3 +419,10 @@ def step_impl(context):
         # need to sleep before taking screenshot
         time.sleep(2)
         ss.take(context, 'asset_filter_applied')
+
+
+@then("I want to see there is a Root Category")
+def step_impl(context):
+    with CategoryPage() as page:
+        assert context.browser.find_by_xpath("//div[@id='tree-div']//span[contains(text(), 'Default Category')]")
+        ss.take(context, 'root_category', 2)
