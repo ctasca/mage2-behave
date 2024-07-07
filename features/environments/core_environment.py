@@ -26,14 +26,17 @@ def core_before_scenario(context, scenario):
     _take_screenshots(context, scenario.tags)
     _skip(context, scenario, 'scenario')
     _cleanup_screenshots(context, scenario.tags, 'before')
-    if "fixture.splinter.browser.chrome" in scenario.tags and not ('skip' in scenario.tags):
-        use_fixture(splinter_browser_chrome, context)
+    if "fixture.splinter.browser.chrome.incognito" in scenario.tags and not ('skip' in scenario.tags):
+        use_fixture(splinter_browser_chrome_incognito, context)
 
     if "fixture.splinter.browser.chrome.fullscreen" in scenario.tags and not ('skip' in scenario.tags):
         use_fixture(splinter_browser_chrome_fullscreen, context)
 
     if "fixture.splinter.browser.chrome.headless" in scenario.tags and not ('skip' in scenario.tags):
         use_fixture(splinter_browser_chrome_headless, context)
+
+    if "fixture.splinter.browser.chrome.headless.incognito" in scenario.tags and not ('skip' in scenario.tags):
+        use_fixture(splinter_browser_chrome_headless_incognito, context)
 
     if matches := (_regex_fixture_tag_matches(scenario, 'fixture.splinter.browser.chrome.screen.size.') and
                    not ('skip' in scenario.tags)):
@@ -108,14 +111,14 @@ def _dummy_customer_delete(context, hook):
 
 
 def _set_products_in_stock(context, hook):
-    use_fixture(integration_admin_token, context)
     if matches := _regex_fixture_tag_matches(hook, 'fixture.set.products.in.stock.'):
+        use_fixture(integration_admin_token, context)
         for data in matches:
             use_fixture(set_products_in_stock, context, data[1])
 
 
 def _set_products_out_of_stock(context, hook):
-    use_fixture(integration_admin_token, context)
     if matches := _regex_fixture_tag_matches(hook, 'fixture.set.products.out.of.stock.'):
+        use_fixture(integration_admin_token, context)
         for data in matches:
             use_fixture(set_products_out_of_stock, context, data[1])

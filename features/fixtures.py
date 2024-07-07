@@ -32,6 +32,15 @@ def splinter_browser_chrome(context):
 
 
 @fixture
+def splinter_browser_chrome_incognito(context):
+    # -- SETUP-FIXTURE PART:
+    _init_context_browser(context, Config(fullscreen=False), incognito=True)
+    yield context.browser
+    # -- CLEANUP-FIXTURE PART:
+    context.browser.quit()
+
+
+@fixture
 def splinter_browser_chrome_fullscreen(context):
     # -- SETUP-FIXTURE PART:
     _init_context_browser(context, Config(fullscreen=True))
@@ -52,6 +61,15 @@ def splinter_browser_chrome_screen_size(context, data):
 def splinter_browser_chrome_headless(context):
     # -- SETUP-FIXTURE PART:
     _init_context_browser(context, Config(headless=True))
+    yield context.browser
+    # -- CLEANUP-FIXTURE PART:
+    context.browser.quit()
+
+
+@fixture
+def splinter_browser_chrome_headless_incognito(context):
+    # -- SETUP-FIXTURE PART:
+    _init_context_browser(context, Config(headless=True), incognito=True)
     yield context.browser
     # -- CLEANUP-FIXTURE PART:
     context.browser.quit()
@@ -235,16 +253,26 @@ def _set_product_is_in_stock_request(context, data, is_in_stock: str):
             raise Exception('Could not update product stock status')
 
 
-def _init_context_browser(context, browser_config: Config, custom_size=None) -> None:
+def _init_context_browser(context, browser_config: Config,
+                          custom_size=None, incognito=False, enable_automation=True) -> None:
     width, height = '1920', '1080'
     if custom_size is not None:
         width, height = custom_size.split(':')
     options = webdriver.ChromeOptions()
     options.add_argument('--ignore-ssl-errors=yes')
+    if incognito:
+        options.add_argument('--incognito')
     options.add_argument('--ignore-certificate-errors')
+    options.add_argument("--disable-extensions")
+    options.add_argument("--disable-popup-blocking")
+    options.add_argument("--disable-notifications")
+    options.add_argument("--enable-javascript")
+    options.add_argument("--enable-file-cookies")
     options.add_argument("window-size={},{}".format(width, height))
+    if enable_automation:
+        options.add_experimental_option("excludeSwitches", ['enable-automation'])
     my_config = browser_config
-    service = Service(driver)
+    service = Service(wait_time=3)
     browser = Browser('chrome', options=options, config=my_config, service=service)
     # configure Stere browser for Page objects
     Stere.browser = browser
