@@ -266,6 +266,7 @@ def _init_context_browser(context, browser_config: Config,
     options.add_argument("--disable-extensions")
     options.add_argument("--disable-popup-blocking")
     options.add_argument("--disable-notifications")
+    options.add_argument("--disable-search-engine-choice-screen")
     options.add_argument("--enable-javascript")
     options.add_argument("--enable-file-cookies")
     options.add_argument("window-size={},{}".format(width, height))
