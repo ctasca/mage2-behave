@@ -1,0 +1,34 @@
+[Development]
+development_admin_username =
+development_admin_firstname =
+development_admin_lastname =
+development_admin_email =
+development_backend_url =
+
+[Integration]
+integration_admin_username =
+integration_admin_firstname =
+integration_admin_lastname =
+integration_admin_email =
+integration_backend_url =
+
+[Test]
+test_admin_username =
+test_admin_firstname =
+test_admin_lastname =
+test_admin_email =
+test_backend_url =
+
+[Staging]
+staging_admin_username =
+staging_admin_firstname =
+staging_admin_lastname =
+staging_admin_email =
+staging_backend_url =
+
+[PreProduction]
+pre_production_admin_username =
+pre_production_admin_firstname =
+pre_production_admin_lastname =
+pre_production_admin_email =
+pre_production_backend_url =

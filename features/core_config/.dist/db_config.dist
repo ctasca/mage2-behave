@@ -1,0 +1,65 @@
+[Development]
+development_db_host =
+development_db_port =
+development_db_user =
+development_db_root_user =
+development_db_name =
+development_db_connection_timeout =
+development_db_read_timeout =
+development_db_write_timeout =
+development_db_remote_bind_address_host =
+development_db_remote_host_port =
+development_db_test_name =
+
+[Integration]
+integration_db_host =
+integration_db_port =
+integration_db_user =
+development_db_root_user =
+integration_db_name =
+integration_db_connection_timeout =
+integration_db_read_timeout =
+integration_db_write_timeout =
+integration_db_remote_bind_address_host =
+integration_db_remote_host_port =
+integration_db_test_name =
+
+[Test]
+test_db_host =
+test_db_port =
+test_db_user =
+test_db_root_user =
+test_db_name =
+test_db_connection_timeout =
+test_db_read_timeout =
+test_db_write_timeout =
+test_db_remote_bind_address_host =
+test_db_remote_host_port =
+test_db_test_name =
+
+[Staging]
+staging_db_host =
+staging_db_port =
+staging_db_user =
+staging_db_name =
+staging_db_root_user =
+staging_db_connection_timeout =
+staging_db_read_timeout =
+staging_db_write_timeout =
+staging_db_remote_bind_address_host =
+staging_db_remote_host_port =
+staging_db_test_name =
+
+[PreProduction]
+pre_production_db_host =
+pre_production_db_port =
+pre_production_db_user =
+pre_production_db_name =
+pre_production_db_root_user =
+pre_production_db_connection_timeout =
+pre_production_db_read_timeout =
+pre_production_db_write_timeout =
+pre_production_db_remote_bind_address_host =
+pre_production_db_remote_host_port =
+pre_production_db_test_name =
+

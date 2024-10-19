@@ -1,0 +1,16 @@
+behave
+requests
+selenium
+splinter>=0.21.0
+waiting
+mariadb
+paramiko
+webdriver-manager
+sshtunnel
+stere>=0.31.0
+colorama
+python-decouple>=3.8
+docker
+urllib3<2.0.0
+responses
+requests-mock
