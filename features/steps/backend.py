@@ -71,14 +71,6 @@ def step_impl(context):
         menu.submenu(menu.CATALOG).products.click()
 
 
-@when(u'I want to view the catalog category page')
-def step_impl(context):
-    with Dashboard() as page:
-        menu = page.admin_menu
-        menu.click_link(menu.CATALOG)
-        menu.submenu(menu.CATALOG).categories.click()
-
-
 @when(u'I want to view the system configuration')
 def step_impl(context):
     with Dashboard() as page:
@@ -181,11 +173,18 @@ def step_impl(context):
     context.page_object = ProductsGrid()
 
 
-@given("I am on the catalog category page")
+@given("I am on the delivery methods configuration page")
 def step_impl(context):
-    logged_in_to_backend = 'Given I am logged in the backend'
-    view_category_page = 'When I want to view the catalog category page'
-    context.execute_steps(f'''
-                           {logged_in_to_backend}
-                           {view_category_page}
-                       ''')
+    dashboard_page = 'Given I am on the backend Dashboard page'
+    context.execute_steps(f'''{dashboard_page}''')
+    with Dashboard() as page:
+        page.spinner.is_not_visible(60)
+        page.admin_notification_modal.click_close_button()
+        menu = page.admin_menu
+        menu.click_link(menu.STORES)
+        menu.submenu(menu.STORES).configuration.click()
+    with SystemConfiguration() as page:
+        tabs = page.tabs
+        tabs.click_tab(tabs.SALES)
+        sales_tab = tabs.get_tab(tabs.SALES)
+        sales_tab.click_tab_link('Delivery Methods')

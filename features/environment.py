@@ -37,6 +37,8 @@ def _environment_bootstrap(context):
     context.keep_last_db_dump = True if bool(context.config.userdata.get('keep-db-dump')) is True else False
     context.use_env_db = True if bool(context.config.userdata.get('use-env-db')) is True else False
     context.setup_upgrade = True if bool(context.config.userdata.get('setup-upgrade')) is True else False
+    context.environment = context.config.userdata.get('environment') if bool(
+    context.config.userdata.get('environment')) is True else 'Development'
     verify_env()
     core_before_all(context)
     if not context.use_env_db:
@@ -46,5 +48,6 @@ def _environment_bootstrap(context):
         docker_bin_magento('cache:flush')
     if context.setup_upgrade:
         docker_bin_magento('setup:upgrade')
-    use_fixture(warden_maria_db_connect, context)
+    if context.environment == 'dev':
+        use_fixture(warden_maria_db_connect, context)
     context.take_screenshots = False

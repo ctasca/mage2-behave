@@ -575,3 +575,64 @@ Here is the screenshot generated after the save configuration button has been cl
 Here another example of a screenshot taken during Magento backend store scope switch:
 
 ![Alternative text](./images/store_scopebr55jpqf.png "Backend Store Scope Switch")
+
+# Custom Flags for Behave Command
+
+This project uses specific custom flags to control various aspects of the test environment setup when running `behave` scenarios. These flags are used to configure database handling, caching, environment setup, and other behaviors. Below is a detailed explanation of each custom flag.
+
+## Custom Flags
+
+1. **keep-test-db**
+    - **Description**: Determines whether the test database should be retained after the test execution.
+    - **Usage**: `--define keep-test-db=true`
+    - **Default**: `False`
+
+2. **keep-cache**
+    - **Description**: If set to `true`, keeps the cache after the test execution.
+    - **Usage**: `--define keep-cache=true`
+    - **Default**: `False`
+
+3. **keep-db-dump**
+    - **Description**: Keeps the last database dump after the test execution if set to `true`.
+    - **Usage**: `--define keep-db-dump=true`
+    - **Default**: `False`
+
+4. **use-env-db**
+    - **Description**: Uses an existing database configured in the environment instead of setting up a new test database.
+    - **Usage**: `--define use-env-db=true`
+    - **Default**: `False`
+
+5. **setup-upgrade**
+    - **Description**: If set to `true`, performs the bin/magento setup:upgrade command before running the tests.
+    - **Usage**: `--define setup-upgrade=true`
+    - **Default**: `False`
+
+6. **environment**
+    - **Description**: Specifies the environment in which the tests should run. It defaults to 'Development' if not provided.
+    - **Usage**: `--define environment=YourEnvironmentName`
+    - **Default**: `Development`
+
+## Example Usage
+
+To run `behave` with a custom flag, you can pass the flags as follows:
+```bash
+behave --define keep-test-db=true --define environment=Production
+```
+
+This command will retain the test database after execution and set the testing environment to `Production`.
+
+## Implementation
+
+The custom flags are handled in the `_environment_bootstrap` function:
+```python
+def _environment_bootstrap(context):
+    context.keep_test_db = True if bool(context.config.userdata.get('keep-test-db')) is True else False
+    context.keep_cache = True if bool(context.config.userdata.get('keep-cache')) is True else False
+    context.keep_last_db_dump = True if bool(context.config.userdata.get('keep-db-dump')) is True else False
+    context.use_env_db = True if bool(context.config.userdata.get('use-env-db')) is True else False
+    context.setup_upgrade = True if bool(context.config.userdata.get('setup-upgrade')) is True else False
+    context.environment = context.config.userdata.get('environment') if bool(
+        context.config.userdata.get('environment')) is True else 'Development'
+```
+
+By configuring these flags, you can easily control various settings and behaviors for your test environment to suit your needs.

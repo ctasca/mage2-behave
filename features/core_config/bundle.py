@@ -11,6 +11,7 @@ SECTIONS: Dict[str, str] = {
     "pre_prod": "PreProduction",
     "prod": "Production",
     "customer": "DummyCustomer",
+    "persistent_customer": "PersistentCustomer",
     "api": "Api",
     "docker": "Docker"
 }
@@ -24,6 +25,7 @@ config_parser.read(os.path.join(current_dir, 'dummy_customer.ini'))
 config_parser.read(os.path.join(current_dir, 'docker_config.ini'))
 config_parser.read(os.path.join(current_dir, 'api.ini'))
 config_parser.read(os.path.join(current_dir, 'db_config.ini'))
+config_parser.read(os.path.join(current_dir, 'core_config_test_products.ini'))
 
 
 def context_development_environment(context, config):
@@ -50,3 +52,21 @@ def context_development_environment(context, config):
     context.warden_tunnel_ssh_user = config_parser.get(SECTIONS.get('docker'), 'WARDEN_TUNNEL_SSH_USER')
     context.warden_tunnel_ssh_port = config_parser.get(SECTIONS.get('docker'), 'WARDEN_TUNNEL_SSH_PORT')
     context.db_test_name = config_parser.get(SECTIONS.get('dev'), 'DEVELOPMENT_DB_TEST_NAME')
+    context.persistent_customer = config_parser.get(SECTIONS.get('persistent_customer'), 'CUSTOMER_USERNAME')
+    context.persistent_customer_password = config('persistent_customer_password')
+    test_products = config_parser.get(SECTIONS.get('dev'), 'DEVELOPMENT_TEST_PRODUCTS')
+    if test_products:
+        context.test_products = test_products_dictionary(test_products)
+        context.test_products_skus = test_products_skus_array(test_products)
+
+def test_products_dictionary(test_products_config: str):
+    return {
+    item.split(':')[0]: (
+        True if item.split(':')[0] == 'fresh' else item.split(':')[1]
+    )
+    for item in test_products_config.split(',')
+}
+
+def test_products_skus_array(test_products_config: str):
+    products = test_products_config.split(',')
+    return [item.split(':')[0] for item in products]
